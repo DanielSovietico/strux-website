@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriales — Strux 2.00.00 | Galper Softwares</title>
+    <meta name="description" content="Tutoriales en video de Strux 2.00: diseño de vigas de concreto reforzado, acero estructural y vigas genéricas según las NTC de la Ciudad de México 2023.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Tutoriales Strux 2.00 — Diseño de vigas">
+    <meta property="og:description" content="Videos demostrativos del software de diseño estructural Strux 2.00 bajo NTC-CDMX 2023.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://strux.com.mx/tutoriales.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Schema.org VideoObject — mejora indexación en Google (rich snippets) -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "Demostración Strux 2.00.00 — Diseño de Concreto",
+        "description": "Módulo de diseño de vigas de concreto reforzado según NTC-Concreto 2023 en Strux 2.00.00.",
+        "thumbnailUrl": "https://i.ytimg.com/vi/0rJ0sqys4Sk/maxresdefault.jpg",
+        "uploadDate": "2026-04-17",
+        "contentUrl": "https://www.youtube.com/watch?v=0rJ0sqys4Sk",
+        "embedUrl": "https://www.youtube-nocookie.com/embed/0rJ0sqys4Sk",
+        "publisher": { "@type": "Organization", "name": "Galper Softwares" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "Demostración Strux 2.00.00 — Diseño de Acero",
+        "description": "Módulo de diseño de vigas de acero estructural según NTC-Acero 2023 en Strux 2.00.00.",
+        "thumbnailUrl": "https://i.ytimg.com/vi/JWFx_DQI3YM/maxresdefault.jpg",
+        "uploadDate": "2026-04-16",
+        "contentUrl": "https://www.youtube.com/watch?v=JWFx_DQI3YM",
+        "embedUrl": "https://www.youtube-nocookie.com/embed/JWFx_DQI3YM",
+        "publisher": { "@type": "Organization", "name": "Galper Softwares" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "Demostración Strux 2.00.00 — Diseño de Viga Genérica",
+        "description": "Módulo de diseño de vigas genéricas (revisión por resistencia) en Strux 2.00.00.",
+        "thumbnailUrl": "https://i.ytimg.com/vi/B70FlEDGas4/maxresdefault.jpg",
+        "uploadDate": "2026-04-17",
+        "contentUrl": "https://www.youtube.com/watch?v=B70FlEDGas4",
+        "embedUrl": "https://www.youtube-nocookie.com/embed/B70FlEDGas4",
+        "publisher": { "@type": "Organization", "name": "Galper Softwares" }
+      }
+    ]
+    </script>
+
+    <style>
+        :root {
+            --bg: #0C0F14;
+            --bg-card: #13171F;
+            --bg-card-hover: #1A1F2B;
+            --surface: #1E2330;
+            --border: #2A3040;
+            --text: #E8ECF4;
+            --text-dim: #8892A6;
+            --text-muted: #5C6578;
+            --accent: #3B82F6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --accent-warm: #F59E0B;
+            --accent-green: #10B981;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --font: 'DM Sans', sans-serif;
+            --mono: 'Space Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- NAV (idéntico al index) --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(12, 15, 20, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+        }
+        .nav-inner {
+            max-width: 1100px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 64px;
+        }
+        .logo {
+            font-family: var(--mono);
+            font-weight: 700; font-size: 1.25rem;
+            color: var(--text);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a {
+            color: var(--text-dim); text-decoration: none;
+            font-size: 0.9rem; font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a.current { color: var(--text); }
+
+        /* --- HERO compacto --- */
+        .page-hero {
+            padding: 9rem 2rem 3rem;
+            text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute; top: -40%; left: -20%;
+            width: 80%; height: 80%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .page-hero-content {
+            max-width: 720px; margin: 0 auto;
+            position: relative; z-index: 1;
+        }
+        .section-label {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        .page-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+        .page-hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent) 0%, #818CF8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .page-hero p {
+            font-size: 1.05rem;
+            color: var(--text-dim);
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* --- Videos section --- */
+        .videos-section {
+            padding: 2rem 2rem 5rem;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        .video-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: border-color 0.3s;
+        }
+        .video-card:hover {
+            border-color: var(--text-muted);
+        }
+
+        .video-header {
+            padding: 1.75rem 2rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .video-tag {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            background: var(--accent-glow);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            padding: 0.3rem 0.8rem;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+        .video-card h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .video-description {
+            padding: 0 2rem 1.5rem;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
+
+        .video-footer {
+            padding: 1rem 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .video-footer-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-family: var(--mono);
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .video-footer-link:hover {
+            color: var(--accent);
+        }
+
+        /* --- CTA final --- */
+        .cta {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #818CF8, var(--accent));
+        }
+        .cta h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.75rem;
+        }
+        .cta p {
+            color: var(--text-dim);
+            margin-bottom: 1.75rem;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font);
+            font-size: 1rem; font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 20px var(--accent-glow), 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .btn-primary:hover {
+            background: #2563EB;
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--accent-glow), 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        footer a { color: var(--text-dim); text-decoration: none; }
+        footer a:hover { color: var(--text); }
+
+        /* --- Mobile --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-hero { padding: 7rem 1.25rem 2rem; }
+            .videos-section { padding: 1rem 1.25rem 3rem; }
+            .video-header { padding: 1.25rem 1.25rem 1rem; }
+            .video-description { padding: 0 1.25rem 1.25rem; }
+            .video-footer { padding: 1rem 1.25rem; }
+            .cta { padding: 2.5rem 1.25rem; }
+        }
+
+        /* --- Fade-in --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">Galper<span>.</span></a>
+            <div class="nav-links">
+                <a href="index.html#features">Funcionalidades</a>
+                <a href="index.html#normas">Normatividad</a>
+                <a href="tutoriales.html" class="current">Tutoriales</a>
+                <a href="index.html#precio">Precio</a>
+                <a href="index.html#acerca">Acerca de</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="page-hero-content fade-in">
+            <div class="section-label">Tutoriales</div>
+            <h1>Strux en acción<br><span class="highlight">paso a paso</span></h1>
+            <p>Videos demostrativos de cada módulo de diseño. Observa el flujo completo:
+               definición de geometría, asignación de cargas, diseño normativo y
+               generación de la memoria de cálculo.</p>
+        </div>
+    </section>
+
+    <section class="videos-section">
+        <div class="container">
+
+            <!-- Video 1: Concreto -->
+            <article class="video-card fade-in" id="concreto">
+                <div class="video-header">
+                    <span class="video-tag">NTC-Concreto 2023</span>
+                    <h2>Diseño de vigas de concreto reforzado</h2>
+                </div>
+                <p class="video-description">
+                    Demostración del módulo de diseño de vigas de concreto reforzado según
+                    la NTC-Concreto 2023. Incluye revisión por flexión, cortante, deflexiones
+                    y generación de la memoria de cálculo con citas normativas completas.
+                </p>
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/0rJ0sqys4Sk?rel=0&modestbranding=1"
+                        title="Strux 2.00 — Diseño de vigas de concreto según NTC-Concreto 2023"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <div class="video-footer">
+                    <span style="color: var(--text-muted); font-size: 0.85rem; font-family: var(--mono);">
+                        RCDF-CDMX
+                    </span>
+                    <a href="https://www.youtube.com/watch?v=0rJ0sqys4Sk" target="_blank" rel="noopener" class="video-footer-link">
+                        Ver en YouTube →
+                    </a>
+                </div>
+            </article>
+
+            <!-- Video 2: Acero -->
+            <article class="video-card fade-in" id="acero">
+                <div class="video-header">
+                    <span class="video-tag">NTC-Acero 2023</span>
+                    <h2>Diseño de vigas de acero estructural</h2>
+                </div>
+                <p class="video-description">
+                    Demostración del módulo de diseño de vigas de acero según la
+                    NTC-Acero 2023. Cubre resistencia a flexión (Cap. 7), cortante (Cap. 8),
+                    clasificación de sección y la generación completa de la memoria de cálculo.
+                </p>
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/JWFx_DQI3YM?rel=0&modestbranding=1"
+                        title="Strux 2.00 — Diseño de vigas de acero según NTC-Acero 2023"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <div class="video-footer">
+                    <span style="color: var(--text-muted); font-size: 0.85rem; font-family: var(--mono);">
+                        RCDF-CDMX
+                    </span>
+                    <a href="https://www.youtube.com/watch?v=JWFx_DQI3YM" target="_blank" rel="noopener" class="video-footer-link">
+                        Ver en YouTube →
+                    </a>
+                </div>
+            </article>
+
+            <!-- Video 3: Viga genérica -->
+            <article class="video-card fade-in" id="generica">
+                <div class="video-header">
+                    <span class="video-tag">Viga genérica</span>
+                    <h2>Revisión por resistencia de vigas genéricas</h2>
+                </div>
+                <p class="video-description">
+                    Demostración del módulo de vigas genéricas para casos donde se conoce
+                    el módulo de sección disponible y se requiere revisar su capacidad
+                    ante las solicitaciones de diseño.
+                </p>
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/B70FlEDGas4?rel=0&modestbranding=1"
+                        title="Strux 2.00 — Diseño de vigas genéricas"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <div class="video-footer">
+                    <span style="color: var(--text-muted); font-size: 0.85rem; font-family: var(--mono);">
+                        Módulo independiente
+                    </span>
+                    <a href="https://www.youtube.com/watch?v=B70FlEDGas4" target="_blank" rel="noopener" class="video-footer-link">
+                        Ver en YouTube →
+                    </a>
+                </div>
+            </article>
+
+            <!-- CTA -->
+            <div class="cta fade-in">
+                <h2>¿Listo para probar Strux 2.00?</h2>
+                <p>Licencia perpetua, pago único. Todas las actualizaciones 2.xx.xx son gratuitas.</p>
+                <a href="index.html#precio" class="btn btn-primary">
+                    Ver planes y precios
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Galper Softwares. Todos los derechos reservados.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="terms.html">Terms of Service</a> ·
+                <a href="privacy.html">Privacy Policy</a> ·
+                <a href="refund.html">Refund Policy</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Fade-in on scroll (idéntico al index)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
