@@ -319,6 +319,16 @@
             font-size: 0.9rem;
             color: var(--text-dim);
         }
+        /* Galería de capturas por módulo. Una sola columna a todo el ancho:
+           son capturas de UI densa y en la rejilla de 3 columnas no se leen. */
+        .shot-panel { display: grid; gap: 1.5rem; }
+        .shot-panel[hidden] { display: none; }   /* display:grid le gana a [hidden] */
+        .shot-narrow { max-width: 780px; margin: 0 auto; }  /* hojas de reporte, más angostas */
+        .shot-crop img {                          /* recorta la franja inferior */
+            aspect-ratio: 1366 / 650;
+            object-fit: cover;
+            object-position: top;
+        }
 
         /* --- PRICING --- */
         #precio {
@@ -883,23 +893,141 @@
         <div class="container">
             <div class="section-label fade-in" data-i18n="demo_label">Interfaz</div>
             <h2 class="section-title fade-in" data-i18n="demo_title">Diseñado para ingenieros</h2>
-            <p class="section-desc fade-in" data-i18n="demo_desc">Interfaz clara y directa, con el mismo flujo de trabajo en los seis módulos: ingresa los datos, diseña y genera la memoria de cálculo en segundos. Las capturas siguientes corresponden al módulo de vigas.</p>
-            <div class="demo-grid">
-                <div class="demo-item fade-in">
-                    <img src="img/captura1.png" alt="Strux - Módulo de vigas: datos de entrada para viga de concreto reforzado" data-i18n-alt="alt1" loading="lazy">
-                    <div class="caption" data-i18n="cap1">Módulo de vigas · Datos de entrada — Define geometría, cargas, apoyos y propiedades del material, con unidades en SI, MKS o Imperial. Visualización del modelo en tiempo real.</div>
+            <p class="section-desc fade-in" data-i18n="demo_desc">El mismo flujo de trabajo en los seis módulos: capturas los datos, diseñas y generas la memoria de cálculo en segundos. Elige un módulo para ver su interfaz real.</p>
+
+            <div class="demo-item shot-wide fade-in" style="margin-bottom: 2.5rem;">
+                <img src="img/MENU_1.PNG" data-i18n-alt="sc_menu" loading="lazy">
+                <div class="caption" data-i18n="sc_menu">Cambio de módulo — Un solo programa y un solo archivo de proyecto. El selector de módulos se abre desde cualquier pantalla y conserva las hojas de trabajo abiertas.</div>
+            </div>
+
+            <div class="video-tabs fade-in">
+                <button class="video-tab active" data-shots="vigas" type="button" data-i18n="stab_beams">Vigas</button>
+                <button class="video-tab" data-shots="columnas" type="button" data-i18n="stab_columns">Columnas</button>
+                <button class="video-tab" data-shots="zapatas" type="button" data-i18n="stab_footings">Zapatas</button>
+                <button class="video-tab" data-shots="placas" type="button" data-i18n="stab_plates">Placas base</button>
+                <button class="video-tab" data-shots="muros" type="button" data-i18n="stab_walls">Muros</button>
+                <button class="video-tab" data-shots="armaduras" type="button" data-i18n="stab_trusses">Armaduras</button>
+            </div>
+
+            <div class="shot-panel" data-shots="vigas">
+                <div class="demo-item">
+                    <img src="img/VIGAS_CONCRETO_1.PNG" data-i18n-alt="sc_vc1" loading="lazy">
+                    <div class="caption" data-i18n="sc_vc1">Viga de concreto · Datos de entrada — Geometría por tramo, apoyos, cargas puntuales y distribuidas, y peso propio, con el modelo dibujado en tiempo real.</div>
                 </div>
-                <div class="demo-item fade-in">
-                    <img src="img/captura2.png" alt="Strux - Módulo de vigas: diseño y resultados de viga de concreto" data-i18n-alt="alt2" loading="lazy">
-                    <div class="caption" data-i18n="cap2">Módulo de vigas · Concreto reforzado — Relaciones D/C, detallado de armado y diagramas conforme a NTC-Concreto 2023 y ACI 318-25.</div>
+                <div class="demo-item">
+                    <img src="img/VIGAS_CONCRETO_2.PNG" data-i18n-alt="sc_vc2" loading="lazy">
+                    <div class="caption" data-i18n="sc_vc2">Viga de concreto · Diseño — Armado longitudinal y estribos propuestos, D/C de flexión y cortante, y la curva de acero requerido contra el disponible.</div>
                 </div>
-                <div class="demo-item fade-in">
-                    <img src="img/captura3.png" alt="Strux - Módulo de vigas: datos de entrada para viga de acero estructural" data-i18n-alt="alt3" loading="lazy">
-                    <div class="caption" data-i18n="cap3">Módulo de vigas · Acero estructural — Selección de perfil, cargas de construcción y servicio conforme a NTC-Acero 2023 y AISC 360-22.</div>
+                <div class="demo-item shot-narrow">
+                    <img src="img/VIGAS_CONCRETO_3.PNG" data-i18n-alt="sc_vc3" loading="lazy">
+                    <div class="caption" data-i18n="sc_vc3">Viga de concreto · Memoria de cálculo — Resumen ejecutivo con las relaciones D/C, datos de entrada, diagramas M(x) y V(x), y la tabla de acero requerido por sección.</div>
                 </div>
-                <div class="demo-item fade-in">
-                    <img src="img/captura4.png" alt="Strux - Módulo de vigas: verificaciones de diseño en acero estructural" data-i18n-alt="alt4" loading="lazy">
-                    <div class="caption" data-i18n="cap4">Módulo de vigas · Verificaciones de diseño — Propiedades del perfil, clasificación de sección y D/C por etapa de construcción y servicio.</div>
+                <div class="demo-item">
+                    <img src="img/VIGAS_ACERO_1.PNG" data-i18n-alt="sc_va1" loading="lazy">
+                    <div class="caption" data-i18n="sc_va1">Viga de acero · Datos de entrada — Selección de perfil del catálogo IMCA con sus propiedades de sección, cargas de construcción y opción de sección compuesta.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/VIGAS_ACERO_2.PNG" data-i18n-alt="sc_va2" loading="lazy">
+                    <div class="caption" data-i18n="sc_va2">Viga de acero · Verificaciones — Clasificación de la sección y revisión por flexión y cortante en las dos etapas: construcción (acero solo) y servicio.</div>
+                </div>
+                <div class="demo-item shot-narrow">
+                    <img src="img/VIGAS_ACERO_3.PNG" data-i18n-alt="sc_va3" loading="lazy">
+                    <div class="caption" data-i18n="sc_va3">Viga de acero · Memoria de cálculo — Resumen de flexión, cortante, deflexión, pandeo lateral y clase de sección, con los diagramas del modelo analizado.</div>
+                </div>
+            </div>
+
+            <div class="shot-panel" data-shots="columnas" hidden>
+                <div class="demo-item">
+                    <img src="img/COLUMNAS_CONCRETO_1.PNG" data-i18n-alt="sc_cc1" loading="lazy">
+                    <div class="caption" data-i18n="sc_cc1">Columna de concreto · Sección y armado — Secciones rectangular, circular, L y T; armado longitudinal, cuantía, capacidad axial y veredicto global.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/COLUMNAS_CONCRETO_2.PNG" data-i18n-alt="sc_cc2" loading="lazy">
+                    <div class="caption" data-i18n="sc_cc2">Columna de concreto · Diagramas de interacción — Curvas Pr–Mrx y Pr–Mry, contorno biaxial y superficie 3D, con la demanda amplificada por esbeltez marcada sobre ellas.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/COLUMNAS_CONCRETO_3.PNG" data-i18n-alt="sc_cc3" loading="lazy">
+                    <div class="caption" data-i18n="sc_cc3">Columna de concreto · Isolíneas de esfuerzo — Estado de deformaciones en equilibrio, esfuerzo del concreto en la sección y esfuerzo varilla por varilla.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/COLUMNAS_ACERO_1.PNG" data-i18n-alt="sc_ca1" loading="lazy">
+                    <div class="caption" data-i18n="sc_ca1">Columna de acero · Sección — Perfil del catálogo o diseñado a la medida, grado del acero, longitudes de pandeo y arriostre, y clasificación de patín y alma.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/COLUMNAS_ACERO_2.PNG" data-i18n-alt="sc_ca2" loading="lazy">
+                    <div class="caption" data-i18n="sc_ca2">Columna de acero · Interacción — Curvas de eje fuerte y eje débil, contorno biaxial y la ecuación de interacción con los momentos amplificados por P-Δ.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/COLUMNAS_ACERO_3.PNG" data-i18n-alt="sc_ca3" loading="lazy">
+                    <div class="caption" data-i18n="sc_ca3">Columna de acero · Capacidad — Curva de columna φcPn contra KL/r y curva de pandeo lateral-torsional φbMnx contra Lb, con el punto de diseño señalado.</div>
+                </div>
+            </div>
+
+            <div class="shot-panel" data-shots="zapatas" hidden>
+                <div class="demo-item">
+                    <img src="img/ZAPATAS_1.PNG" data-i18n-alt="sc_z1" loading="lazy">
+                    <div class="caption" data-i18n="sc_z1">Zapatas · Vistas — Planta con la parrilla de armado, vista 3D y elevación con la distribución de presiones, por cada combinación de carga.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/ZAPATAS_2.PNG" data-i18n-alt="sc_z2" loading="lazy">
+                    <div class="caption" data-i18n="sc_z2">Zapatas · Presiones del terreno — Mapa de isolíneas de presión, q máx y q mín, área comprimida y detección de levantamiento en cada combinación.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/ZAPATAS_3.PNG" data-i18n-alt="sc_z3" loading="lazy">
+                    <div class="caption" data-i18n="sc_z3">Zapatas · Diseño — Cortante por penetración y cortante en cada dirección, y diseño por flexión con el armado propuesto, con la fórmula y el artículo a la vista.</div>
+                </div>
+            </div>
+
+            <div class="shot-panel" data-shots="placas" hidden>
+                <div class="demo-item">
+                    <img src="img/PB_1.PNG" data-i18n-alt="sc_pb1" loading="lazy">
+                    <div class="caption" data-i18n="sc_pb1">Placas base · Vistas — Planta con las presiones sobre el dado y las anclas en tensión marcadas en rojo, y elevación con el perfil, la placa y el empotramiento de las anclas.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/PB_2.PNG" data-i18n-alt="sc_pb2" loading="lazy">
+                    <div class="caption" data-i18n="sc_pb2">Placas base · Presiones — Superficie 3D de presiones sobre el dado, zona en contacto y tensión ancla por ancla para cada combinación.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/PB_3.PNG" data-i18n-alt="sc_pb3" loading="lazy">
+                    <div class="caption" data-i18n="sc_pb3">Placas base · Diseño — Aplastamiento del dado, flexión de la placa por los volados críticos, tensión en las anclas y cortante por fricción más anclas.</div>
+                </div>
+            </div>
+
+            <div class="shot-panel" data-shots="muros" hidden>
+                <div class="demo-item">
+                    <img src="img/MUROSIS_1.PNG" data-i18n-alt="sc_mw1" loading="lazy">
+                    <div class="caption" data-i18n="sc_mw1">Muros · Revisión por dirección — Un renglón por muro con material, apoyo, geometría, rigidez, cortante resistente, cortante de diseño y su D/C.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/MUROSIS_2.PNG" data-i18n-alt="sc_mw2" loading="lazy">
+                    <div class="caption" data-i18n="sc_mw2">Muros · Resumen del entrepiso — Rigidez total, centro de rigidez, excentricidades de diseño, distorsión contra el límite de la norma y el muro gobernante en cada dirección.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/MUROSIS_3.PNG" data-i18n-alt="sc_mw3" loading="lazy">
+                    <div class="caption" data-i18n="sc_mw3">Muros · Vista 3D de la planta — Muros sólidos con color por material (tabique y concreto) sobre la losa, con órbita, encuadre y zoom libres.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/MUROSIS_4.PNG" data-i18n-alt="sc_mw4" loading="lazy">
+                    <div class="caption" data-i18n="sc_mw4">Muros · Armado y refuerzo — Armado mínimo normativo o personalizado para muros de concreto, con diseño de los núcleos extremos por descomposición de fuerzas.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/MUROSIS_5.PNG" data-i18n-alt="sc_mw5" loading="lazy">
+                    <div class="caption" data-i18n="sc_mw5">Muros · Importación desde DXF — Toma la planta directamente del archivo de CAD: elige capa, unidad, espesor y material, y los muros entran nombrados y en orden.</div>
+                </div>
+            </div>
+
+            <div class="shot-panel" data-shots="armaduras" hidden>
+                <div class="demo-item shot-crop">
+                    <img src="img/ARMADURAS_1.PNG" data-i18n-alt="sc_ar1" loading="lazy">
+                    <div class="caption" data-i18n="sc_ar1">Armaduras · Modelo — Tipología, celosía, claro y peralte definen la geometría; cuerdas, montantes y diagonales quedan agrupados con su perfil.</div>
+                </div>
+                <div class="demo-item shot-crop">
+                    <img src="img/ARMADURAS_2.PNG" data-i18n-alt="sc_ar2" loading="lazy">
+                    <div class="caption" data-i18n="sc_ar2">Armaduras · Fuerzas axiales — Compresión y tensión rotuladas barra por barra sobre el modelo, con la lista de las barras más solicitadas.</div>
+                </div>
+                <div class="demo-item shot-crop">
+                    <img src="img/ARMADURAS_3.PNG" data-i18n-alt="sc_ar3" loading="lazy">
+                    <div class="caption" data-i18n="sc_ar3">Armaduras · Cuantificación — Peso y longitud por grupo y total, peso por metro de claro y despiece por perfil, listo para presupuestar.</div>
                 </div>
             </div>
         </div>
@@ -1089,15 +1217,40 @@
                 norm7_li4: "Límites de distorsión lateral",
                 demo_label: "Interfaz",
                 demo_title: "Diseñado para ingenieros",
-                demo_desc: "Interfaz clara y directa, con el mismo flujo de trabajo en los seis módulos: ingresa los datos, diseña y genera la memoria de cálculo en segundos. Las capturas siguientes corresponden al módulo de vigas.",
-                alt1: "Strux - Módulo de vigas: datos de entrada para viga de concreto reforzado",
-                alt2: "Strux - Módulo de vigas: diseño y resultados de viga de concreto",
-                alt3: "Strux - Módulo de vigas: datos de entrada para viga de acero estructural",
-                alt4: "Strux - Módulo de vigas: verificaciones de diseño en acero estructural",
-                cap1: "Módulo de vigas · Datos de entrada — Define geometría, cargas, apoyos y propiedades del material, con unidades en SI, MKS o Imperial. Visualización del modelo en tiempo real.",
-                cap2: "Módulo de vigas · Concreto reforzado — Relaciones D/C, detallado de armado y diagramas conforme a NTC-Concreto 2023 y ACI 318-25.",
-                cap3: "Módulo de vigas · Acero estructural — Selección de perfil, cargas de construcción y servicio conforme a NTC-Acero 2023 y AISC 360-22.",
-                cap4: "Módulo de vigas · Verificaciones de diseño — Propiedades del perfil, clasificación de sección y D/C por etapa de construcción y servicio.",
+                demo_desc: "El mismo flujo de trabajo en los seis módulos: capturas los datos, diseñas y generas la memoria de cálculo en segundos. Elige un módulo para ver su interfaz real.",
+                stab_beams: "Vigas",
+                stab_columns: "Columnas",
+                stab_footings: "Zapatas",
+                stab_plates: "Placas base",
+                stab_walls: "Muros",
+                stab_trusses: "Armaduras",
+                sc_menu: "Cambio de módulo — Un solo programa y un solo archivo de proyecto. El selector de módulos se abre desde cualquier pantalla y conserva las hojas de trabajo abiertas.",
+                sc_vc1: "Viga de concreto · Datos de entrada — Geometría por tramo, apoyos, cargas puntuales y distribuidas, y peso propio, con el modelo dibujado en tiempo real.",
+                sc_vc2: "Viga de concreto · Diseño — Armado longitudinal y estribos propuestos, D/C de flexión y cortante, y la curva de acero requerido contra el disponible.",
+                sc_vc3: "Viga de concreto · Memoria de cálculo — Resumen ejecutivo con las relaciones D/C, datos de entrada, diagramas M(x) y V(x), y la tabla de acero requerido por sección.",
+                sc_va1: "Viga de acero · Datos de entrada — Selección de perfil del catálogo IMCA con sus propiedades de sección, cargas de construcción y opción de sección compuesta.",
+                sc_va2: "Viga de acero · Verificaciones — Clasificación de la sección y revisión por flexión y cortante en las dos etapas: construcción (acero solo) y servicio.",
+                sc_va3: "Viga de acero · Memoria de cálculo — Resumen de flexión, cortante, deflexión, pandeo lateral y clase de sección, con los diagramas del modelo analizado.",
+                sc_cc1: "Columna de concreto · Sección y armado — Secciones rectangular, circular, L y T; armado longitudinal, cuantía, capacidad axial y veredicto global.",
+                sc_cc2: "Columna de concreto · Diagramas de interacción — Curvas Pr–Mrx y Pr–Mry, contorno biaxial y superficie 3D, con la demanda amplificada por esbeltez marcada sobre ellas.",
+                sc_cc3: "Columna de concreto · Isolíneas de esfuerzo — Estado de deformaciones en equilibrio, esfuerzo del concreto en la sección y esfuerzo varilla por varilla.",
+                sc_ca1: "Columna de acero · Sección — Perfil del catálogo o diseñado a la medida, grado del acero, longitudes de pandeo y arriostre, y clasificación de patín y alma.",
+                sc_ca2: "Columna de acero · Interacción — Curvas de eje fuerte y eje débil, contorno biaxial y la ecuación de interacción con los momentos amplificados por P-Δ.",
+                sc_ca3: "Columna de acero · Capacidad — Curva de columna φcPn contra KL/r y curva de pandeo lateral-torsional φbMnx contra Lb, con el punto de diseño señalado.",
+                sc_z1: "Zapatas · Vistas — Planta con la parrilla de armado, vista 3D y elevación con la distribución de presiones, por cada combinación de carga.",
+                sc_z2: "Zapatas · Presiones del terreno — Mapa de isolíneas de presión, q máx y q mín, área comprimida y detección de levantamiento en cada combinación.",
+                sc_z3: "Zapatas · Diseño — Cortante por penetración y cortante en cada dirección, y diseño por flexión con el armado propuesto, con la fórmula y el artículo a la vista.",
+                sc_pb1: "Placas base · Vistas — Planta con las presiones sobre el dado y las anclas en tensión marcadas en rojo, y elevación con el perfil, la placa y el empotramiento de las anclas.",
+                sc_pb2: "Placas base · Presiones — Superficie 3D de presiones sobre el dado, zona en contacto y tensión ancla por ancla para cada combinación.",
+                sc_pb3: "Placas base · Diseño — Aplastamiento del dado, flexión de la placa por los volados críticos, tensión en las anclas y cortante por fricción más anclas.",
+                sc_mw1: "Muros · Revisión por dirección — Un renglón por muro con material, apoyo, geometría, rigidez, cortante resistente, cortante de diseño y su D/C.",
+                sc_mw2: "Muros · Resumen del entrepiso — Rigidez total, centro de rigidez, excentricidades de diseño, distorsión contra el límite de la norma y el muro gobernante en cada dirección.",
+                sc_mw3: "Muros · Vista 3D de la planta — Muros sólidos con color por material (tabique y concreto) sobre la losa, con órbita, encuadre y zoom libres.",
+                sc_mw4: "Muros · Armado y refuerzo — Armado mínimo normativo o personalizado para muros de concreto, con diseño de los núcleos extremos por descomposición de fuerzas.",
+                sc_mw5: "Muros · Importación desde DXF — Toma la planta directamente del archivo de CAD: elige capa, unidad, espesor y material, y los muros entran nombrados y en orden.",
+                sc_ar1: "Armaduras · Modelo — Tipología, celosía, claro y peralte definen la geometría; cuerdas, montantes y diagonales quedan agrupados con su perfil.",
+                sc_ar2: "Armaduras · Fuerzas axiales — Compresión y tensión rotuladas barra por barra sobre el modelo, con la lista de las barras más solicitadas.",
+                sc_ar3: "Armaduras · Cuantificación — Peso y longitud por grupo y total, peso por metro de claro y despiece por perfil, listo para presupuestar.",
                 vid_label: "Tutoriales",
                 vid_title: "Ve Strux en acción",
                 vid_desc: "Videos demostrativos del módulo de vigas. Observa el flujo completo de trabajo dentro del software; iremos publicando los videos de los demás módulos.",
@@ -1233,15 +1386,40 @@
                 norm7_li4: "Lateral drift limits",
                 demo_label: "Interface",
                 demo_title: "Built for engineers",
-                demo_desc: "A clear, direct interface with the same workflow across the six modules: enter the data, run the design and generate the calculation report in seconds. The screenshots below are from the beam module.",
-                alt1: "Strux - Beam module: input data for a reinforced-concrete beam",
-                alt2: "Strux - Beam module: concrete beam design and results",
-                alt3: "Strux - Beam module: input data for a structural-steel beam",
-                alt4: "Strux - Beam module: structural-steel design checks",
-                cap1: "Beam module · Inputs — Define geometry, loads, supports and material properties, with units in SI, MKS or Imperial. Real-time model preview.",
-                cap2: "Beam module · Reinforced concrete — D/C ratios, rebar detailing and diagrams under NTC-Concreto 2023 and ACI 318-25.",
-                cap3: "Beam module · Structural steel — Section selection, construction and service loads under NTC-Acero 2023 and AISC 360-22.",
-                cap4: "Beam module · Design checks — Section properties, classification and D/C by construction and service stage.",
+                demo_desc: "The same workflow across all six modules: enter the data, run the design and generate the calculation report in seconds. Pick a module to see its actual interface.",
+                stab_beams: "Beams",
+                stab_columns: "Columns",
+                stab_footings: "Footings",
+                stab_plates: "Base plates",
+                stab_walls: "Walls",
+                stab_trusses: "Trusses",
+                sc_menu: "Switching modules — One program and one project file. The module selector opens from any screen and keeps your open worksheets.",
+                sc_vc1: "Concrete beam · Inputs — Span geometry, supports, point and distributed loads, and self weight, with the model drawn in real time.",
+                sc_vc2: "Concrete beam · Design — Proposed longitudinal reinforcement and stirrups, flexure and shear D/C, and required versus available steel along the span.",
+                sc_vc3: "Concrete beam · Calculation report — Executive summary with the D/C ratios, input data, M(x) and V(x) diagrams, and the required-steel table by section.",
+                sc_va1: "Steel beam · Inputs — Section picked from the IMCA catalog with its section properties, construction loads and a composite-section option.",
+                sc_va2: "Steel beam · Checks — Section classification and flexure and shear checks for both stages: construction (bare steel) and service.",
+                sc_va3: "Steel beam · Calculation report — Summary of flexure, shear, deflection, lateral-torsional buckling and section class, with the diagrams of the analyzed model.",
+                sc_cc1: "Concrete column · Section and reinforcement — Rectangular, circular, L and T sections; longitudinal reinforcement, ratio, axial capacity and overall verdict.",
+                sc_cc2: "Concrete column · Interaction diagrams — Pr–Mrx and Pr–Mry curves, biaxial contour and 3D surface, with the slenderness-amplified demand plotted on them.",
+                sc_cc3: "Concrete column · Stress contours — Strain state in equilibrium, concrete stress across the section and stress bar by bar.",
+                sc_ca1: "Steel column · Section — Catalog or custom-designed section, steel grade, buckling and bracing lengths, and flange and web classification.",
+                sc_ca2: "Steel column · Interaction — Strong-axis and weak-axis curves, biaxial contour and the interaction equation with P-Δ amplified moments.",
+                sc_ca3: "Steel column · Capacity — Column curve φcPn versus KL/r and lateral-torsional buckling curve φbMnx versus Lb, with the design point marked.",
+                sc_z1: "Footings · Views — Plan with the reinforcement grid, 3D view and elevation with the pressure distribution, for each load combination.",
+                sc_z2: "Footings · Bearing pressures — Pressure contour map, q max and q min, compressed area and uplift detection for every combination.",
+                sc_z3: "Footings · Design — Punching shear and one-way shear in each direction, and flexural design with the proposed reinforcement, formula and code clause in view.",
+                sc_pb1: "Base plates · Views — Plan with the pressures on the pedestal and anchor rods in tension marked in red, and elevation with the section, plate and anchor embedment.",
+                sc_pb2: "Base plates · Pressures — 3D surface of the pressures on the pedestal, contact area and tension anchor by anchor for each combination.",
+                sc_pb3: "Base plates · Design — Pedestal bearing, plate bending from the critical cantilevers, anchor tension and shear by friction plus anchors.",
+                sc_mw1: "Walls · Checks by direction — One row per wall with material, support, geometry, stiffness, resisting shear, design shear and its D/C.",
+                sc_mw2: "Walls · Story summary — Total stiffness, center of rigidity, design eccentricities, drift against the code limit and the governing wall in each direction.",
+                sc_mw3: "Walls · 3D plan view — Solid walls colored by material (clay masonry and concrete) over the slab, with free orbit, pan and zoom.",
+                sc_mw4: "Walls · Reinforcement — Code-minimum or custom reinforcement for concrete walls, with boundary elements designed by force decomposition.",
+                sc_mw5: "Walls · DXF import — Takes the plan straight from the CAD file: pick layer, unit, thickness and material, and the walls come in named and in order.",
+                sc_ar1: "Trusses · Model — Typology, web pattern, span and depth define the geometry; chords, verticals and diagonals are grouped with their section.",
+                sc_ar2: "Trusses · Axial forces — Compression and tension labeled member by member on the model, with a list of the most stressed members.",
+                sc_ar3: "Trusses · Take-off — Weight and length by group and total, weight per meter of span and a breakdown by section, ready for costing.",
                 vid_label: "Tutorials",
                 vid_title: "See Strux in action",
                 vid_desc: "Demo videos of the beam module. Watch the full workflow inside the software; videos for the remaining modules are on the way.",
@@ -1292,9 +1470,23 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+        // Screenshot tabs switcher (una pestaña por módulo)
+        (function() {
+            const tabs = document.querySelectorAll('.video-tab[data-shots]');
+            const panels = document.querySelectorAll('.shot-panel[data-shots]');
+            if (!tabs.length) return;
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const key = this.getAttribute('data-shots');
+                    tabs.forEach(t => t.classList.toggle('active', t === this));
+                    panels.forEach(p => { p.hidden = p.getAttribute('data-shots') !== key; });
+                });
+            });
+        })();
+
         // Video tabs switcher
         (function() {
-            const tabs = document.querySelectorAll('.video-tab');
+            const tabs = document.querySelectorAll('.video-tab[data-video]');
             const iframe = document.getElementById('videos-iframe');
             if (!iframe) return;
             tabs.forEach(tab => {
