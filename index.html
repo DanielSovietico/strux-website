@@ -12,1492 +12,954 @@
         :root {
             --bg: #0C0F14;
             --bg-card: #13171F;
-            --bg-card-hover: #1A1F2B;
+            --bg-hover: #1A1F2B;
             --surface: #1E2330;
             --border: #2A3040;
             --text: #E8ECF4;
             --text-dim: #8892A6;
             --text-muted: #5C6578;
             --accent: #3B82F6;
-            --accent-glow: rgba(59, 130, 246, 0.15);
-            --accent-warm: #F59E0B;
-            --accent-green: #10B981;
-            --danger: #EF4444;
-            --radius: 12px;
-            --radius-sm: 8px;
+            --amber: #F59E0B;
+            --green: #10B981;
+            --red: #EF4444;
             --font: 'DM Sans', sans-serif;
             --mono: 'Space Mono', monospace;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-
         body {
-            font-family: var(--font);
             background: var(--bg);
             color: var(--text);
+            font-family: var(--font);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { color: #60A5FA; }
+        button { font-family: var(--font); }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
 
         /* --- NAV --- */
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 100;
-            background: rgba(12, 15, 20, 0.85);
+        .topnav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(12,15,20,0.88);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             padding: 0 2rem;
         }
         .nav-inner {
-            max-width: 1100px; margin: 0 auto;
+            max-width: 1200px; margin: 0 auto;
             display: flex; align-items: center; justify-content: space-between;
-            height: 64px;
+            height: 64px; gap: 1.5rem;
         }
+        .brand { display: flex; align-items: baseline; gap: 0.85rem; }
         .logo {
-            font-family: var(--mono);
-            font-weight: 700; font-size: 1.25rem;
-            color: var(--text);
-            letter-spacing: -0.5px;
+            font-family: var(--mono); font-weight: 700; font-size: 1.25rem;
+            letter-spacing: -0.5px; color: var(--text);
         }
         .logo span { color: var(--accent); }
-        .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links a {
-            color: var(--text-dim); text-decoration: none;
-            font-size: 0.9rem; font-weight: 500;
-            transition: color 0.2s;
+        .ver {
+            font-family: var(--mono); font-size: 0.7rem;
+            color: var(--text-muted); letter-spacing: 1px;
         }
-        .nav-links a:hover { color: var(--text); }
+        .nav-links { display: flex; gap: 1.75rem; align-items: center; }
+        .nav-links > a { color: var(--text-dim); font-size: 0.9rem; font-weight: 500; }
+        .nav-links > a:hover { color: var(--text); }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 0.55rem;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; padding: 0.5rem 0.9rem;
+            font-size: 0.88rem; font-weight: 600;
+        }
+        .nav-links > a.nav-cta { color: var(--text); }
+        .nav-links > a.nav-cta:hover { color: var(--text); border-color: var(--accent); }
+        .nav-cta .price { font-family: var(--mono); color: var(--amber); }
+
+        /* --- SECCIONES --- */
+        .sec { padding: 5.5rem 2rem 0; }
+        .wrap { max-width: 1200px; margin: 0 auto; }
+        .kicker {
+            font-family: var(--mono); font-size: 0.72rem;
+            text-transform: uppercase; letter-spacing: 2px;
+            color: var(--accent); margin-bottom: 0.9rem;
+        }
+        .sec-title {
+            font-size: clamp(1.9rem, 3.6vw, 2.6rem); font-weight: 700;
+            letter-spacing: -1.2px; margin-bottom: 2.25rem;
+            max-width: 660px; text-wrap: balance;
+        }
 
         /* --- HERO --- */
-        .hero {
-            min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-            padding: 8rem 2rem 4rem;
-            position: relative; overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute; top: -40%; left: -20%;
-            width: 80%; height: 80%;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+        .hero { padding: 5.5rem 2rem 0; position: relative; overflow: hidden; }
+        .hero-glow {
+            position: absolute; top: -30%; left: 50%; transform: translateX(-50%);
+            width: 900px; height: 700px;
+            background: radial-gradient(ellipse, rgba(59,130,246,0.16) 0%, transparent 65%);
             pointer-events: none;
         }
-        .hero-content {
-            max-width: 800px; text-align: center;
-            position: relative; z-index: 1;
-        }
-        .badge {
+        .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+        .hero-copy { max-width: 780px; }
+        .hero-badge {
             display: inline-flex; align-items: center; gap: 0.5rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            padding: 0.4rem 1rem;
-            font-size: 0.8rem;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 2rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 100px; padding: 0.35rem 0.9rem;
+            font-size: 0.72rem; color: var(--accent); font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.75rem;
         }
-        .badge::before {
-            content: ''; display: block;
-            width: 8px; height: 8px;
-            background: var(--accent-green);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+        .hero-badge .dot {
+            width: 7px; height: 7px; background: var(--green);
+            border-radius: 50%; animation: pulse 2s infinite;
         }
         h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -1.5px;
-            margin-bottom: 1.5rem;
+            font-size: clamp(2.6rem, 5.6vw, 4.3rem); font-weight: 700;
+            line-height: 1.04; letter-spacing: -2px; margin-bottom: 1.35rem;
+            text-wrap: balance;
         }
-        h1 .highlight {
-            background: linear-gradient(135deg, var(--accent) 0%, #818CF8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .grad {
+            background: linear-gradient(135deg, #3B82F6 0%, #818CF8 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            max-width: 580px;
-            margin: 0 auto 2.5rem;
-            line-height: 1.7;
+        .hero-sub {
+            font-size: 1.15rem; color: var(--text-dim); max-width: 600px;
+            line-height: 1.65; margin-bottom: 2.25rem; text-wrap: pretty;
         }
-        .hero-actions {
-            display: flex; gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.85rem 2rem;
-            border-radius: var(--radius-sm);
-            font-family: var(--font);
-            font-size: 1rem; font-weight: 600;
-            text-decoration: none;
-            transition: all 0.25s;
-            cursor: pointer;
-            border: none;
-        }
+        .hero-actions { display: flex; gap: 0.85rem; flex-wrap: wrap; align-items: center; }
         .btn-primary {
-            background: var(--accent);
-            color: #fff;
-            box-shadow: 0 0 20px var(--accent-glow), 0 4px 12px rgba(0,0,0,0.3);
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.9rem 1.6rem; border-radius: 8px;
+            font-size: 1rem; font-weight: 600;
+            background: var(--accent); color: #fff;
+            box-shadow: 0 0 24px rgba(59,130,246,0.25), 0 6px 16px rgba(0,0,0,0.35);
+            transition: all .25s;
         }
-        .btn-primary:hover {
-            background: #2563EB;
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px var(--accent-glow), 0 8px 20px rgba(0,0,0,0.4);
+        .btn-primary:hover { background: #2563EB; color: #fff; transform: translateY(-2px); }
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.9rem 1.6rem; border-radius: 8px;
+            font-size: 1rem; font-weight: 600;
+            background: var(--surface); color: var(--text);
+            border: 1px solid var(--border); transition: all .25s;
         }
-        .btn-secondary {
-            background: var(--surface);
-            color: var(--text);
+        .btn-ghost:hover { background: var(--bg-hover); border-color: var(--text-muted); color: var(--text); }
+        .btn-ghost .price { font-family: var(--mono); color: var(--amber); }
+        .btn-ghost .note { color: var(--text-dim); font-weight: 500; }
+
+        /* --- TILES DE MÓDULO (hero) --- */
+        .tiles-block { margin-top: 3.5rem; }
+        .tilehead {
+            display: flex; align-items: baseline; justify-content: space-between;
+            gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;
+        }
+        .tilehead-label {
+            font-family: var(--mono); font-size: 0.72rem;
+            text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted);
+        }
+        .tilehead-hint { font-size: 0.85rem; color: var(--text-muted); }
+        .tiles {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+            gap: 0.9rem;
+        }
+        .tile {
+            display: block; background: var(--bg-card);
+            border: 1px solid var(--border); border-radius: 12px;
+            overflow: hidden; transition: all .25s;
+        }
+        .tile:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .tile-img {
+            height: 104px; overflow: hidden;
+            background: var(--bg); border-bottom: 1px solid var(--border);
+        }
+        .tile-img img {
+            width: 100%; height: 100%; object-fit: cover;
+            object-position: center; opacity: .85; display: block;
+        }
+        .tile-img.top img { object-position: top; }
+        .tile-body { padding: 0.85rem 1rem 1rem; }
+        .tile-name { font-size: 0.98rem; font-weight: 600; color: var(--text); margin-bottom: 0.15rem; }
+        .tile-meta { font-size: 0.8rem; color: var(--text-muted); font-family: var(--mono); }
+
+        /* --- FRANJA DE DATOS --- */
+        .sec-stats { padding: 3rem 2rem 0; }
+        .stats {
+            max-width: 1200px; margin: 0 auto;
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        }
+        .stat { padding: 1.25rem; border-right: 1px solid var(--border); }
+        .stat:last-child { border-right: none; }
+        .stat-v { font-family: var(--mono); font-size: 1.05rem; color: var(--text); }
+        .stat-v.ok { color: var(--green); }
+        .stat-k { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* --- FLUJO --- */
+        .flow {
+            display: grid; gap: 1.25rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+        }
+        .fcard {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; overflow: hidden;
+        }
+        .fhead {
+            padding: 1.1rem 1.35rem; display: flex; align-items: center;
+            gap: 0.75rem; border-bottom: 1px solid var(--border);
+        }
+        .fnum {
+            font-family: var(--mono); font-size: 0.78rem; color: var(--accent);
+            background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.25);
+            border-radius: 6px; padding: 0.15rem 0.5rem;
+        }
+        .fnum.ok {
+            color: var(--green);
+            background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.25);
+        }
+        .fname { font-weight: 600; font-size: 1.02rem; }
+        .ftime { margin-left: auto; font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); }
+        .fcard img {
+            width: 100%; display: block; aspect-ratio: 16 / 10;
+            object-fit: cover; object-position: top;
+        }
+        .fbody { padding: 1rem 1.35rem; color: var(--text-dim); font-size: 0.9rem; }
+
+        .compare {
+            margin-top: 1.25rem; display: grid; gap: 1.25rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+        }
+        .cmp {
+            border-radius: 14px; padding: 1.6rem 1.5rem;
+            background: var(--bg); border: 1px solid var(--border);
+        }
+        .cmp.strux { background: rgba(59,130,246,0.06); border-color: rgba(59,130,246,0.3); }
+        .cmp-head {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 1.1rem;
+        }
+        .cmp-name { font-size: 0.95rem; font-weight: 600; color: var(--text-dim); }
+        .cmp.strux .cmp-name { color: var(--text); }
+        .cmp-time { font-family: var(--mono); font-size: 0.8rem; color: var(--red); }
+        .cmp.strux .cmp-time { color: var(--green); }
+        .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .chip {
+            font-size: 0.82rem; color: var(--text-muted);
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 6px; padding: 0.3rem 0.6rem;
+        }
+        .cmp.strux .chip { color: var(--text); background: var(--surface); }
+        .cmp-note { margin-top: 1.1rem; color: var(--text-dim); font-size: 0.88rem; line-height: 1.6; }
+
+        /* --- PÍLDORAS (pestañas) --- */
+        .pill {
+            padding: 0.5rem 0.95rem; border-radius: 8px;
+            font-weight: 600; font-size: 0.86rem;
+            cursor: pointer; transition: all .2s;
+            background: var(--bg); color: var(--text-dim);
             border: 1px solid var(--border);
         }
-        .btn-secondary:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--text-muted);
-        }
+        .pill:hover { color: var(--text); }
+        .pill.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
-        .price-hero {
-            margin-top: 2rem;
-            font-family: var(--mono);
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        /* --- VIDEO --- */
+        .video-head {
+            display: flex; align-items: flex-end; justify-content: space-between;
+            gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;
         }
-        .price-hero strong {
-            color: var(--accent-warm);
-            font-size: 1.8rem;
+        .video-head .sec-title { margin-bottom: 0; }
+        .pills { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .player {
+            position: relative; width: 100%; padding-bottom: 56.25%; height: 0;
+            overflow: hidden; border-radius: 14px;
+            border: 1px solid var(--border); background: #000;
         }
+        .player iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .video-foot {
+            margin-top: 1rem; display: flex; justify-content: space-between;
+            gap: 1rem; flex-wrap: wrap;
+        }
+        .video-note { color: var(--text-muted); font-size: 0.85rem; font-family: var(--mono); }
+        .video-foot a { font-size: 0.88rem; font-weight: 500; }
 
-        /* --- SECTIONS --- */
-        section { padding: 6rem 2rem; }
-        .container { max-width: 1100px; margin: 0 auto; }
+        /* --- MÓDULOS --- */
+        .railgrid {
+            display: grid; grid-template-columns: 230px minmax(0, 1fr);
+            gap: 1.5rem; align-items: start;
+        }
+        .rail {
+            display: flex; flex-direction: column; gap: 0.4rem;
+            position: sticky; top: 88px;
+        }
+        .rail-btn {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 0.5rem; width: 100%; text-align: left;
+            padding: 0.75rem 0.95rem; border-radius: 10px;
+            font-size: 0.94rem; font-weight: 600; cursor: pointer; transition: all .2s;
+            background: transparent; color: var(--text-dim); border: 1px solid var(--border);
+        }
+        .rail-btn:hover { color: var(--text); }
+        .rail-btn.active { background: var(--surface); color: var(--text); border-color: var(--accent); }
+        .rail-btn .count { font-family: var(--mono); font-size: 0.72rem; opacity: .65; }
+        .railnote {
+            margin-top: 0.9rem; padding: 0.9rem 1rem;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+            font-size: 0.82rem; color: var(--text-dim); line-height: 1.55;
+        }
+        .browser {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; overflow: hidden;
+        }
+        .browser-bar {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border); flex-wrap: wrap;
+        }
+        .bdot { width: 9px; height: 9px; border-radius: 50%; opacity: .5; }
+        .bdot.r { background: var(--red); } .bdot.a { background: var(--amber); } .bdot.g { background: var(--green); }
+        .shot-title { font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); margin-left: 0.5rem; }
+        .shot-stage { background: var(--bg); }
+        .shot-stage img { width: 100%; display: block; max-height: 620px; object-fit: contain; }
+        .shot-stage img.crop {
+            aspect-ratio: 1366 / 650; object-fit: cover; object-position: top;
+            max-height: none;
+        }
+        .shot-cap {
+            padding: 1rem 1.25rem; border-top: 1px solid var(--border);
+            color: var(--text-dim); font-size: 0.92rem;
+        }
+        .shot-tabs { display: flex; gap: 0.5rem; padding: 0 1.25rem 1.25rem; flex-wrap: wrap; }
 
-        .section-label {
-            font-family: var(--mono);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
-            margin-bottom: 1rem;
+        /* --- NORMAS --- */
+        .normtable { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+        .normrow {
+            display: grid; grid-template-columns: 220px 1fr 190px;
+            gap: 1.25rem; padding: 1.1rem 1.4rem;
+            border-bottom: 1px solid var(--border); align-items: center;
+            background: var(--bg-card); transition: background .2s;
         }
-        .section-title {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 700;
-            letter-spacing: -1px;
-            margin-bottom: 1rem;
-        }
-        .section-desc {
-            color: var(--text-dim);
-            font-size: 1.05rem;
-            max-width: 600px;
-            margin-bottom: 3rem;
-        }
+        .normrow:last-child { border-bottom: none; }
+        .normrow:hover { background: var(--bg-hover); }
+        .norm-tag { font-family: var(--mono); font-size: 0.82rem; color: var(--accent); letter-spacing: 0.5px; }
+        .norm-what { color: var(--text); font-size: 0.93rem; }
+        .norm-where { color: var(--text-muted); font-size: 0.82rem; text-align: right; }
 
-        /* --- FEATURES --- */
-        #features { border-top: 1px solid var(--border); }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+        /* --- PRECIO --- */
+        .price-sub { color: var(--text-dim); font-size: 1.05rem; max-width: 560px; margin-bottom: 2.25rem; }
+        .pricegrid {
+            display: grid; gap: 1.25rem; align-items: stretch;
+            grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
         }
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 2rem;
-            transition: all 0.3s;
+        .pricecard {
+            background: var(--bg-card); border: 1px solid var(--accent);
+            border-radius: 16px; padding: 2rem; position: relative; overflow: hidden;
+            box-shadow: 0 0 40px rgba(59,130,246,0.10);
+            display: flex; flex-direction: column;
         }
-        .feature-card:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--text-muted);
-            transform: translateY(-3px);
+        .topline {
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, #3B82F6, #818CF8, #3B82F6);
         }
-        .feature-icon {
-            width: 48px; height: 48px;
-            background: var(--accent-glow);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 1.25rem;
-            font-size: 1.3rem;
+        .lic-tabs { display: flex; gap: 0.4rem; margin-bottom: 1.75rem; flex-wrap: wrap; }
+        .price-row { display: flex; align-items: flex-end; gap: 0.85rem; flex-wrap: wrap; }
+        .price-big {
+            font-family: var(--mono); font-size: clamp(3rem, 6vw, 4.25rem);
+            font-weight: 700; line-height: 0.95; letter-spacing: -0.055em;
         }
-        .feature-card h3 {
-            font-size: 1.1rem; font-weight: 600;
-            margin-bottom: 0.6rem;
+        .price-side { padding-bottom: 0.45rem; }
+        .price-unit { font-family: var(--mono); font-size: 0.9rem; color: var(--amber); }
+        .price-alt { font-size: 0.85rem; color: var(--text-muted); }
+        .price-per { margin-top: 0.6rem; font-size: 0.9rem; color: var(--text-dim); }
+        .buy-wrap { margin-top: auto; padding-top: 1.75rem; }
+        .buy {
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            width: 100%; padding: 1rem; border-radius: 10px;
+            font-size: 1.02rem; font-weight: 700;
+            background: var(--accent); color: #fff;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.35); transition: all .25s;
         }
-        .feature-card p {
-            color: var(--text-dim);
-            font-size: 0.92rem;
-            line-height: 1.6;
+        .buy:hover { background: #2563EB; color: #fff; transform: translateY(-2px); }
+        .buy-note {
+            margin-top: 0.9rem; display: flex; gap: 1.1rem; justify-content: center;
+            flex-wrap: wrap; font-size: 0.8rem; color: var(--text-muted);
         }
-
-        /* --- NORMS --- */
-        #normas {
-            background: var(--bg-card);
+        .included {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: 16px; padding: 2rem;
+        }
+        .inc-label {
+            font-family: var(--mono); font-size: 0.72rem;
+            text-transform: uppercase; letter-spacing: 2px;
+            color: var(--text-muted); margin-bottom: 1.25rem;
+        }
+        .inc-list { display: flex; flex-direction: column; gap: 0.85rem; }
+        .inc-list > div { display: flex; gap: 0.75rem; align-items: flex-start; }
+        .inc-list .check { color: var(--green); font-weight: 700; }
+        .inc-list .txt { color: var(--text); font-size: 0.94rem; }
+        .inc-foot {
+            margin-top: 1.75rem; padding-top: 1.25rem;
             border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-        .norms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        .norm-card {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 2rem;
-        }
-        .norm-tag {
-            font-family: var(--mono);
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--accent);
-            margin-bottom: 0.75rem;
-        }
-        .norm-card h3 {
-            font-size: 1.15rem; font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-        .norm-card ul {
-            list-style: none;
-            padding: 0;
-        }
-        .norm-card li {
-            color: var(--text-dim);
-            font-size: 0.88rem;
-            padding: 0.35rem 0;
-            padding-left: 1.2rem;
-            position: relative;
-        }
-        .norm-card li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-size: 0.8rem;
+            color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;
         }
 
-        /* --- SCREENSHOTS / DEMO --- */
-        #demo { border-top: 1px solid var(--border); }
-        .demo-placeholder {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 4rem 2rem;
-            text-align: center;
-            color: var(--text-muted);
+        /* --- FAQ --- */
+        .faqgrid {
+            display: grid; gap: 0.75rem; align-items: start;
+            grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
         }
-        .demo-placeholder .icon { font-size: 3rem; margin-bottom: 1rem; }
-        .demo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
+        .faq { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .faq-q {
+            width: 100%; display: flex; align-items: center; justify-content: space-between;
+            gap: 1rem; padding: 1.1rem 1.35rem;
+            background: transparent; border: none; cursor: pointer; text-align: left;
+            color: var(--text); font-size: 0.98rem; font-weight: 600;
         }
-        .demo-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-        .demo-item img {
-            width: 100%;
-            display: block;
-        }
-        .demo-item .caption {
-            padding: 1rem 1.5rem;
-            font-size: 0.9rem;
-            color: var(--text-dim);
-        }
-        /* Galería de capturas por módulo. Una sola columna a todo el ancho:
-           son capturas de UI densa y en la rejilla de 3 columnas no se leen. */
-        .shot-panel { display: grid; gap: 1.5rem; }
-        .shot-panel[hidden] { display: none; }   /* display:grid le gana a [hidden] */
-        .shot-narrow { max-width: 780px; margin: 0 auto; }  /* hojas de reporte, más angostas */
-        .shot-crop img {                          /* recorta la franja inferior */
-            aspect-ratio: 1366 / 650;
-            object-fit: cover;
-            object-position: top;
-        }
+        .faq-sign { color: var(--accent); font-size: 1.2rem; line-height: 1; flex-shrink: 0; }
+        .faq-a { display: none; padding: 0 1.35rem 1.25rem; color: var(--text-dim); font-size: 0.92rem; line-height: 1.65; }
+        .faq.open .faq-a { display: block; }
 
-        /* --- PRICING --- */
-        #precio {
-            text-align: center;
-            border-top: 1px solid var(--border);
+        /* --- CTA FINAL --- */
+        .cta {
+            max-width: 1200px; margin: 0 auto;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 18px; padding: 3.5rem 2.5rem; text-align: center;
+            position: relative; overflow: hidden;
         }
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.25rem;
-            max-width: 1100px;
-            margin: 0 auto;
+        .cta h2 {
+            font-size: clamp(1.8rem, 3.4vw, 2.4rem); font-weight: 700;
+            letter-spacing: -1.2px; margin-bottom: 0.75rem;
         }
-        .price-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 2.25rem 1.5rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        .price-card:hover {
-            border-color: var(--text-muted);
-            transform: translateY(-4px);
-        }
-        .price-card.featured {
-            border: 2px solid var(--accent);
-            box-shadow: 0 0 30px var(--accent-glow);
-        }
-        .price-card.featured:hover {
-            border-color: var(--accent);
-        }
-        .price-card::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), #818CF8, var(--accent));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .price-card.featured::before { opacity: 1; }
-        .price-badge-popular {
-            display: inline-block;
-            background: var(--accent);
-            color: #fff;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 0.25rem 0.75rem;
-            border-radius: 100px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-        .price-plan-name {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-dim);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-family: var(--mono);
-            font-size: 0.8rem;
-        }
-        .price-amount {
-            font-family: var(--mono);
-            font-size: 2.6rem;
-            font-weight: 700;
-            margin: 0.5rem 0 0.25rem;
-            line-height: 1;
-        }
-        .price-currency {
-            color: var(--text-muted);
-            font-size: 0.82rem;
-            margin-bottom: 1.75rem;
-        }
-        .price-type {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--accent-green);
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 0.3rem 0.8rem;
-            border-radius: 100px;
-            margin-bottom: 1.5rem;
-        }
-        .price-features {
-            text-align: left;
-            list-style: none;
-            padding: 0;
-            margin-bottom: 2rem;
-        }
-        .price-features li {
-            padding: 0.45rem 0;
-            color: var(--text-dim);
-            font-size: 0.88rem;
-            display: flex; align-items: flex-start; gap: 0.65rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .price-features li:last-child { border-bottom: none; }
-        .price-features li::before {
-            content: '✓';
-            color: var(--accent-green);
-            font-weight: 700;
-            flex-shrink: 0;
-            margin-top: 0.05rem;
-        }
-        .price-card .btn-primary, .price-card .btn-secondary {
-            width: 100%; justify-content: center;
-        }
-        .price-note {
-            margin-top: 2.5rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* --- ABOUT --- */
-        #acerca {
-            border-top: 1px solid var(--border);
-        }
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: start;
-        }
-        .about-label {
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            color: var(--accent);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .about-text p {
-            color: var(--text-dim);
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            line-height: 1.7;
-        }
-        .about-text a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        .about-text a:hover { text-decoration: underline; }
+        .cta p { color: var(--text-dim); max-width: 520px; margin: 0 auto 2rem; }
+        .cta-actions { display: flex; gap: 0.85rem; justify-content: center; flex-wrap: wrap; }
 
         /* --- FOOTER --- */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 3rem 2rem;
-            text-align: center;
+        footer { margin-top: 5.5rem; border-top: 1px solid var(--border); padding: 2.5rem 2rem; }
+        .foot-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1.5rem; flex-wrap: wrap;
         }
-        footer p {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-        footer a { color: var(--text-dim); text-decoration: none; }
-        footer a:hover { color: var(--text); }
+        .foot-brand { display: flex; align-items: baseline; gap: 0.85rem; }
+        .foot-brand .logo { font-size: 1.05rem; }
+        .foot-brand .where { color: var(--text-muted); font-size: 0.82rem; }
+        .foot-links { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 0.85rem; }
+        .foot-links a { color: var(--text-dim); }
+        .foot-links a:hover { color: var(--text); }
 
-        /* --- MOBILE --- */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            section { padding: 4rem 1.25rem; }
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            .hero { padding: 7rem 1.25rem 3rem; }
-            .hero-actions { flex-direction: column; align-items: center; }
-            .btn { width: 100%; justify-content: center; }
+        /* --- RESPONSIVO --- */
+        @media (max-width: 900px) {
+            .sec, .sec-stats, .hero, footer { padding-left: 1.15rem; padding-right: 1.15rem; }
+            .topnav { padding-left: 1.15rem; padding-right: 1.15rem; }
+            .nav-inner { height: auto; flex-wrap: wrap; padding: 0.6rem 0; gap: 0.35rem; position: relative; }
+            .nav-links { width: 100%; gap: 1.15rem; overflow-x: auto; padding-bottom: 0.1rem; }
+            .nav-links > a:not(.nav-cta) { flex: 0 0 auto; font-size: 0.85rem; }
+            .nav-cta { position: absolute; right: 0; top: 0.3rem; padding: 0.4rem 0.7rem; font-size: 0.8rem; }
+            .ver { display: none; }
+            .railgrid { grid-template-columns: minmax(0, 1fr); }
+            .rail { position: static; flex-direction: row; overflow-x: auto; padding-bottom: 0.35rem; }
+            .rail > button { flex: 0 0 auto; min-width: 148px; }
+            .railnote { display: none; }
+            .normrow { grid-template-columns: minmax(0, 1fr); gap: 0.3rem; }
+            .norm-where { text-align: left; }
+            .tilehead > div:last-child { display: none; }
         }
-
-        /* --- ANIMATIONS --- */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- VIDEOS / TUTORIALES --- */
-        #videos {
-            border-top: 1px solid var(--border);
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border);
-        }
-        .video-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-        .video-tab {
-            background: var(--bg);
-            color: var(--text-dim);
-            border: 1px solid var(--border);
-            padding: 0.7rem 1.4rem;
-            border-radius: var(--radius-sm);
-            font-family: var(--font);
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .video-tab:hover {
-            border-color: var(--text-muted);
-            color: var(--text);
-        }
-        .video-tab.active {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-        .video-player {
-            max-width: 880px;
-            margin: 0 auto;
-            position: relative;
-            width: 100%;
-            padding-bottom: 49.5%; /* 16:9 ajustado al max-width */
-            height: 0;
-            overflow: hidden;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            background: #000;
-        }
-        .video-player iframe {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            border: 0;
-        }
-        .videos-footer {
-            text-align: center;
-            margin-top: 2rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-        .videos-footer a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .videos-footer a:hover {
-            text-decoration: underline;
-        }
-        @media (max-width: 768px) {
-            .video-player { padding-bottom: 56.25%; }
-            .video-tab { padding: 0.6rem 1rem; font-size: 0.85rem; }
+        @media (max-width: 560px) {
+            h1 { letter-spacing: -1px; }
+            .sec, .hero { padding-top: 3.5rem; }
         }
     </style>
 </head>
 <body>
-    <nav>
+
+    <nav class="topnav">
         <div class="nav-inner">
-            <div class="logo">Galper<span>.</span></div>
+            <div class="brand">
+                <span class="logo">Galper<span>.</span></span>
+                <span class="ver">STRUX 3.00.00</span>
+            </div>
             <div class="nav-links">
-                <a href="#precio" data-i18n="nav_pricing">Precio</a>
-                <a href="#modulos" data-i18n="nav_modules">Módulos</a>
-                <a href="#features" data-i18n="nav_features">Funcionalidades</a>
-                <a href="#normas" data-i18n="nav_codes">Normatividad</a>
-                <a href="tutoriales.html" data-i18n="nav_tutorials">Tutoriales</a>
-                <a href="#acerca" data-i18n="nav_about">Acerca de</a>
+                <a href="#flujo">Cómo funciona</a>
+                <a href="#modulos">Módulos</a>
+                <a href="#normas">Normas</a>
+                <a href="tutoriales.html">Tutoriales</a>
+                <a href="#precio" class="nav-cta">Precio <span class="price">$1,500 MXN</span></a>
             </div>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="hero-content fade-in">
-            <div class="badge" data-i18n="hero_badge">Versión 3.00.00 — Disponible ahora</div>
-            <h1 data-i18n-html="hero_title">Diseño estructural <br><span class="highlight">apegado a la norma</span></h1>
-            <p data-i18n="hero_sub">Software de escritorio para análisis y diseño de vigas, columnas, zapatas, placas base, muros ante sismo y armaduras, conforme a las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22.</p>
-            <div class="hero-actions">
-                <a href="#precio" class="btn btn-primary">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-                    <span data-i18n="hero_btn_primary">Ver planes y precios</span>
-                </a>
-
-                <a href="#modulos" class="btn btn-secondary" data-i18n="hero_btn_secondary">Ver los 6 módulos</a>
+        <div class="hero-glow"></div>
+        <div class="hero-inner">
+            <div class="hero-copy">
+                <div class="hero-badge"><span class="dot"></span>Versión 3.00.00 disponible</div>
+                <h1>Diseño estructural en <span class="grad">minutos</span></h1>
+                <p class="hero-sub">Sin nodos, sin barras, sin modelo. Eliges el elemento, capturas los datos y sale la memoria de cálculo con su referencia normativa.</p>
+                <div class="hero-actions">
+                    <a href="#video" class="btn-primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Ver Strux en acción
+                    </a>
+                    <a href="#precio" class="btn-ghost"><span class="price">$1,500 MXN</span><span class="note">pago único</span></a>
+                </div>
             </div>
-            <div class="price-hero" data-i18n-html="hero_price">
-                Desde <strong>$1,500 MXN</strong> — licencia perpetua, pago único
+
+            <div class="tiles-block">
+                <div class="tilehead">
+                    <div class="tilehead-label">Seis módulos · un programa · un archivo</div>
+                    <div class="tilehead-hint">Toca un módulo para ver su interfaz real ↓</div>
+                </div>
+                <div class="tiles">
+                    <a href="#modulos" class="tile" data-mod="vigas">
+                        <div class="tile-img"><img src="img/VIGAS_CONCRETO_2.PNG" alt="Módulo de vigas de Strux" loading="lazy"></div>
+                        <div class="tile-body"><div class="tile-name">Vigas</div><div class="tile-meta">concreto · acero</div></div>
+                    </a>
+                    <a href="#modulos" class="tile" data-mod="columnas">
+                        <div class="tile-img"><img src="img/COLUMNAS_CONCRETO_2.PNG" alt="Módulo de columnas de Strux" loading="lazy"></div>
+                        <div class="tile-body"><div class="tile-name">Columnas</div><div class="tile-meta">biaxial</div></div>
+                    </a>
+                    <a href="#modulos" class="tile" data-mod="zapatas">
+                        <div class="tile-img"><img src="img/ZAPATAS_1.PNG" alt="Módulo de zapatas de Strux" loading="lazy"></div>
+                        <div class="tile-body"><div class="tile-name">Zapatas</div><div class="tile-meta">cimentación</div></div>
+                    </a>
+                    <a href="#modulos" class="tile" data-mod="placas">
+                        <div class="tile-img"><img src="img/PB_1.PNG" alt="Módulo de placas base de Strux" loading="lazy"></div>
+                        <div class="tile-body"><div class="tile-name">Placas base</div><div class="tile-meta">anclas</div></div>
+                    </a>
+                    <a href="#modulos" class="tile" data-mod="muros">
+                        <div class="tile-img"><img src="img/MUROSIS_3.PNG" alt="Módulo de muros ante sismo de Strux" loading="lazy"></div>
+                        <div class="tile-body"><div class="tile-name">Muros ante sismo</div><div class="tile-meta">planta 3D · DXF</div></div>
+                    </a>
+                    <a href="#modulos" class="tile" data-mod="armaduras">
+                        <div class="tile-img top"><img src="img/ARMADURAS_2.PNG" alt="Módulo de armaduras de Strux" loading="lazy"></div>
+                        <div class="tile-body"><div class="tile-name">Armaduras</div><div class="tile-meta">cuantificación</div></div>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="precio">
-        <div class="container">
-            <div class="section-label fade-in" data-i18n="price_label">Precio</div>
-            <h2 class="section-title fade-in" style="text-align:center;" data-i18n="price_title">Licencia perpetua, un solo pago</h2>
-            <p class="section-desc fade-in" style="text-align:center; margin: 0 auto 3rem;" data-i18n="price_desc">Sin suscripciones. Sin costos ocultos. Paga una vez y usa Strux para siempre. Todas las actualizaciones 3.xx.xx son gratuitas para compradores de la versión 3.00.00.</p>
+    <section class="sec-stats">
+        <div class="stats">
+            <div class="stat"><div class="stat-v">NTC 2023</div><div class="stat-k">Concreto · Acero · Mampostería</div></div>
+            <div class="stat"><div class="stat-v">ACI · AISC</div><div class="stat-k">318-25 y 360-22</div></div>
+            <div class="stat"><div class="stat-v">SI · MKS · Imperial</div><div class="stat-k">Conversión instantánea</div></div>
+            <div class="stat"><div class="stat-v">ES / EN</div><div class="stat-k">Interfaz y memorias</div></div>
+            <div class="stat"><div class="stat-v ok">100% offline</div><div class="stat-k">Escritorio Windows</div></div>
+        </div>
+    </section>
+
+    <section id="flujo" class="sec">
+        <div class="wrap">
+            <div class="kicker">Cómo funciona</div>
+            <h2 class="sec-title" style="margin-bottom:2.5rem; max-width:640px;">Tres pantallas entre el dato y la entrega</h2>
+            <div class="flow">
+                <div class="fcard">
+                    <div class="fhead"><span class="fnum">01</span><span class="fname">Capturas</span><span class="ftime">~60 s</span></div>
+                    <img src="img/VIGAS_CONCRETO_1.PNG" alt="Datos de entrada de una viga de concreto" loading="lazy">
+                    <div class="fbody">Geometría, apoyos y cargas. El modelo se dibuja solo mientras escribes.</div>
+                </div>
+                <div class="fcard">
+                    <div class="fhead"><span class="fnum">02</span><span class="fname">Diseñas</span><span class="ftime">~90 s</span></div>
+                    <img src="img/VIGAS_CONCRETO_2.PNG" alt="Diseño y relaciones D/C de una viga" loading="lazy">
+                    <div class="fbody">Armado propuesto y relaciones D/C que se recalculan en cada cambio.</div>
+                </div>
+                <div class="fcard">
+                    <div class="fhead"><span class="fnum ok">03</span><span class="fname">Entregas</span><span class="ftime">~30 s</span></div>
+                    <img src="img/VIGAS_CONCRETO_3.PNG" alt="Memoria de cálculo en PDF" loading="lazy">
+                    <div class="fbody">Memoria en PDF: fórmula, sustitución numérica y el artículo que la respalda.</div>
+                </div>
+            </div>
+
+            <div class="compare">
+                <div class="cmp">
+                    <div class="cmp-head"><span class="cmp-name">Software de análisis general</span><span class="cmp-time">≈ 1 h</span></div>
+                    <div class="chips">
+                        <span class="chip">Crear archivo y grilla</span>
+                        <span class="chip">Materiales y secciones</span>
+                        <span class="chip">Nodos y barras</span>
+                        <span class="chip">Cargas y combinaciones</span>
+                        <span class="chip">Correr el análisis</span>
+                        <span class="chip">Interpretar resultados</span>
+                        <span class="chip">Redactar la memoria</span>
+                    </div>
+                </div>
+                <div class="cmp strux">
+                    <div class="cmp-head"><span class="cmp-name">Strux, cuando solo necesitas el elemento</span><span class="cmp-time">≈ 3 min</span></div>
+                    <div class="chips">
+                        <span class="chip">Abrir el módulo</span>
+                        <span class="chip">Capturar geometría y cargas</span>
+                        <span class="chip">Exportar la memoria</span>
+                    </div>
+                    <p class="cmp-note">Strux no sustituye el análisis global de un edificio: resuelve el elemento y su memoria, que es donde se va la mayor parte del tiempo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="video" class="sec">
+        <div class="wrap">
+            <div class="video-head">
+                <div>
+                    <div class="kicker">En video</div>
+                    <h2 class="sec-title">El flujo completo, sin cortes</h2>
+                </div>
+                <div class="pills" id="video-tabs"></div>
+            </div>
+            <div class="player">
+                <iframe id="video-frame"
+                    src="https://www.youtube-nocookie.com/embed/0rJ0sqys4Sk?rel=0&modestbranding=1"
+                    title="Demo Strux 3.00.00"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-foot">
+                <span class="video-note" id="video-note"></span>
+                <a href="tutoriales.html">Todos los tutoriales →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="modulos" class="sec">
+        <div class="wrap">
+            <div class="kicker">Módulos</div>
+            <h2 class="sec-title">La interfaz real, módulo por módulo</h2>
+
+            <div class="railgrid">
+                <div class="rail" id="rail">
+                    <!-- botones de módulo generados por JS -->
+                    <div class="railnote" id="railnote"></div>
+                </div>
+                <div class="browser">
+                    <div class="browser-bar">
+                        <span class="bdot r"></span><span class="bdot a"></span><span class="bdot g"></span>
+                        <span class="shot-title" id="shot-title"></span>
+                    </div>
+                    <div class="shot-stage"><img id="shot-img" src="img/VIGAS_CONCRETO_1.PNG" alt=""></div>
+                    <div class="shot-cap" id="shot-cap"></div>
+                    <div class="shot-tabs" id="shot-tabs"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="normas" class="sec">
+        <div class="wrap">
+            <div class="kicker">Normatividad</div>
+            <h2 class="sec-title">Cinco reglamentos, implementados artículo por artículo</h2>
+            <div class="normtable">
+                <div class="normrow">
+                    <div class="norm-tag">NTC-Concreto 2023</div>
+                    <div class="norm-what">Flexión, cortante, deflexiones, cuantías y factores FR</div>
+                    <div class="norm-where">Vigas · Columnas · Zapatas</div>
+                </div>
+                <div class="normrow">
+                    <div class="norm-tag">NTC-Acero 2023</div>
+                    <div class="norm-what">Flexión (Cap. 7), cortante (Cap. 8), clasificación y pandeo lateral</div>
+                    <div class="norm-where">Vigas · Columnas · Armaduras</div>
+                </div>
+                <div class="normrow">
+                    <div class="norm-tag">NTC-Mampostería 2023</div>
+                    <div class="norm-what">Cortante en muros, mampostería confinada y rigidez lateral</div>
+                    <div class="norm-where">Muros ante sismo</div>
+                </div>
+                <div class="normrow">
+                    <div class="norm-tag">ACI 318-25</div>
+                    <div class="norm-what">Flexión y cortante, inercia efectiva (Bischoff) y factores φ</div>
+                    <div class="norm-where">Vigas · Columnas · Zapatas</div>
+                </div>
+                <div class="normrow">
+                    <div class="norm-tag">AISC 360-22</div>
+                    <div class="norm-what">Flexión (Cap. F), cortante (Cap. G), clasificación y LRFD</div>
+                    <div class="norm-where">Vigas · Columnas · Placas base</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="precio" class="sec">
+        <div class="wrap">
+            <div class="kicker">Precio</div>
+            <h2 class="sec-title" style="margin-bottom:0.75rem;">Un pago. Tuyo para siempre.</h2>
+            <p class="price-sub">Sin suscripción y sin renovación. Elige cuántos equipos necesitas.</p>
 
             <!--
                 CHECKOUTS Strux 3.00.00 — Lemon Squeezy.
-                Los cuatro enlaces de compra viven aquí abajo, uno por tarjeta y en
-                este orden: 1 licencia · 2 licencias · 3 licencias · 5 licencias.
+                Los cuatro enlaces de compra viven en el bloque PLANS del script,
+                en este orden: 1 licencia · 2 licencias · 3 licencias · 5 licencias.
                 Para cambiar de producto basta con sustituir los cuatro href.
             -->
-            <div class="pricing-grid">
-
-                <!-- Plan 1 licencia -->
-                <div class="price-card fade-in">
-                    <div class="price-plan-name" data-i18n="plan_individual">Individual</div>
-                    <div class="price-amount">$1,500</div>
-                    <div class="price-currency" data-i18n="cur_1500">MXN · ~$83 USD · pago único</div>
-                    <ul class="price-features">
-                        <li data-i18n="pf_lic1">1 licencia perpetua (1 equipo)</li>
-                        <li data-i18n="pf_modules">Los 6 módulos: vigas, columnas, zapatas, placas base, muros y armaduras</li>
-                        <li data-i18n="pf_codes">NTC CDMX 2023 · ACI 318-25 · AISC 360-22</li>
-                        <li data-i18n="pf_units_lang">Unidades SI/MKS/Imperial · idiomas ES/EN</li>
-                        <li data-i18n="pf_reports">Memorias de cálculo detalladas</li>
-                        <li data-i18n="pf_updates">Actualizaciones 3.xx.xx gratuitas</li>
-                        <li data-i18n="pf_offline">Sin conexión a internet requerida</li>
-                    </ul>
-                    <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/a2b2d8d1-e79a-4d3f-96c7-ba5b369eb09d" class="btn btn-secondary" data-i18n="price_btn_1">
-                        Comprar — 1 licencia
-                    </a>
+            <div class="pricegrid">
+                <div class="pricecard">
+                    <div class="topline"></div>
+                    <div class="lic-tabs" id="lic-tabs"></div>
+                    <div class="price-row">
+                        <div class="price-big" id="price-main">$1,500</div>
+                        <div class="price-side">
+                            <div class="price-unit">MXN</div>
+                            <div class="price-alt" id="price-alt">≈ $83 USD</div>
+                        </div>
+                    </div>
+                    <div class="price-per" id="price-per">Licencia perpetua para 1 equipo</div>
+                    <div class="buy-wrap">
+                        <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/a2b2d8d1-e79a-4d3f-96c7-ba5b369eb09d" class="buy" id="buy-btn">Comprar 1 licencia</a>
+                        <div class="buy-note">
+                            <span>Pago seguro con Lemon Squeezy</span><span>·</span><span>Entrega inmediata de la licencia</span>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Plan 2 licencias -->
-                <div class="price-card fade-in">
-                    <div class="price-plan-name" data-i18n="plan_duo">Dúo</div>
-                    <div class="price-amount">$2,500</div>
-                    <div class="price-currency" data-i18n="cur_2500">MXN · ~$139 USD · pago único</div>
-                    <ul class="price-features">
-                        <li data-i18n="pf_lic2">2 licencias perpetuas (2 equipos)</li>
-                        <li data-i18n="pf_modules">Los 6 módulos: vigas, columnas, zapatas, placas base, muros y armaduras</li>
-                        <li data-i18n="pf_codes">NTC CDMX 2023 · ACI 318-25 · AISC 360-22</li>
-                        <li data-i18n="pf_units_lang">Unidades SI/MKS/Imperial · idiomas ES/EN</li>
-                        <li data-i18n="pf_reports">Memorias de cálculo detalladas</li>
-                        <li data-i18n="pf_updates">Actualizaciones 3.xx.xx gratuitas</li>
-                        <li data-i18n="pf_offline">Sin conexión a internet requerida</li>
-                    </ul>
-                    <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/0b5c1d20-1e96-4fbb-a010-a5246c512638" class="btn btn-secondary" data-i18n="price_btn_2">
-                        Comprar — 2 licencias
-                    </a>
-                </div>
-
-                <!-- Plan 3 licencias (destacado) -->
-                <div class="price-card featured fade-in">
-                    <div class="price-badge-popular" data-i18n="price_popular">Más popular</div>
-                    <div class="price-plan-name" data-i18n="plan_small">Despacho pequeño</div>
-                    <div class="price-amount">$3,500</div>
-                    <div class="price-currency" data-i18n="cur_3500">MXN · ~$194 USD · pago único</div>
-                    <ul class="price-features">
-                        <li data-i18n="pf_lic3">3 licencias perpetuas (3 equipos)</li>
-                        <li data-i18n="pf_modules">Los 6 módulos: vigas, columnas, zapatas, placas base, muros y armaduras</li>
-                        <li data-i18n="pf_codes">NTC CDMX 2023 · ACI 318-25 · AISC 360-22</li>
-                        <li data-i18n="pf_units_lang">Unidades SI/MKS/Imperial · idiomas ES/EN</li>
-                        <li data-i18n="pf_reports">Memorias de cálculo detalladas</li>
-                        <li data-i18n="pf_updates">Actualizaciones 3.xx.xx gratuitas</li>
-                        <li data-i18n="pf_offline">Sin conexión a internet requerida</li>
-                    </ul>
-                    <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/85892367-05b3-46ef-880c-5c42a8bfc050" class="btn btn-primary" data-i18n="price_btn_3">
-                        Comprar — 3 licencias
-                    </a>
-                </div>
-
-                <!-- Plan 5 licencias -->
-                <div class="price-card fade-in">
-                    <div class="price-plan-name" data-i18n="plan_medium">Despacho mediano</div>
-                    <div class="price-amount">$5,200</div>
-                    <div class="price-currency" data-i18n="cur_5200">MXN · ~$289 USD · pago único</div>
-                    <ul class="price-features">
-                        <li data-i18n="pf_lic5">5 licencias perpetuas (5 equipos)</li>
-                        <li data-i18n="pf_modules">Los 6 módulos: vigas, columnas, zapatas, placas base, muros y armaduras</li>
-                        <li data-i18n="pf_codes">NTC CDMX 2023 · ACI 318-25 · AISC 360-22</li>
-                        <li data-i18n="pf_units_lang">Unidades SI/MKS/Imperial · idiomas ES/EN</li>
-                        <li data-i18n="pf_reports">Memorias de cálculo detalladas</li>
-                        <li data-i18n="pf_updates">Actualizaciones 3.xx.xx gratuitas</li>
-                        <li data-i18n="pf_offline">Sin conexión a internet requerida</li>
-                    </ul>
-                    <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/092eef1c-5911-4e0d-a5b6-57c517c186bd" class="btn btn-secondary" data-i18n="price_btn_5">
-                        Comprar — 5 licencias
-                    </a>
-                </div>
-
-            </div>
-            <p class="price-note fade-in" data-i18n-html="price_note">¿Dudas sobre cuál plan elegir? Escríbenos a <a href="mailto:strux.contacto@gmail.com" style="color:var(--accent);">strux.contacto@gmail.com</a></p>
-        </div>
-    </section>
-
-    <section id="modulos">
-        <div class="container">
-            <div class="section-label fade-in" data-i18n="mod_label">Módulos</div>
-            <h2 class="section-title fade-in" data-i18n="mod_title">Seis módulos, un solo programa</h2>
-            <p class="section-desc fade-in" data-i18n="mod_desc">La versión 3.00.00 cubre el ciclo completo de un proyecto: de la superestructura a la cimentación, con un mismo archivo de proyecto y una sola memoria de cálculo.</p>
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📐</div>
-                    <h3 data-i18n="mod1_t">Vigas</h3>
-                    <p data-i18n="mod1_p">Análisis y diseño de vigas de concreto reforzado, acero estructural y vigas genéricas. Flexión, cortante y deflexiones con los diagramas M(x) y V(x) del modelo real.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🏛️</div>
-                    <h3 data-i18n="mod2_t">Columnas</h3>
-                    <p data-i18n="mod2_p">Diseño de columnas de concreto y acero en flexocompresión biaxial. Diagramas de interacción, pandeo por flexión y pandeo lateral-torsional según la sección.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🪨</div>
-                    <h3 data-i18n="mod3_t">Zapatas</h3>
-                    <p data-i18n="mod3_p">Análisis y diseño de zapatas de concreto reforzado: aisladas, corridas y combinadas. Presiones de contacto, cortante por penetración y armado.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">⚓</div>
-                    <h3 data-i18n="mod4_t">Placas base</h3>
-                    <p data-i18n="mod4_p">Análisis y diseño de placas base sobre dado de concreto. Equilibrio del plano de deformaciones, anclas en tensión y presiones de aplastamiento.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🧱</div>
-                    <h3 data-i18n="mod5_t">Muros ante sismo</h3>
-                    <p data-i18n="mod5_p">Revisión de muros de mampostería y concreto ante cargas sísmicas. Método estático por nivel, reparto del cortante de entrepiso, distorsiones y vista 3D de la planta.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🔺</div>
-                    <h3 data-i18n="mod6_t">Armaduras</h3>
-                    <p data-i18n="mod6_p">Análisis y diseño de armaduras. Fuerzas axiales por barra, revisión de cuerdas y diagonales, y arriostramiento de la cuerda superior.</p>
+                <div class="included">
+                    <div class="inc-label">Incluido en cualquier plan</div>
+                    <div class="inc-list">
+                        <div><span class="check">✓</span><span class="txt">Los 6 módulos completos, sin niveles ni extras</span></div>
+                        <div><span class="check">✓</span><span class="txt">NTC CDMX 2023 · ACI 318-25 · AISC 360-22</span></div>
+                        <div><span class="check">✓</span><span class="txt">Memorias de cálculo en PDF, ilimitadas</span></div>
+                        <div><span class="check">✓</span><span class="txt">Unidades SI / MKS / Imperial · español e inglés</span></div>
+                        <div><span class="check">✓</span><span class="txt">Todas las actualizaciones 3.xx.xx, gratis</span></div>
+                        <div><span class="check">✓</span><span class="txt">Funciona sin internet una vez activado</span></div>
+                    </div>
+                    <div class="inc-foot">¿Licencias para una universidad o un grupo grande? Escríbenos a <a href="mailto:strux.contacto@gmail.com">strux.contacto@gmail.com</a></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="features">
-        <div class="container">
-            <div class="section-label fade-in" data-i18n="feat_label">Funcionalidades</div>
-            <h2 class="section-title fade-in" data-i18n="feat_title">Todo lo que necesitas para diseñar</h2>
-            <p class="section-desc fade-in" data-i18n="feat_desc">Strux automatiza el proceso de diseño en los seis módulos y genera memorias de cálculo trazables a cada artículo de la norma.</p>
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📐</div>
-                    <h3 data-i18n="feat1_t">Flexión y flexocompresión</h3>
-                    <p data-i18n="feat1_p">Secciones rectangulares y T, acero requerido, cuantías mínimas y máximas y diagramas de interacción para columnas, con los factores de reducción de la norma seleccionada (NTC o ACI 318).</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">⚡</div>
-                    <h3 data-i18n="feat2_t">Cortante y penetración</h3>
-                    <p data-i18n="feat2_p">Resistencia del concreto y del acero transversal, separación de estribos y cortante por penetración en zapatas, con los límites de la NTC-Concreto 2023 y el ACI 318-25.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📉</div>
-                    <h3 data-i18n="feat3_t">Revisión de Deflexiones</h3>
-                    <p data-i18n="feat3_p">Deflexiones inmediatas y diferidas con el método de Bischoff. Comparación automática contra los límites permisibles definidos por cada norma.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🏗️</div>
-                    <h3 data-i18n="feat4_t">Acero Estructural</h3>
-                    <p data-i18n="feat4_p">Vigas, columnas, placas base y armaduras conforme a la NTC-Acero 2023 y el AISC 360-22. Clasificación de secciones compactas, no compactas y esbeltas.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📊</div>
-                    <h3 data-i18n="feat5_t">Relaciones D/C en Tiempo Real</h3>
-                    <p data-i18n="feat5_p">Indicadores de demanda/capacidad visibles en todo momento, en los seis módulos. Cada cambio de geometría, carga o material se refleja al instante.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📄</div>
-                    <h3 data-i18n="feat6_t">Memorias de Cálculo</h3>
-                    <p data-i18n="feat6_p">Reportes detallados con una hoja por elemento, fórmulas simbólicas, sustitución numérica, figuras vectoriales y referencia al artículo normativo. Listos para entregar en PDF.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">📏</div>
-                    <h3 data-i18n="feat7_t">Cambio de Unidades</h3>
-                    <p data-i18n="feat7_p">Alterna entre Sistema Internacional (SI), MKS e Imperial cuando quieras. Datos, resultados y memorias se convierten al instante.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <div class="feature-icon">🌐</div>
-                    <h3 data-i18n="feat8_t">Español e Inglés</h3>
-                    <p data-i18n="feat8_p">Interfaz y memorias de cálculo disponibles en español e inglés. Cambia el idioma con un clic, según tu equipo o tu cliente.</p>
-                </div>
-            </div>
+    <section id="faq" class="sec">
+        <div class="wrap">
+            <div class="kicker">Preguntas</div>
+            <h2 class="sec-title">Lo que nos preguntan antes de comprar</h2>
+            <div class="faqgrid" id="faqgrid"></div>
         </div>
     </section>
 
-    <section id="normas">
-        <div class="container">
-            <div class="section-label fade-in" data-i18n="norm_label">Normatividad</div>
-            <h2 class="section-title fade-in" data-i18n="norm_title">Normas mexicanas y estadounidenses</h2>
-            <p class="section-desc fade-in" data-i18n="norm_desc">Cada fórmula, factor de reducción y límite proviene directamente del texto normativo vigente, tanto mexicano como estadounidense.</p>
-            <div class="norms-grid">
-                <div class="norm-card fade-in">
-                    <div class="norm-tag">NTC-Concreto 2023</div>
-                    <h3 data-i18n="norm1_t">Normas Técnicas Complementarias para Diseño y Construcción de Estructuras de Concreto</h3>
-                    <ul>
-                        <li data-i18n="norm1_li1">Diseño por flexión (secciones rectangulares y T)</li>
-                        <li data-i18n="norm1_li2">Diseño por fuerza cortante</li>
-                        <li data-i18n="norm1_li3">Deflexiones inmediatas y diferidas</li>
-                        <li data-i18n="norm1_li4">Cuantías mínimas y máximas</li>
-                        <li data-i18n="norm1_li6">Flexocompresión y cimentaciones superficiales</li>
-                        <li data-i18n="norm1_li5">Factores de resistencia FR</li>
-                    </ul>
-                </div>
-                <div class="norm-card fade-in">
-                    <div class="norm-tag">ACI 318-25</div>
-                    <h3 data-i18n="norm3_t">Requisitos del Código para Concreto Estructural (ACI 318-25)</h3>
-                    <ul>
-                        <li data-i18n="norm3_li1">Diseño por flexión y cortante</li>
-                        <li data-i18n="norm3_li2">Deflexiones con inercia efectiva (Bischoff)</li>
-                        <li data-i18n="norm3_li3">Cuantías mínimas y máximas</li>
-                        <li data-i18n="norm3_li4">Factores de reducción φ</li>
-                        <li data-i18n="norm3_li5">Método de resistencia (LRFD)</li>
-                    </ul>
-                </div>
-                <div class="norm-card fade-in">
-                    <div class="norm-tag">NTC-Acero 2023</div>
-                    <h3 data-i18n="norm2_t">Normas Técnicas Complementarias para Diseño y Construcción de Estructuras de Acero</h3>
-                    <ul>
-                        <li data-i18n="norm2_li1">Resistencia a flexión (Cap. 7)</li>
-                        <li data-i18n="norm2_li2">Resistencia a cortante (Cap. 8)</li>
-                        <li data-i18n="norm2_li3">Clasificación de secciones</li>
-                        <li data-i18n="norm2_li4">Pandeo lateral torsional</li>
-                        <li data-i18n="norm2_li5">Secciones compuestas (§10.2)</li>
-                    </ul>
-                </div>
-                <div class="norm-card fade-in">
-                    <div class="norm-tag">AISC 360-22</div>
-                    <h3 data-i18n="norm4_t">Especificación para Edificios de Acero Estructural (AISC 360-22)</h3>
-                    <ul>
-                        <li data-i18n="norm4_li1">Resistencia a flexión (Cap. F)</li>
-                        <li data-i18n="norm4_li2">Resistencia a cortante (Cap. G)</li>
-                        <li data-i18n="norm4_li3">Clasificación de secciones</li>
-                        <li data-i18n="norm4_li4">Pandeo lateral-torsional</li>
-                        <li data-i18n="norm4_li5">Método de resistencia (LRFD)</li>
-                    </ul>
-                </div>
-                <div class="norm-card fade-in">
-                    <div class="norm-tag">NTC-Mampostería 2023</div>
-                    <h3 data-i18n="norm6_t">Normas Técnicas Complementarias para Diseño y Construcción de Estructuras de Mampostería</h3>
-                    <ul>
-                        <li data-i18n="norm6_li1">Resistencia de muros a fuerza cortante</li>
-                        <li data-i18n="norm6_li2">Muros de mampostería confinada</li>
-                        <li data-i18n="norm6_li3">Rigidez lateral y reparto de cortante</li>
-                        <li data-i18n="norm6_li4">Muros de concreto en el mismo entrepiso</li>
-                    </ul>
-                </div>
-                <div class="norm-card fade-in">
-                    <div class="norm-tag">NTC-Sismo 2023</div>
-                    <h3 data-i18n="norm7_t">Normas Técnicas Complementarias para Diseño por Sismo</h3>
-                    <ul>
-                        <li data-i18n="norm7_li1">Método estático de fuerzas por nivel</li>
-                        <li data-i18n="norm7_li2">Cortante basal y factor de comportamiento Q</li>
-                        <li data-i18n="norm7_li3">Cortante de entrepiso</li>
-                        <li data-i18n="norm7_li4">Límites de distorsión lateral</li>
-                    </ul>
-                </div>
-                <div class="norm-card fade-in">
-                    <div class="norm-tag">RCDF CDMX</div>
-                    <h3 data-i18n="norm5_t">Reglamento de Construcciones de la Ciudad de México</h3>
-                    <ul>
-                        <li data-i18n="norm5_li1">Marco legal de referencia</li>
-                        <li data-i18n="norm5_li2">Combinaciones de carga</li>
-                        <li data-i18n="norm5_li3">Factores de carga y resistencia</li>
-                        <li data-i18n="norm5_li4">Criterios de estados límite</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="demo">
-        <div class="container">
-            <div class="section-label fade-in" data-i18n="demo_label">Interfaz</div>
-            <h2 class="section-title fade-in" data-i18n="demo_title">Diseñado para ingenieros</h2>
-            <p class="section-desc fade-in" data-i18n="demo_desc">El mismo flujo de trabajo en los seis módulos: capturas los datos, diseñas y generas la memoria de cálculo en segundos. Elige un módulo para ver su interfaz real.</p>
-
-            <div class="demo-item shot-wide fade-in" style="margin-bottom: 2.5rem;">
-                <img src="img/MENU_1.PNG" data-i18n-alt="sc_menu" loading="lazy">
-                <div class="caption" data-i18n="sc_menu">Cambio de módulo — Un solo programa y un solo archivo de proyecto. El selector de módulos se abre desde cualquier pantalla y conserva las hojas de trabajo abiertas.</div>
-            </div>
-
-            <div class="video-tabs fade-in">
-                <button class="video-tab active" data-shots="vigas" type="button" data-i18n="stab_beams">Vigas</button>
-                <button class="video-tab" data-shots="columnas" type="button" data-i18n="stab_columns">Columnas</button>
-                <button class="video-tab" data-shots="zapatas" type="button" data-i18n="stab_footings">Zapatas</button>
-                <button class="video-tab" data-shots="placas" type="button" data-i18n="stab_plates">Placas base</button>
-                <button class="video-tab" data-shots="muros" type="button" data-i18n="stab_walls">Muros</button>
-                <button class="video-tab" data-shots="armaduras" type="button" data-i18n="stab_trusses">Armaduras</button>
-            </div>
-
-            <div class="shot-panel" data-shots="vigas">
-                <div class="demo-item">
-                    <img src="img/VIGAS_CONCRETO_1.PNG" data-i18n-alt="sc_vc1" loading="lazy">
-                    <div class="caption" data-i18n="sc_vc1">Viga de concreto · Datos de entrada — Geometría por tramo, apoyos, cargas puntuales y distribuidas, y peso propio, con el modelo dibujado en tiempo real.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/VIGAS_CONCRETO_2.PNG" data-i18n-alt="sc_vc2" loading="lazy">
-                    <div class="caption" data-i18n="sc_vc2">Viga de concreto · Diseño — Armado longitudinal y estribos propuestos, D/C de flexión y cortante, y la curva de acero requerido contra el disponible.</div>
-                </div>
-                <div class="demo-item shot-narrow">
-                    <img src="img/VIGAS_CONCRETO_3.PNG" data-i18n-alt="sc_vc3" loading="lazy">
-                    <div class="caption" data-i18n="sc_vc3">Viga de concreto · Memoria de cálculo — Resumen ejecutivo con las relaciones D/C, datos de entrada, diagramas M(x) y V(x), y la tabla de acero requerido por sección.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/VIGAS_ACERO_1.PNG" data-i18n-alt="sc_va1" loading="lazy">
-                    <div class="caption" data-i18n="sc_va1">Viga de acero · Datos de entrada — Selección de perfil del catálogo IMCA con sus propiedades de sección, cargas de construcción y opción de sección compuesta.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/VIGAS_ACERO_2.PNG" data-i18n-alt="sc_va2" loading="lazy">
-                    <div class="caption" data-i18n="sc_va2">Viga de acero · Verificaciones — Clasificación de la sección y revisión por flexión y cortante en las dos etapas: construcción (acero solo) y servicio.</div>
-                </div>
-                <div class="demo-item shot-narrow">
-                    <img src="img/VIGAS_ACERO_3.PNG" data-i18n-alt="sc_va3" loading="lazy">
-                    <div class="caption" data-i18n="sc_va3">Viga de acero · Memoria de cálculo — Resumen de flexión, cortante, deflexión, pandeo lateral y clase de sección, con los diagramas del modelo analizado.</div>
-                </div>
-            </div>
-
-            <div class="shot-panel" data-shots="columnas" hidden>
-                <div class="demo-item">
-                    <img src="img/COLUMNAS_CONCRETO_1.PNG" data-i18n-alt="sc_cc1" loading="lazy">
-                    <div class="caption" data-i18n="sc_cc1">Columna de concreto · Sección y armado — Secciones rectangular, circular, L y T; armado longitudinal, cuantía, capacidad axial y veredicto global.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/COLUMNAS_CONCRETO_2.PNG" data-i18n-alt="sc_cc2" loading="lazy">
-                    <div class="caption" data-i18n="sc_cc2">Columna de concreto · Diagramas de interacción — Curvas Pr–Mrx y Pr–Mry, contorno biaxial y superficie 3D, con la demanda amplificada por esbeltez marcada sobre ellas.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/COLUMNAS_CONCRETO_3.PNG" data-i18n-alt="sc_cc3" loading="lazy">
-                    <div class="caption" data-i18n="sc_cc3">Columna de concreto · Isolíneas de esfuerzo — Estado de deformaciones en equilibrio, esfuerzo del concreto en la sección y esfuerzo varilla por varilla.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/COLUMNAS_ACERO_1.PNG" data-i18n-alt="sc_ca1" loading="lazy">
-                    <div class="caption" data-i18n="sc_ca1">Columna de acero · Sección — Perfil del catálogo o diseñado a la medida, grado del acero, longitudes de pandeo y arriostre, y clasificación de patín y alma.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/COLUMNAS_ACERO_2.PNG" data-i18n-alt="sc_ca2" loading="lazy">
-                    <div class="caption" data-i18n="sc_ca2">Columna de acero · Interacción — Curvas de eje fuerte y eje débil, contorno biaxial y la ecuación de interacción con los momentos amplificados por P-Δ.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/COLUMNAS_ACERO_3.PNG" data-i18n-alt="sc_ca3" loading="lazy">
-                    <div class="caption" data-i18n="sc_ca3">Columna de acero · Capacidad — Curva de columna φcPn contra KL/r y curva de pandeo lateral-torsional φbMnx contra Lb, con el punto de diseño señalado.</div>
-                </div>
-            </div>
-
-            <div class="shot-panel" data-shots="zapatas" hidden>
-                <div class="demo-item">
-                    <img src="img/ZAPATAS_1.PNG" data-i18n-alt="sc_z1" loading="lazy">
-                    <div class="caption" data-i18n="sc_z1">Zapatas · Vistas — Planta con la parrilla de armado, vista 3D y elevación con la distribución de presiones, por cada combinación de carga.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/ZAPATAS_2.PNG" data-i18n-alt="sc_z2" loading="lazy">
-                    <div class="caption" data-i18n="sc_z2">Zapatas · Presiones del terreno — Mapa de isolíneas de presión, q máx y q mín, área comprimida y detección de levantamiento en cada combinación.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/ZAPATAS_3.PNG" data-i18n-alt="sc_z3" loading="lazy">
-                    <div class="caption" data-i18n="sc_z3">Zapatas · Diseño — Cortante por penetración y cortante en cada dirección, y diseño por flexión con el armado propuesto, con la fórmula y el artículo a la vista.</div>
-                </div>
-            </div>
-
-            <div class="shot-panel" data-shots="placas" hidden>
-                <div class="demo-item">
-                    <img src="img/PB_1.PNG" data-i18n-alt="sc_pb1" loading="lazy">
-                    <div class="caption" data-i18n="sc_pb1">Placas base · Vistas — Planta con las presiones sobre el dado y las anclas en tensión marcadas en rojo, y elevación con el perfil, la placa y el empotramiento de las anclas.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/PB_2.PNG" data-i18n-alt="sc_pb2" loading="lazy">
-                    <div class="caption" data-i18n="sc_pb2">Placas base · Presiones — Superficie 3D de presiones sobre el dado, zona en contacto y tensión ancla por ancla para cada combinación.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/PB_3.PNG" data-i18n-alt="sc_pb3" loading="lazy">
-                    <div class="caption" data-i18n="sc_pb3">Placas base · Diseño — Aplastamiento del dado, flexión de la placa por los volados críticos, tensión en las anclas y cortante por fricción más anclas.</div>
-                </div>
-            </div>
-
-            <div class="shot-panel" data-shots="muros" hidden>
-                <div class="demo-item">
-                    <img src="img/MUROSIS_1.PNG" data-i18n-alt="sc_mw1" loading="lazy">
-                    <div class="caption" data-i18n="sc_mw1">Muros · Revisión por dirección — Un renglón por muro con material, apoyo, geometría, rigidez, cortante resistente, cortante de diseño y su D/C.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/MUROSIS_2.PNG" data-i18n-alt="sc_mw2" loading="lazy">
-                    <div class="caption" data-i18n="sc_mw2">Muros · Resumen del entrepiso — Rigidez total, centro de rigidez, excentricidades de diseño, distorsión contra el límite de la norma y el muro gobernante en cada dirección.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/MUROSIS_3.PNG" data-i18n-alt="sc_mw3" loading="lazy">
-                    <div class="caption" data-i18n="sc_mw3">Muros · Vista 3D de la planta — Muros sólidos con color por material (tabique y concreto) sobre la losa, con órbita, encuadre y zoom libres.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/MUROSIS_4.PNG" data-i18n-alt="sc_mw4" loading="lazy">
-                    <div class="caption" data-i18n="sc_mw4">Muros · Armado y refuerzo — Armado mínimo normativo o personalizado para muros de concreto, con diseño de los núcleos extremos por descomposición de fuerzas.</div>
-                </div>
-                <div class="demo-item">
-                    <img src="img/MUROSIS_5.PNG" data-i18n-alt="sc_mw5" loading="lazy">
-                    <div class="caption" data-i18n="sc_mw5">Muros · Importación desde DXF — Toma la planta directamente del archivo de CAD: elige capa, unidad, espesor y material, y los muros entran nombrados y en orden.</div>
-                </div>
-            </div>
-
-            <div class="shot-panel" data-shots="armaduras" hidden>
-                <div class="demo-item shot-crop">
-                    <img src="img/ARMADURAS_1.PNG" data-i18n-alt="sc_ar1" loading="lazy">
-                    <div class="caption" data-i18n="sc_ar1">Armaduras · Modelo — Tipología, celosía, claro y peralte definen la geometría; cuerdas, montantes y diagonales quedan agrupados con su perfil.</div>
-                </div>
-                <div class="demo-item shot-crop">
-                    <img src="img/ARMADURAS_2.PNG" data-i18n-alt="sc_ar2" loading="lazy">
-                    <div class="caption" data-i18n="sc_ar2">Armaduras · Fuerzas axiales — Compresión y tensión rotuladas barra por barra sobre el modelo, con la lista de las barras más solicitadas.</div>
-                </div>
-                <div class="demo-item shot-crop">
-                    <img src="img/ARMADURAS_3.PNG" data-i18n-alt="sc_ar3" loading="lazy">
-                    <div class="caption" data-i18n="sc_ar3">Armaduras · Cuantificación — Peso y longitud por grupo y total, peso por metro de claro y despiece por perfil, listo para presupuestar.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="videos">
-        <div class="container">
-            <div class="section-label fade-in" data-i18n="vid_label">Tutoriales</div>
-            <h2 class="section-title fade-in" style="text-align:center;" data-i18n="vid_title">Ve Strux en acción</h2>
-            <p class="section-desc fade-in" style="text-align:center; margin: 0 auto 3rem;" data-i18n="vid_desc">Videos demostrativos del módulo de vigas. Observa el flujo completo de trabajo dentro del software; iremos publicando los videos de los demás módulos.</p>
-
-            <div class="video-tabs fade-in">
-                <button class="video-tab active" data-video="0rJ0sqys4Sk" type="button" data-i18n="tab_concrete">
-                    Concreto
-                </button>
-                <button class="video-tab" data-video="JWFx_DQI3YM" type="button" data-i18n="tab_steel">
-                    Acero
-                </button>
-                <button class="video-tab" data-video="B70FlEDGas4" type="button" data-i18n="tab_generic">
-                    Viga genérica
-                </button>
-            </div>
-
-            <div class="video-player fade-in">
-                <iframe
-                    id="videos-iframe"
-                    src="https://www.youtube-nocookie.com/embed/0rJ0sqys4Sk?rel=0&modestbranding=1"
-                    title="Demo Strux 3.00"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                    loading="lazy">
-                </iframe>
-            </div>
-
-            <p class="videos-footer fade-in" data-i18n-html="vid_footer">
-                ¿Quieres ver todos los tutoriales en detalle?
-                <a href="tutoriales.html">Visita la página de tutoriales →</a>
-            </p>
-        </div>
-    </section>
-
-    <section id="acerca">
-        <div class="container">
-            <div class="about-content fade-in">
-                <div>
-                    <div class="about-label" data-i18n="about_label">Acerca de</div>
-                </div>
-                <div class="about-text">
-                    <p data-i18n-html="about_p1">Strux es desarrollado por <strong>Galper Softwares</strong>, una empresa de desarrollo de software para ingeniería con sede en Aguascalientes, México. El software nace de la necesidad de contar con herramientas de diseño estructural que sigan fielmente las normas vigentes.</p>
-                    <p data-i18n-html="about_p2">El motor de diseño de Strux implementa directamente las fórmulas, factores y criterios de las Normas Técnicas Complementarias de la Ciudad de México (edición 2023) — Concreto, Acero, Mampostería, Sismo y Cimentaciones — y, desde la versión 2.01.00, de los reglamentos estadounidenses ACI 318-25 y AISC 360-22.</p>
-                    <p data-i18n-html="about_p3">¿Preguntas o soporte? Escríbenos a <a href="mailto:strux.contacto@gmail.com">strux.contacto@gmail.com</a></p>
-                </div>
+    <section class="sec">
+        <div class="cta">
+            <div class="topline"></div>
+            <h2>Tu próxima memoria de cálculo, hoy</h2>
+            <p>Strux 3.00.00 para Windows. Licencia perpetua, un solo pago.</p>
+            <div class="cta-actions">
+                <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/a2b2d8d1-e79a-4d3f-96c7-ba5b369eb09d" class="btn-primary">Comprar Strux — $1,500 MXN</a>
+                <a href="#video" class="btn-ghost">Ver el video primero</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="container">
-            <p data-i18n-html="footer_copy">&copy; 2026 Galper Softwares. Todos los derechos reservados.</p>
-            <p style="margin-top: 0.5rem;" data-i18n-html="footer_links">
-                <a href="terms.html">Términos del servicio</a> · <a href="privacy.html">Aviso de privacidad</a> · <a href="refund.html">Política de reembolsos</a>
-            </p>
+        <div class="foot-inner">
+            <div class="foot-brand">
+                <span class="logo">Galper<span>.</span></span>
+                <span class="where">Aguascalientes, México · © 2026 Galper Softwares</span>
+            </div>
+            <div class="foot-links">
+                <a href="mailto:strux.contacto@gmail.com">strux.contacto@gmail.com</a>
+                <a href="terms.html">Términos</a>
+                <a href="privacy.html">Privacidad</a>
+                <a href="refund.html">Reembolsos</a>
+            </div>
         </div>
     </footer>
 
     <script>
-        // --- i18n: detección automática de idioma (ES por defecto, EN si el navegador está en inglés) ---
-        var I18N = {
-            es: {
-                __title: "Strux 3.00.00 — Software de Diseño Estructural | Galper Softwares",
-                __desc: "Software profesional de Galper Softwares para diseño de vigas, columnas, zapatas, placas base, muros ante sismo y armaduras bajo las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22. Unidades SI, MKS e Imperial. Español e inglés.",
-                nav_pricing: "Precio",
-                nav_modules: "Módulos",
-                nav_features: "Funcionalidades",
-                nav_codes: "Normatividad",
-                nav_tutorials: "Tutoriales",
-                nav_about: "Acerca de",
-                hero_badge: "Versión 3.00.00 — Disponible ahora",
-                hero_title: 'Diseño estructural <br><span class="highlight">apegado a la norma</span>',
-                hero_sub: "Software de escritorio para análisis y diseño de vigas, columnas, zapatas, placas base, muros ante sismo y armaduras, conforme a las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22.",
-                hero_btn_primary: "Ver planes y precios",
-                hero_btn_secondary: "Ver los 6 módulos",
-                hero_price: 'Desde <strong>$1,500 MXN</strong> — licencia perpetua, pago único',
-                price_label: "Precio",
-                price_title: "Licencia perpetua, un solo pago",
-                price_desc: "Sin suscripciones. Sin costos ocultos. Paga una vez y usa Strux para siempre. Todas las actualizaciones 3.xx.xx son gratuitas para compradores de la versión 3.00.00.",
-                price_popular: "Más popular",
-                plan_individual: "Individual",
-                plan_duo: "Dúo",
-                plan_small: "Despacho pequeño",
-                plan_medium: "Despacho mediano",
-                cur_1500: "MXN · ~$83 USD · pago único",
-                cur_2500: "MXN · ~$139 USD · pago único",
-                cur_3500: "MXN · ~$194 USD · pago único",
-                cur_5200: "MXN · ~$289 USD · pago único",
-                pf_lic1: "1 licencia perpetua (1 equipo)",
-                pf_lic2: "2 licencias perpetuas (2 equipos)",
-                pf_lic3: "3 licencias perpetuas (3 equipos)",
-                pf_lic5: "5 licencias perpetuas (5 equipos)",
-                pf_modules: "Los 6 módulos: vigas, columnas, zapatas, placas base, muros y armaduras",
-                pf_codes: "NTC CDMX 2023 · ACI 318-25 · AISC 360-22",
-                pf_units_lang: "Unidades SI/MKS/Imperial · idiomas ES/EN",
-                pf_reports: "Memorias de cálculo detalladas",
-                pf_updates: "Actualizaciones 3.xx.xx gratuitas",
-                pf_offline: "Sin conexión a internet requerida",
-                price_btn_1: "Comprar — 1 licencia",
-                price_btn_2: "Comprar — 2 licencias",
-                price_btn_3: "Comprar — 3 licencias",
-                price_btn_5: "Comprar — 5 licencias",
-                price_note: '¿Dudas sobre cuál plan elegir? Escríbenos a <a href="mailto:strux.contacto@gmail.com" style="color:var(--accent);">strux.contacto@gmail.com</a>',
-                mod_label: "Módulos",
-                mod_title: "Seis módulos, un solo programa",
-                mod_desc: "La versión 3.00.00 cubre el ciclo completo de un proyecto: de la superestructura a la cimentación, con un mismo archivo de proyecto y una sola memoria de cálculo.",
-                mod1_t: "Vigas",
-                mod1_p: "Análisis y diseño de vigas de concreto reforzado, acero estructural y vigas genéricas. Flexión, cortante y deflexiones con los diagramas M(x) y V(x) del modelo real.",
-                mod2_t: "Columnas",
-                mod2_p: "Diseño de columnas de concreto y acero en flexocompresión biaxial. Diagramas de interacción, pandeo por flexión y pandeo lateral-torsional según la sección.",
-                mod3_t: "Zapatas",
-                mod3_p: "Análisis y diseño de zapatas de concreto reforzado: aisladas, corridas y combinadas. Presiones de contacto, cortante por penetración y armado.",
-                mod4_t: "Placas base",
-                mod4_p: "Análisis y diseño de placas base sobre dado de concreto. Equilibrio del plano de deformaciones, anclas en tensión y presiones de aplastamiento.",
-                mod5_t: "Muros ante sismo",
-                mod5_p: "Revisión de muros de mampostería y concreto ante cargas sísmicas. Método estático por nivel, reparto del cortante de entrepiso, distorsiones y vista 3D de la planta.",
-                mod6_t: "Armaduras",
-                mod6_p: "Análisis y diseño de armaduras. Fuerzas axiales por barra, revisión de cuerdas y diagonales, y arriostramiento de la cuerda superior.",
-                feat_label: "Funcionalidades",
-                feat_title: "Todo lo que necesitas para diseñar",
-                feat_desc: "Strux automatiza el proceso de diseño en los seis módulos y genera memorias de cálculo trazables a cada artículo de la norma.",
-                feat1_t: "Flexión y flexocompresión",
-                feat1_p: "Secciones rectangulares y T, acero requerido, cuantías mínimas y máximas y diagramas de interacción para columnas, con los factores de reducción de la norma seleccionada (NTC o ACI 318).",
-                feat2_t: "Cortante y penetración",
-                feat2_p: "Resistencia del concreto y del acero transversal, separación de estribos y cortante por penetración en zapatas, con los límites de la NTC-Concreto 2023 y el ACI 318-25.",
-                feat3_t: "Revisión de Deflexiones",
-                feat3_p: "Deflexiones inmediatas y diferidas con el método de Bischoff. Comparación automática contra los límites permisibles definidos por cada norma.",
-                feat4_t: "Acero Estructural",
-                feat4_p: "Vigas, columnas, placas base y armaduras conforme a la NTC-Acero 2023 y el AISC 360-22. Clasificación de secciones compactas, no compactas y esbeltas.",
-                feat5_t: "Relaciones D/C en Tiempo Real",
-                feat5_p: "Indicadores de demanda/capacidad visibles en todo momento, en los seis módulos. Cada cambio de geometría, carga o material se refleja al instante.",
-                feat6_t: "Memorias de Cálculo",
-                feat6_p: "Reportes detallados con una hoja por elemento, fórmulas simbólicas, sustitución numérica, figuras vectoriales y referencia al artículo normativo. Listos para entregar en PDF.",
-                feat7_t: "Cambio de Unidades",
-                feat7_p: "Alterna entre Sistema Internacional (SI), MKS e Imperial cuando quieras. Datos, resultados y memorias se convierten al instante.",
-                feat8_t: "Español e Inglés",
-                feat8_p: "Interfaz y memorias de cálculo disponibles en español e inglés. Cambia el idioma con un clic, según tu equipo o tu cliente.",
-                norm_label: "Normatividad",
-                norm_title: "Normas mexicanas y estadounidenses",
-                norm_desc: "Cada fórmula, factor de reducción y límite proviene directamente del texto normativo vigente, tanto mexicano como estadounidense.",
-                norm1_t: "Normas Técnicas Complementarias para Diseño y Construcción de Estructuras de Concreto",
-                norm1_li1: "Diseño por flexión (secciones rectangulares y T)",
-                norm1_li2: "Diseño por fuerza cortante",
-                norm1_li3: "Deflexiones inmediatas y diferidas",
-                norm1_li4: "Cuantías mínimas y máximas",
-                norm1_li6: "Flexocompresión y cimentaciones superficiales",
-                norm1_li5: "Factores de resistencia FR",
-                norm2_t: "Normas Técnicas Complementarias para Diseño y Construcción de Estructuras de Acero",
-                norm2_li1: "Resistencia a flexión (Cap. 7)",
-                norm2_li2: "Resistencia a cortante (Cap. 8)",
-                norm2_li3: "Clasificación de secciones",
-                norm2_li4: "Pandeo lateral torsional",
-                norm2_li5: "Secciones compuestas (§10.2)",
-                norm3_t: "Requisitos del Código para Concreto Estructural (ACI 318-25)",
-                norm3_li1: "Diseño por flexión y cortante",
-                norm3_li2: "Deflexiones con inercia efectiva (Bischoff)",
-                norm3_li3: "Cuantías mínimas y máximas",
-                norm3_li4: "Factores de reducción φ",
-                norm3_li5: "Método de resistencia (LRFD)",
-                norm4_t: "Especificación para Edificios de Acero Estructural (AISC 360-22)",
-                norm4_li1: "Resistencia a flexión (Cap. F)",
-                norm4_li2: "Resistencia a cortante (Cap. G)",
-                norm4_li3: "Clasificación de secciones",
-                norm4_li4: "Pandeo lateral-torsional",
-                norm4_li5: "Método de resistencia (LRFD)",
-                norm5_t: "Reglamento de Construcciones de la Ciudad de México",
-                norm5_li1: "Marco legal de referencia",
-                norm5_li2: "Combinaciones de carga",
-                norm5_li3: "Factores de carga y resistencia",
-                norm5_li4: "Criterios de estados límite",
-                norm6_t: "Normas Técnicas Complementarias para Diseño y Construcción de Estructuras de Mampostería",
-                norm6_li1: "Resistencia de muros a fuerza cortante",
-                norm6_li2: "Muros de mampostería confinada",
-                norm6_li3: "Rigidez lateral y reparto de cortante",
-                norm6_li4: "Muros de concreto en el mismo entrepiso",
-                norm7_t: "Normas Técnicas Complementarias para Diseño por Sismo",
-                norm7_li1: "Método estático de fuerzas por nivel",
-                norm7_li2: "Cortante basal y factor de comportamiento Q",
-                norm7_li3: "Cortante de entrepiso",
-                norm7_li4: "Límites de distorsión lateral",
-                demo_label: "Interfaz",
-                demo_title: "Diseñado para ingenieros",
-                demo_desc: "El mismo flujo de trabajo en los seis módulos: capturas los datos, diseñas y generas la memoria de cálculo en segundos. Elige un módulo para ver su interfaz real.",
-                stab_beams: "Vigas",
-                stab_columns: "Columnas",
-                stab_footings: "Zapatas",
-                stab_plates: "Placas base",
-                stab_walls: "Muros",
-                stab_trusses: "Armaduras",
-                sc_menu: "Cambio de módulo — Un solo programa y un solo archivo de proyecto. El selector de módulos se abre desde cualquier pantalla y conserva las hojas de trabajo abiertas.",
-                sc_vc1: "Viga de concreto · Datos de entrada — Geometría por tramo, apoyos, cargas puntuales y distribuidas, y peso propio, con el modelo dibujado en tiempo real.",
-                sc_vc2: "Viga de concreto · Diseño — Armado longitudinal y estribos propuestos, D/C de flexión y cortante, y la curva de acero requerido contra el disponible.",
-                sc_vc3: "Viga de concreto · Memoria de cálculo — Resumen ejecutivo con las relaciones D/C, datos de entrada, diagramas M(x) y V(x), y la tabla de acero requerido por sección.",
-                sc_va1: "Viga de acero · Datos de entrada — Selección de perfil del catálogo IMCA con sus propiedades de sección, cargas de construcción y opción de sección compuesta.",
-                sc_va2: "Viga de acero · Verificaciones — Clasificación de la sección y revisión por flexión y cortante en las dos etapas: construcción (acero solo) y servicio.",
-                sc_va3: "Viga de acero · Memoria de cálculo — Resumen de flexión, cortante, deflexión, pandeo lateral y clase de sección, con los diagramas del modelo analizado.",
-                sc_cc1: "Columna de concreto · Sección y armado — Secciones rectangular, circular, L y T; armado longitudinal, cuantía, capacidad axial y veredicto global.",
-                sc_cc2: "Columna de concreto · Diagramas de interacción — Curvas Pr–Mrx y Pr–Mry, contorno biaxial y superficie 3D, con la demanda amplificada por esbeltez marcada sobre ellas.",
-                sc_cc3: "Columna de concreto · Isolíneas de esfuerzo — Estado de deformaciones en equilibrio, esfuerzo del concreto en la sección y esfuerzo varilla por varilla.",
-                sc_ca1: "Columna de acero · Sección — Perfil del catálogo o diseñado a la medida, grado del acero, longitudes de pandeo y arriostre, y clasificación de patín y alma.",
-                sc_ca2: "Columna de acero · Interacción — Curvas de eje fuerte y eje débil, contorno biaxial y la ecuación de interacción con los momentos amplificados por P-Δ.",
-                sc_ca3: "Columna de acero · Capacidad — Curva de columna φcPn contra KL/r y curva de pandeo lateral-torsional φbMnx contra Lb, con el punto de diseño señalado.",
-                sc_z1: "Zapatas · Vistas — Planta con la parrilla de armado, vista 3D y elevación con la distribución de presiones, por cada combinación de carga.",
-                sc_z2: "Zapatas · Presiones del terreno — Mapa de isolíneas de presión, q máx y q mín, área comprimida y detección de levantamiento en cada combinación.",
-                sc_z3: "Zapatas · Diseño — Cortante por penetración y cortante en cada dirección, y diseño por flexión con el armado propuesto, con la fórmula y el artículo a la vista.",
-                sc_pb1: "Placas base · Vistas — Planta con las presiones sobre el dado y las anclas en tensión marcadas en rojo, y elevación con el perfil, la placa y el empotramiento de las anclas.",
-                sc_pb2: "Placas base · Presiones — Superficie 3D de presiones sobre el dado, zona en contacto y tensión ancla por ancla para cada combinación.",
-                sc_pb3: "Placas base · Diseño — Aplastamiento del dado, flexión de la placa por los volados críticos, tensión en las anclas y cortante por fricción más anclas.",
-                sc_mw1: "Muros · Revisión por dirección — Un renglón por muro con material, apoyo, geometría, rigidez, cortante resistente, cortante de diseño y su D/C.",
-                sc_mw2: "Muros · Resumen del entrepiso — Rigidez total, centro de rigidez, excentricidades de diseño, distorsión contra el límite de la norma y el muro gobernante en cada dirección.",
-                sc_mw3: "Muros · Vista 3D de la planta — Muros sólidos con color por material (tabique y concreto) sobre la losa, con órbita, encuadre y zoom libres.",
-                sc_mw4: "Muros · Armado y refuerzo — Armado mínimo normativo o personalizado para muros de concreto, con diseño de los núcleos extremos por descomposición de fuerzas.",
-                sc_mw5: "Muros · Importación desde DXF — Toma la planta directamente del archivo de CAD: elige capa, unidad, espesor y material, y los muros entran nombrados y en orden.",
-                sc_ar1: "Armaduras · Modelo — Tipología, celosía, claro y peralte definen la geometría; cuerdas, montantes y diagonales quedan agrupados con su perfil.",
-                sc_ar2: "Armaduras · Fuerzas axiales — Compresión y tensión rotuladas barra por barra sobre el modelo, con la lista de las barras más solicitadas.",
-                sc_ar3: "Armaduras · Cuantificación — Peso y longitud por grupo y total, peso por metro de claro y despiece por perfil, listo para presupuestar.",
-                vid_label: "Tutoriales",
-                vid_title: "Ve Strux en acción",
-                vid_desc: "Videos demostrativos del módulo de vigas. Observa el flujo completo de trabajo dentro del software; iremos publicando los videos de los demás módulos.",
-                tab_concrete: "Concreto",
-                tab_steel: "Acero",
-                tab_generic: "Viga genérica",
-                vid_footer: '¿Quieres ver todos los tutoriales en detalle? <a href="tutoriales.html">Visita la página de tutoriales →</a>',
-                about_label: "Acerca de",
-                about_p1: 'Strux es desarrollado por <strong>Galper Softwares</strong>, una empresa de desarrollo de software para ingeniería con sede en Aguascalientes, México. El software nace de la necesidad de contar con herramientas de diseño estructural que sigan fielmente las normas vigentes.',
-                about_p2: 'El motor de diseño de Strux implementa directamente las fórmulas, factores y criterios de las Normas Técnicas Complementarias de la Ciudad de México (edición 2023) — Concreto, Acero, Mampostería, Sismo y Cimentaciones — y, desde la versión 2.01.00, de los reglamentos estadounidenses ACI 318-25 y AISC 360-22.',
-                about_p3: '¿Preguntas o soporte? Escríbenos a <a href="mailto:strux.contacto@gmail.com">strux.contacto@gmail.com</a>',
-                footer_copy: "&copy; 2026 Galper Softwares. Todos los derechos reservados.",
-                footer_links: '<a href="terms.html">Términos del servicio</a> · <a href="privacy.html">Aviso de privacidad</a> · <a href="refund.html">Política de reembolsos</a>'
-            },
-            en: {
-                __title: "Strux 3.00.00 — Structural Design Software | Galper Softwares",
-                __desc: "Professional Galper Softwares tool for designing beams, columns, footings, base plates, seismic walls and trusses under Mexico City NTC 2023, ACI 318-25 and AISC 360-22. SI, MKS and Imperial units. Spanish and English.",
-                nav_pricing: "Pricing",
-                nav_modules: "Modules",
-                nav_features: "Features",
-                nav_codes: "Codes",
-                nav_tutorials: "Tutorials",
-                nav_about: "About",
-                hero_badge: "Version 3.00.00 — Available now",
-                hero_title: 'Structural design <br><span class="highlight">built to code</span>',
-                hero_sub: "Desktop software for the analysis and design of beams, columns, footings, base plates, seismic walls and trusses under the Mexico City NTC 2023, ACI 318-25 and AISC 360-22 codes.",
-                hero_btn_primary: "See plans and pricing",
-                hero_btn_secondary: "See the 6 modules",
-                hero_price: 'From <strong>$1,500 MXN</strong> — perpetual license, one-time payment',
-                price_label: "Pricing",
-                price_title: "Perpetual license, one-time payment",
-                price_desc: "No subscriptions. No hidden fees. Pay once and use Strux forever. All 3.xx.xx updates are free for buyers of version 3.00.00.",
-                price_popular: "Most popular",
-                plan_individual: "Individual",
-                plan_duo: "Duo",
-                plan_small: "Small studio",
-                plan_medium: "Medium studio",
-                cur_1500: "MXN · ~$83 USD · one-time",
-                cur_2500: "MXN · ~$139 USD · one-time",
-                cur_3500: "MXN · ~$194 USD · one-time",
-                cur_5200: "MXN · ~$289 USD · one-time",
-                pf_lic1: "1 perpetual license (1 computer)",
-                pf_lic2: "2 perpetual licenses (2 computers)",
-                pf_lic3: "3 perpetual licenses (3 computers)",
-                pf_lic5: "5 perpetual licenses (5 computers)",
-                pf_modules: "All 6 modules: beams, columns, footings, base plates, walls and trusses",
-                pf_codes: "NTC Mexico City 2023 · ACI 318-25 · AISC 360-22",
-                pf_units_lang: "SI/MKS/Imperial units · ES/EN languages",
-                pf_reports: "Detailed calculation reports",
-                pf_updates: "Free 3.xx.xx updates",
-                pf_offline: "No internet connection required",
-                price_btn_1: "Buy — 1 license",
-                price_btn_2: "Buy — 2 licenses",
-                price_btn_3: "Buy — 3 licenses",
-                price_btn_5: "Buy — 5 licenses",
-                price_note: 'Not sure which plan to choose? Email us at <a href="mailto:strux.contacto@gmail.com" style="color:var(--accent);">strux.contacto@gmail.com</a>',
-                mod_label: "Modules",
-                mod_title: "Six modules, one program",
-                mod_desc: "Version 3.00.00 covers a project end to end — from the superstructure down to the foundation — within a single project file and a single calculation report.",
-                mod1_t: "Beams",
-                mod1_p: "Analysis and design of reinforced-concrete, structural-steel and generic beams. Flexure, shear and deflections with the M(x) and V(x) diagrams of the actual model.",
-                mod2_t: "Columns",
-                mod2_p: "Design of concrete and steel columns under biaxial combined bending and compression. Interaction diagrams, flexural buckling and lateral-torsional buckling by section type.",
-                mod3_t: "Footings",
-                mod3_p: "Analysis and design of reinforced-concrete footings: isolated, strip and combined. Bearing pressures, punching shear and reinforcement.",
-                mod4_t: "Base plates",
-                mod4_p: "Analysis and design of base plates on concrete pedestals. Strain-plane equilibrium, anchor rods in tension and bearing pressures.",
-                mod5_t: "Seismic wall checks",
-                mod5_p: "Checks of masonry and concrete walls under seismic loads. Static method by story, story-shear distribution, drifts and a 3D view of the plan.",
-                mod6_t: "Trusses",
-                mod6_p: "Analysis and design of trusses. Axial forces per member, chord and diagonal checks, and top-chord bracing.",
-                feat_label: "Features",
-                feat_title: "Everything you need to design",
-                feat_desc: "Strux automates the design process across the six modules and generates calculation reports traceable to each code provision.",
-                feat1_t: "Flexure and Combined Bending",
-                feat1_p: "Rectangular and T sections, required steel, minimum and maximum reinforcement ratios and interaction diagrams for columns, using the reduction factors of the selected code (NTC or ACI 318).",
-                feat2_t: "Shear and Punching",
-                feat2_p: "Concrete and transverse-steel strength, stirrup spacing and punching shear in footings, checked against the limits of NTC-Concreto 2023 and ACI 318-25.",
-                feat3_t: "Deflection Checks",
-                feat3_p: "Immediate and long-term deflections using the Bischoff method. Automatic comparison against the permissible limits defined by each code.",
-                feat4_t: "Structural Steel",
-                feat4_p: "Beams, columns, base plates and trusses under NTC-Acero 2023 and AISC 360-22. Classification of compact, noncompact and slender sections.",
-                feat5_t: "Real-Time D/C Ratios",
-                feat5_p: "Demand/capacity indicators visible at all times, across the six modules. Every change of geometry, load or material is reflected instantly.",
-                feat6_t: "Calculation Reports",
-                feat6_p: "Detailed reports with one sheet per element, symbolic formulas, numeric substitution, vector figures and references to the code provision. Ready to submit as PDF.",
-                feat7_t: "Unit Switching",
-                feat7_p: "Switch between International (SI), MKS and Imperial systems anytime. Inputs, results and reports convert instantly.",
-                feat8_t: "Spanish & English",
-                feat8_p: "Interface and calculation reports available in Spanish and English. Switch language with one click, to match your team or client.",
-                norm_label: "Codes",
-                norm_title: "Mexican and U.S. codes",
-                norm_desc: "Every formula, reduction factor and limit comes straight from the governing code text, both Mexican and U.S.",
-                norm1_t: "Mexico City Complementary Technical Standards for Concrete Structures",
-                norm1_li1: "Flexural design (rectangular and T sections)",
-                norm1_li2: "Shear design",
-                norm1_li3: "Immediate and long-term deflections",
-                norm1_li4: "Minimum and maximum reinforcement ratios",
-                norm1_li6: "Combined bending and shallow foundations",
-                norm1_li5: "FR resistance factors",
-                norm2_t: "Mexico City Complementary Technical Standards for Steel Structures",
-                norm2_li1: "Flexural strength (Ch. 7)",
-                norm2_li2: "Shear strength (Ch. 8)",
-                norm2_li3: "Section classification",
-                norm2_li4: "Lateral-torsional buckling",
-                norm2_li5: "Composite sections (§10.2)",
-                norm3_t: "Building Code Requirements for Structural Concrete (ACI 318-25)",
-                norm3_li1: "Flexural and shear design",
-                norm3_li2: "Deflections with effective moment of inertia (Bischoff)",
-                norm3_li3: "Minimum and maximum reinforcement ratios",
-                norm3_li4: "φ strength-reduction factors",
-                norm3_li5: "Strength design method (LRFD)",
-                norm4_t: "Specification for Structural Steel Buildings (AISC 360-22)",
-                norm4_li1: "Flexural strength (Ch. F)",
-                norm4_li2: "Shear strength (Ch. G)",
-                norm4_li3: "Section classification",
-                norm4_li4: "Lateral-torsional buckling",
-                norm4_li5: "Strength design method (LRFD)",
-                norm5_t: "Mexico City Building Regulations (RCDF)",
-                norm5_li1: "Governing legal framework",
-                norm5_li2: "Load combinations",
-                norm5_li3: "Load and resistance factors",
-                norm5_li4: "Limit-state criteria",
-                norm6_t: "Mexico City Complementary Technical Standards for Masonry Structures",
-                norm6_li1: "Wall shear strength",
-                norm6_li2: "Confined masonry walls",
-                norm6_li3: "Lateral stiffness and shear distribution",
-                norm6_li4: "Concrete walls in the same story",
-                norm7_t: "Mexico City Complementary Technical Standards for Seismic Design",
-                norm7_li1: "Static method, story forces",
-                norm7_li2: "Base shear and behavior factor Q",
-                norm7_li3: "Story shear",
-                norm7_li4: "Lateral drift limits",
-                demo_label: "Interface",
-                demo_title: "Built for engineers",
-                demo_desc: "The same workflow across all six modules: enter the data, run the design and generate the calculation report in seconds. Pick a module to see its actual interface.",
-                stab_beams: "Beams",
-                stab_columns: "Columns",
-                stab_footings: "Footings",
-                stab_plates: "Base plates",
-                stab_walls: "Walls",
-                stab_trusses: "Trusses",
-                sc_menu: "Switching modules — One program and one project file. The module selector opens from any screen and keeps your open worksheets.",
-                sc_vc1: "Concrete beam · Inputs — Span geometry, supports, point and distributed loads, and self weight, with the model drawn in real time.",
-                sc_vc2: "Concrete beam · Design — Proposed longitudinal reinforcement and stirrups, flexure and shear D/C, and required versus available steel along the span.",
-                sc_vc3: "Concrete beam · Calculation report — Executive summary with the D/C ratios, input data, M(x) and V(x) diagrams, and the required-steel table by section.",
-                sc_va1: "Steel beam · Inputs — Section picked from the IMCA catalog with its section properties, construction loads and a composite-section option.",
-                sc_va2: "Steel beam · Checks — Section classification and flexure and shear checks for both stages: construction (bare steel) and service.",
-                sc_va3: "Steel beam · Calculation report — Summary of flexure, shear, deflection, lateral-torsional buckling and section class, with the diagrams of the analyzed model.",
-                sc_cc1: "Concrete column · Section and reinforcement — Rectangular, circular, L and T sections; longitudinal reinforcement, ratio, axial capacity and overall verdict.",
-                sc_cc2: "Concrete column · Interaction diagrams — Pr–Mrx and Pr–Mry curves, biaxial contour and 3D surface, with the slenderness-amplified demand plotted on them.",
-                sc_cc3: "Concrete column · Stress contours — Strain state in equilibrium, concrete stress across the section and stress bar by bar.",
-                sc_ca1: "Steel column · Section — Catalog or custom-designed section, steel grade, buckling and bracing lengths, and flange and web classification.",
-                sc_ca2: "Steel column · Interaction — Strong-axis and weak-axis curves, biaxial contour and the interaction equation with P-Δ amplified moments.",
-                sc_ca3: "Steel column · Capacity — Column curve φcPn versus KL/r and lateral-torsional buckling curve φbMnx versus Lb, with the design point marked.",
-                sc_z1: "Footings · Views — Plan with the reinforcement grid, 3D view and elevation with the pressure distribution, for each load combination.",
-                sc_z2: "Footings · Bearing pressures — Pressure contour map, q max and q min, compressed area and uplift detection for every combination.",
-                sc_z3: "Footings · Design — Punching shear and one-way shear in each direction, and flexural design with the proposed reinforcement, formula and code clause in view.",
-                sc_pb1: "Base plates · Views — Plan with the pressures on the pedestal and anchor rods in tension marked in red, and elevation with the section, plate and anchor embedment.",
-                sc_pb2: "Base plates · Pressures — 3D surface of the pressures on the pedestal, contact area and tension anchor by anchor for each combination.",
-                sc_pb3: "Base plates · Design — Pedestal bearing, plate bending from the critical cantilevers, anchor tension and shear by friction plus anchors.",
-                sc_mw1: "Walls · Checks by direction — One row per wall with material, support, geometry, stiffness, resisting shear, design shear and its D/C.",
-                sc_mw2: "Walls · Story summary — Total stiffness, center of rigidity, design eccentricities, drift against the code limit and the governing wall in each direction.",
-                sc_mw3: "Walls · 3D plan view — Solid walls colored by material (clay masonry and concrete) over the slab, with free orbit, pan and zoom.",
-                sc_mw4: "Walls · Reinforcement — Code-minimum or custom reinforcement for concrete walls, with boundary elements designed by force decomposition.",
-                sc_mw5: "Walls · DXF import — Takes the plan straight from the CAD file: pick layer, unit, thickness and material, and the walls come in named and in order.",
-                sc_ar1: "Trusses · Model — Typology, web pattern, span and depth define the geometry; chords, verticals and diagonals are grouped with their section.",
-                sc_ar2: "Trusses · Axial forces — Compression and tension labeled member by member on the model, with a list of the most stressed members.",
-                sc_ar3: "Trusses · Take-off — Weight and length by group and total, weight per meter of span and a breakdown by section, ready for costing.",
-                vid_label: "Tutorials",
-                vid_title: "See Strux in action",
-                vid_desc: "Demo videos of the beam module. Watch the full workflow inside the software; videos for the remaining modules are on the way.",
-                tab_concrete: "Concrete",
-                tab_steel: "Steel",
-                tab_generic: "Generic beam",
-                vid_footer: 'Want to see all tutorials in detail? <a href="tutoriales.html">Visit the tutorials page →</a>',
-                about_label: "About",
-                about_p1: 'Strux is developed by <strong>Galper Softwares</strong>, an engineering software company based in Aguascalientes, Mexico. The software was born from the need for structural design tools that faithfully follow the governing codes.',
-                about_p2: 'The Strux design engine directly implements the formulas, factors and criteria of the Mexico City Complementary Technical Standards (2023 edition) — Concrete, Steel, Masonry, Seismic Design and Foundations — and, since version 2.01.00, the U.S. ACI 318-25 and AISC 360-22 codes.',
-                about_p3: 'Questions or support? Email us at <a href="mailto:strux.contacto@gmail.com">strux.contacto@gmail.com</a>',
-                footer_copy: "&copy; 2026 Galper Softwares. All rights reserved.",
-                footer_links: '<a href="terms.html">Terms of Service</a> · <a href="privacy.html">Privacy Policy</a> · <a href="refund.html">Refund Policy</a>'
-            }
-        };
+        // --- Datos ---
+        var MODULES = [
+            { key: "vigas", name: "Vigas",
+              blurb: "Concreto reforzado, acero estructural y vigas genéricas, con diagramas M(x) y V(x) del modelo real.",
+              shots: [
+                ["Entrada", "img/VIGAS_CONCRETO_1.PNG", "Geometría por tramo, apoyos y cargas, con el modelo dibujado en tiempo real."],
+                ["Diseño", "img/VIGAS_CONCRETO_2.PNG", "Armado longitudinal y estribos propuestos, con D/C de flexión y cortante."],
+                ["Memoria", "img/VIGAS_CONCRETO_3.PNG", "Resumen ejecutivo, diagramas y tabla de acero requerido por sección."],
+                ["Acero · entrada", "img/VIGAS_ACERO_1.PNG", "Perfil del catálogo IMCA, cargas de construcción y opción de sección compuesta."],
+                ["Acero · revisión", "img/VIGAS_ACERO_2.PNG", "Clasificación de la sección y revisión en etapa de construcción y de servicio."],
+                ["Acero · memoria", "img/VIGAS_ACERO_3.PNG", "Flexión, cortante, deflexión, pandeo lateral y clase de sección."]
+              ] },
+            { key: "columnas", name: "Columnas",
+              blurb: "Flexocompresión biaxial en concreto y acero, con diagramas de interacción y revisión de esbeltez.",
+              shots: [
+                ["Sección", "img/COLUMNAS_CONCRETO_1.PNG", "Secciones rectangular, circular, L y T: armado, cuantía y veredicto global."],
+                ["Interacción", "img/COLUMNAS_CONCRETO_2.PNG", "Curvas Pr–Mrx y Pr–Mry, contorno biaxial y superficie 3D con la demanda marcada."],
+                ["Esfuerzos", "img/COLUMNAS_CONCRETO_3.PNG", "Isolíneas de esfuerzo en el concreto y esfuerzo varilla por varilla."],
+                ["Acero · sección", "img/COLUMNAS_ACERO_1.PNG", "Perfil de catálogo o a la medida, longitudes de pandeo y clasificación."],
+                ["Acero · interacción", "img/COLUMNAS_ACERO_2.PNG", "Eje fuerte, eje débil y la ecuación de interacción con momentos P-Δ."],
+                ["Acero · capacidad", "img/COLUMNAS_ACERO_3.PNG", "Curva φcPn contra KL/r y φbMnx contra Lb, con el punto de diseño."]
+              ] },
+            { key: "zapatas", name: "Zapatas",
+              blurb: "Aisladas, corridas y combinadas: presiones de contacto, penetración y armado.",
+              shots: [
+                ["Vistas", "img/ZAPATAS_1.PNG", "Planta con la parrilla de armado, vista 3D y elevación con las presiones."],
+                ["Presiones", "img/ZAPATAS_2.PNG", "Isolíneas de presión, q máx y q mín, área comprimida y detección de levantamiento."],
+                ["Diseño", "img/ZAPATAS_3.PNG", "Penetración, cortante en cada dirección y flexión, con fórmula y artículo a la vista."]
+              ] },
+            { key: "placas", name: "Placas base",
+              blurb: "Placas sobre dado de concreto: equilibrio del plano de deformaciones y anclas en tensión.",
+              shots: [
+                ["Vistas", "img/PB_1.PNG", "Planta con presiones sobre el dado y anclas en tensión, y elevación con el empotramiento."],
+                ["Presiones", "img/PB_2.PNG", "Superficie 3D de presiones, zona en contacto y tensión ancla por ancla."],
+                ["Diseño", "img/PB_3.PNG", "Aplastamiento, flexión de la placa, tensión en anclas y cortante por fricción."]
+              ] },
+            { key: "muros", name: "Muros ante sismo",
+              blurb: "Mampostería y concreto ante sismo: reparto del cortante de entrepiso, distorsiones y vista 3D.",
+              shots: [
+                ["Revisión", "img/MUROSIS_1.PNG", "Un renglón por muro: rigidez, cortante resistente, cortante de diseño y su D/C."],
+                ["Entrepiso", "img/MUROSIS_2.PNG", "Centro de rigidez, excentricidades, distorsión contra el límite y muro gobernante."],
+                ["Planta 3D", "img/MUROSIS_3.PNG", "Muros sólidos por material sobre la losa, con órbita, encuadre y zoom libres."],
+                ["Refuerzo", "img/MUROSIS_4.PNG", "Armado mínimo o personalizado, con diseño de los núcleos extremos."],
+                ["Importar DXF", "img/MUROSIS_5.PNG", "La planta entra desde CAD: capa, unidad, espesor y material; muros nombrados y en orden."]
+              ] },
+            { key: "armaduras", name: "Armaduras",
+              blurb: "Tipología y celosía paramétricas, fuerzas axiales por barra y despiece listo para presupuestar.",
+              shots: [
+                ["Modelo", "img/ARMADURAS_1.PNG", "Tipología, celosía, claro y peralte definen la geometría; grupos con su perfil."],
+                ["Fuerzas", "img/ARMADURAS_2.PNG", "Compresión y tensión rotuladas barra por barra, con las más solicitadas listadas."],
+                ["Cuantificación", "img/ARMADURAS_3.PNG", "Peso y longitud por grupo, peso por metro de claro y despiece por perfil."]
+              ] }
+        ];
 
-        (function () {
-            var nav = (navigator.language || navigator.userLanguage || 'es').toLowerCase();
-            var lang = nav.indexOf('en') === 0 ? 'en' : 'es';
-            var dict = I18N[lang];
-            if (!dict) return;
-            document.documentElement.lang = lang;
-            document.querySelectorAll('[data-i18n]').forEach(function (el) {
-                var v = dict[el.getAttribute('data-i18n')];
-                if (v != null) el.textContent = v;
-            });
-            document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
-                var v = dict[el.getAttribute('data-i18n-html')];
-                if (v != null) el.innerHTML = v;
-            });
-            document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
-                var v = dict[el.getAttribute('data-i18n-alt')];
-                if (v != null) el.setAttribute('alt', v);
-            });
-            if (dict.__title) document.title = dict.__title;
-            var md = document.querySelector('meta[name="description"]');
-            if (md && dict.__desc) md.setAttribute('content', dict.__desc);
-        })();
+        var PLANS = [
+            { n: 1, label: "1 equipo",  mxn: 1500, usd: 83,  href: "https://struxsoftware.lemonsqueezy.com/checkout/buy/a2b2d8d1-e79a-4d3f-96c7-ba5b369eb09d" },
+            { n: 2, label: "2 equipos", mxn: 2500, usd: 139, href: "https://struxsoftware.lemonsqueezy.com/checkout/buy/0b5c1d20-1e96-4fbb-a010-a5246c512638" },
+            { n: 3, label: "3 equipos", mxn: 3500, usd: 194, href: "https://struxsoftware.lemonsqueezy.com/checkout/buy/85892367-05b3-46ef-880c-5c42a8bfc050" },
+            { n: 5, label: "5 equipos", mxn: 5200, usd: 289, href: "https://struxsoftware.lemonsqueezy.com/checkout/buy/092eef1c-5911-4e0d-a5b6-57c517c186bd" }
+        ];
 
-        // Fade-in on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+        var VIDEOS = [
+            { id: "0rJ0sqys4Sk", label: "Concreto", note: "Viga de concreto reforzado · NTC-Concreto 2023 · ACI 318-25" },
+            { id: "JWFx_DQI3YM", label: "Acero", note: "Viga de acero estructural · NTC-Acero 2023 · AISC 360-22" },
+            { id: "B70FlEDGas4", label: "Viga genérica", note: "Revisión por resistencia con módulo de sección conocido" }
+        ];
+
+        var FAQS = [
+            { q: "¿Cuánto cuesta y qué incluye?", a: "$1,500 MXN por una licencia, en un solo pago. Incluye los seis módulos completos, las memorias de cálculo y todas las actualizaciones 3.xx.xx. No hay suscripción, niveles ni módulos que se compren aparte." },
+            { q: "¿En cuántas computadoras puedo instalarlo?", a: "Una por licencia. Los planes de 2, 3 y 5 equipos entregan una clave por equipo; la licencia es perpetua y no transferible a terceros." },
+            { q: "¿Necesito internet para usarlo?", a: "Solo para activar la licencia. Después Strux trabaja sin conexión: no envía tus proyectos ni recopila datos de uso." },
+            { q: "¿Sustituye un software comercial?", a: "No, y no pretende hacerlo. Un programa de análisis general modela la estructura completa; Strux resuelve el elemento — viga, columna, zapata, placa base, muro, armadura — y entrega su memoria contra la norma, que es donde se va la mayor parte del tiempo." },
+            { q: "¿Sirve para dar clase o para tesis?", a: "Sí. Cada resultado muestra la fórmula simbólica, la sustitución numérica y el artículo del reglamento, así que la memoria funciona como material de estudio, no solo como entregable." }
+        ];
+
+        // --- Módulos: carril + panel ---
+        var state = { mod: "vigas", shot: 0 };
+        var rail = document.getElementById('rail');
+        var railnote = document.getElementById('railnote');
+        var shotTitle = document.getElementById('shot-title');
+        var shotImg = document.getElementById('shot-img');
+        var shotCap = document.getElementById('shot-cap');
+        var shotTabs = document.getElementById('shot-tabs');
+
+        MODULES.forEach(function (m) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'rail-btn';
+            b.setAttribute('data-mod', m.key);
+            b.innerHTML = '<span>' + m.name + '</span><span class="count">' + m.shots.length + ' vistas</span>';
+            b.addEventListener('click', function () { selectModule(m.key); });
+            rail.insertBefore(b, railnote);
+        });
+
+        function currentModule() {
+            for (var i = 0; i < MODULES.length; i++) if (MODULES[i].key === state.mod) return MODULES[i];
+            return MODULES[0];
+        }
+
+        function renderShot() {
+            var mod = currentModule();
+            var si = Math.min(state.shot, mod.shots.length - 1);
+            var s = mod.shots[si];
+            shotTitle.textContent = mod.name + ' · ' + s[0];
+            shotImg.src = s[1];
+            shotImg.alt = mod.name + ' · ' + s[0] + ' — ' + s[2];
+            shotImg.classList.toggle('crop', s[1].indexOf('ARMADURAS') !== -1);
+            shotCap.textContent = s[2];
+            shotTabs.innerHTML = '';
+            mod.shots.forEach(function (t, i) {
+                var p = document.createElement('button');
+                p.type = 'button';
+                p.className = 'pill' + (i === si ? ' active' : '');
+                p.textContent = t[0];
+                p.addEventListener('click', function () { state.shot = i; renderShot(); });
+                shotTabs.appendChild(p);
+            });
+        }
+
+        function selectModule(key) {
+            state.mod = key; state.shot = 0;
+            var btns = rail.querySelectorAll('.rail-btn');
+            for (var i = 0; i < btns.length; i++)
+                btns[i].classList.toggle('active', btns[i].getAttribute('data-mod') === key);
+            railnote.textContent = currentModule().blurb;
+            renderShot();
+        }
+
+        selectModule('vigas');
+
+        // Tiles del hero → seleccionar módulo (el ancla hace el scroll)
+        document.querySelectorAll('.tile[data-mod]').forEach(function (t) {
+            t.addEventListener('click', function () { selectModule(t.getAttribute('data-mod')); });
+        });
+
+        // --- Video ---
+        var videoTabs = document.getElementById('video-tabs');
+        var videoFrame = document.getElementById('video-frame');
+        var videoNote = document.getElementById('video-note');
+        VIDEOS.forEach(function (v, i) {
+            var p = document.createElement('button');
+            p.type = 'button';
+            p.className = 'pill' + (i === 0 ? ' active' : '');
+            p.textContent = v.label;
+            p.addEventListener('click', function () {
+                videoTabs.querySelectorAll('.pill').forEach(function (x) { x.classList.remove('active'); });
+                p.classList.add('active');
+                videoFrame.src = 'https://www.youtube-nocookie.com/embed/' + v.id + '?rel=0&modestbranding=1';
+                videoNote.textContent = v.note;
+            });
+            videoTabs.appendChild(p);
+        });
+        videoNote.textContent = VIDEOS[0].note;
+
+        // --- Precio ---
+        var licTabs = document.getElementById('lic-tabs');
+        var priceMain = document.getElementById('price-main');
+        var priceAlt = document.getElementById('price-alt');
+        var pricePer = document.getElementById('price-per');
+        var buyBtn = document.getElementById('buy-btn');
+        function fmt(n) { return '$' + n.toLocaleString('en-US'); }
+        function setPlan(idx) {
+            var p = PLANS[idx];
+            licTabs.querySelectorAll('.pill').forEach(function (x, i) { x.classList.toggle('active', i === idx); });
+            priceMain.textContent = fmt(p.mxn);
+            priceAlt.textContent = '≈ ' + fmt(p.usd) + ' USD';
+            pricePer.textContent = p.n === 1
+                ? 'Licencia perpetua para 1 equipo'
+                : fmt(Math.round(p.mxn / p.n)) + ' MXN por equipo · ' + p.n + ' licencias perpetuas';
+            buyBtn.href = p.href;
+            buyBtn.textContent = p.n === 1 ? 'Comprar 1 licencia' : 'Comprar ' + p.n + ' licencias';
+        }
+        PLANS.forEach(function (p, i) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'pill' + (i === 0 ? ' active' : '');
+            b.textContent = p.label;
+            b.addEventListener('click', function () { setPlan(i); });
+            licTabs.appendChild(b);
+        });
+        setPlan(0);
+
+        // --- FAQ ---
+        var faqgrid = document.getElementById('faqgrid');
+        FAQS.forEach(function (f, i) {
+            var d = document.createElement('div');
+            d.className = 'faq' + (i === 0 ? ' open' : '');
+            d.innerHTML = '<button type="button" class="faq-q" aria-expanded="' + (i === 0) + '">' +
+                '<span>' + f.q + '</span><span class="faq-sign">' + (i === 0 ? '−' : '+') + '</span></button>' +
+                '<div class="faq-a">' + f.a + '</div>';
+            d.querySelector('.faq-q').addEventListener('click', function () {
+                var wasOpen = d.classList.contains('open');
+                faqgrid.querySelectorAll('.faq').forEach(function (x) {
+                    x.classList.remove('open');
+                    x.querySelector('.faq-sign').textContent = '+';
+                    x.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+                });
+                if (!wasOpen) {
+                    d.classList.add('open');
+                    d.querySelector('.faq-sign').textContent = '−';
+                    d.querySelector('.faq-q').setAttribute('aria-expanded', 'true');
                 }
             });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // Screenshot tabs switcher (una pestaña por módulo)
-        (function() {
-            const tabs = document.querySelectorAll('.video-tab[data-shots]');
-            const panels = document.querySelectorAll('.shot-panel[data-shots]');
-            if (!tabs.length) return;
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const key = this.getAttribute('data-shots');
-                    tabs.forEach(t => t.classList.toggle('active', t === this));
-                    panels.forEach(p => { p.hidden = p.getAttribute('data-shots') !== key; });
-                });
-            });
-        })();
-
-        // Video tabs switcher
-        (function() {
-            const tabs = document.querySelectorAll('.video-tab[data-video]');
-            const iframe = document.getElementById('videos-iframe');
-            if (!iframe) return;
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    const videoId = this.getAttribute('data-video');
-                    iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&autoplay=1`;
-                });
-            });
-        })();
+            faqgrid.appendChild(d);
+        });
     </script>
 </body>
 </html>
