@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strux 2.01.00 — Software de Diseño Estructural | Galper Softwares</title>
-    <meta name="description" content="Software profesional de Galper Softwares para diseño de vigas de concreto reforzado y acero estructural bajo las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22. Unidades SI, MKS e Imperial. Español e inglés.">
+    <title>Strux 3.00.00 — Software de Diseño Estructural | Galper Softwares</title>
+    <meta name="description" content="Software profesional de Galper Softwares para diseño de vigas, columnas, zapatas, placas base, muros ante sismo y armaduras bajo las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22. Unidades SI, MKS e Imperial. Español e inglés.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -319,6 +319,16 @@
             font-size: 0.9rem;
             color: var(--text-dim);
         }
+        /* Galería de capturas por módulo. Una sola columna a todo el ancho:
+           son capturas de UI densa y en la rejilla de 3 columnas no se leen. */
+        .shot-panel { display: grid; gap: 1.5rem; }
+        .shot-panel[hidden] { display: none; }   /* display:grid le gana a [hidden] */
+        .shot-narrow { max-width: 780px; margin: 0 auto; }  /* hojas de reporte, más angostas */
+        .shot-crop img {                          /* recorta la franja inferior */
+            aspect-ratio: 1366 / 650;
+            object-fit: cover;
+            object-position: top;
+        }
 
         /* --- PRICING --- */
         #precio {
@@ -580,6 +590,7 @@
             <div class="logo">Galper<span>.</span></div>
             <div class="nav-links">
                 <a href="#precio" data-i18n="nav_pricing">Precio</a>
+                <a href="#modulos" data-i18n="nav_modules">Módulos</a>
                 <a href="#features" data-i18n="nav_features">Funcionalidades</a>
                 <a href="#normas" data-i18n="nav_codes">Normatividad</a>
                 <a href="tutoriales.html" data-i18n="nav_tutorials">Tutoriales</a>
@@ -590,19 +601,19 @@
 
     <section class="hero">
         <div class="hero-content fade-in">
-            <div class="badge" data-i18n="hero_badge">Versión 2.01.00 — Disponible ahora</div>
+            <div class="badge" data-i18n="hero_badge">Versión 3.00.00 — Disponible ahora</div>
             <h1 data-i18n-html="hero_title">Diseño estructural <br><span class="highlight">apegado a la norma</span></h1>
-            <p data-i18n="hero_sub">Software de escritorio para diseño de vigas de concreto reforzado y acero estructural conforme a las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22.</p>
+            <p data-i18n="hero_sub">Software de escritorio para análisis y diseño de vigas, columnas, zapatas, placas base, muros ante sismo y armaduras, conforme a las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22.</p>
             <div class="hero-actions">
                 <a href="#precio" class="btn btn-primary">
                     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
                     <span data-i18n="hero_btn_primary">Ver planes y precios</span>
                 </a>
 
-                <a href="#features" class="btn btn-secondary" data-i18n="hero_btn_secondary">Ver funcionalidades</a>
+                <a href="#modulos" class="btn btn-secondary" data-i18n="hero_btn_secondary">Ver los 6 módulos</a>
             </div>
             <div class="price-hero" data-i18n-html="hero_price">
-                Desde <strong>$799 MXN</strong> — licencia perpetua, pago único
+                Desde <strong>$1,500 MXN</strong> — licencia perpetua, pago único
             </div>
         </div>
     </section>
@@ -611,21 +622,28 @@
         <div class="container">
             <div class="section-label fade-in" data-i18n="price_label">Precio</div>
             <h2 class="section-title fade-in" style="text-align:center;" data-i18n="price_title">Licencia perpetua, un solo pago</h2>
-            <p class="section-desc fade-in" style="text-align:center; margin: 0 auto 3rem;" data-i18n="price_desc">Sin suscripciones. Sin costos ocultos. Paga una vez y usa Strux para siempre. Todas las actualizaciones 2.xx.xx son gratuitas para compradores de la versión 2.01.00.</p>
+            <p class="section-desc fade-in" style="text-align:center; margin: 0 auto 3rem;" data-i18n="price_desc">Sin suscripciones. Sin costos ocultos. Paga una vez y usa Strux para siempre. Todas las actualizaciones 3.xx.xx son gratuitas para compradores de la versión 3.00.00.</p>
+
+            <!--
+                CHECKOUTS Strux 3.00.00 — Lemon Squeezy.
+                Los cuatro enlaces de compra viven aquí abajo, uno por tarjeta y en
+                este orden: 1 licencia · 2 licencias · 3 licencias · 5 licencias.
+                Para cambiar de producto basta con sustituir los cuatro href.
+            -->
             <div class="pricing-grid">
 
                 <!-- Plan 1 licencia -->
                 <div class="price-card fade-in">
                     <div class="price-plan-name" data-i18n="plan_individual">Individual</div>
-                    <div class="price-amount">$799</div>
-                    <div class="price-currency" data-i18n="cur_799">MXN · ~$44 USD · pago único</div>
+                    <div class="price-amount">$1,500</div>
+                    <div class="price-currency" data-i18n="cur_1500">MXN · ~$83 USD · pago único</div>
                     <ul class="price-features">
                         <li data-i18n="pf_lic1">1 licencia perpetua (1 equipo)</li>
-                        <li data-i18n="pf_concrete">Concreto reforzado — NTC-Concreto 2023 y ACI 318-25</li>
-                        <li data-i18n="pf_steel">Acero estructural — NTC-Acero 2023 y AISC 360-22</li>
+                        <li data-i18n="pf_modules">Los 6 módulos: vigas, columnas, zapatas, placas base, muros y armaduras</li>
+                        <li data-i18n="pf_codes">NTC CDMX 2023 · ACI 318-25 · AISC 360-22</li>
                         <li data-i18n="pf_units_lang">Unidades SI/MKS/Imperial · idiomas ES/EN</li>
                         <li data-i18n="pf_reports">Memorias de cálculo detalladas</li>
-                        <li data-i18n="pf_updates">Actualizaciones 2.xx.xx gratuitas</li>
+                        <li data-i18n="pf_updates">Actualizaciones 3.xx.xx gratuitas</li>
                         <li data-i18n="pf_offline">Sin conexión a internet requerida</li>
                     </ul>
                     <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/a2b2d8d1-e79a-4d3f-96c7-ba5b369eb09d" class="btn btn-secondary" data-i18n="price_btn_1">
@@ -633,18 +651,18 @@
                     </a>
                 </div>
 
-                <!-- Plan 2 licencias (NUEVO) -->
+                <!-- Plan 2 licencias -->
                 <div class="price-card fade-in">
                     <div class="price-plan-name" data-i18n="plan_duo">Dúo</div>
-                    <div class="price-amount">$1,499</div>
-                    <div class="price-currency" data-i18n="cur_1499">MXN · ~$83 USD · pago único</div>
+                    <div class="price-amount">$2,500</div>
+                    <div class="price-currency" data-i18n="cur_2500">MXN · ~$139 USD · pago único</div>
                     <ul class="price-features">
                         <li data-i18n="pf_lic2">2 licencias perpetuas (2 equipos)</li>
-                        <li data-i18n="pf_concrete">Concreto reforzado — NTC-Concreto 2023 y ACI 318-25</li>
-                        <li data-i18n="pf_steel">Acero estructural — NTC-Acero 2023 y AISC 360-22</li>
+                        <li data-i18n="pf_modules">Los 6 módulos: vigas, columnas, zapatas, placas base, muros y armaduras</li>
+                        <li data-i18n="pf_codes">NTC CDMX 2023 · ACI 318-25 · AISC 360-22</li>
                         <li data-i18n="pf_units_lang">Unidades SI/MKS/Imperial · idiomas ES/EN</li>
                         <li data-i18n="pf_reports">Memorias de cálculo detalladas</li>
-                        <li data-i18n="pf_updates">Actualizaciones 2.xx.xx gratuitas</li>
+                        <li data-i18n="pf_updates">Actualizaciones 3.xx.xx gratuitas</li>
                         <li data-i18n="pf_offline">Sin conexión a internet requerida</li>
                     </ul>
                     <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/0b5c1d20-1e96-4fbb-a010-a5246c512638" class="btn btn-secondary" data-i18n="price_btn_2">
@@ -656,15 +674,15 @@
                 <div class="price-card featured fade-in">
                     <div class="price-badge-popular" data-i18n="price_popular">Más popular</div>
                     <div class="price-plan-name" data-i18n="plan_small">Despacho pequeño</div>
-                    <div class="price-amount">$2,099</div>
-                    <div class="price-currency" data-i18n="cur_2099">MXN · ~$117 USD · pago único</div>
+                    <div class="price-amount">$3,500</div>
+                    <div class="price-currency" data-i18n="cur_3500">MXN · ~$194 USD · pago único</div>
                     <ul class="price-features">
                         <li data-i18n="pf_lic3">3 licencias perpetuas (3 equipos)</li>
-                        <li data-i18n="pf_concrete">Concreto reforzado — NTC-Concreto 2023 y ACI 318-25</li>
-                        <li data-i18n="pf_steel">Acero estructural — NTC-Acero 2023 y AISC 360-22</li>
+                        <li data-i18n="pf_modules">Los 6 módulos: vigas, columnas, zapatas, placas base, muros y armaduras</li>
+                        <li data-i18n="pf_codes">NTC CDMX 2023 · ACI 318-25 · AISC 360-22</li>
                         <li data-i18n="pf_units_lang">Unidades SI/MKS/Imperial · idiomas ES/EN</li>
                         <li data-i18n="pf_reports">Memorias de cálculo detalladas</li>
-                        <li data-i18n="pf_updates">Actualizaciones 2.xx.xx gratuitas</li>
+                        <li data-i18n="pf_updates">Actualizaciones 3.xx.xx gratuitas</li>
                         <li data-i18n="pf_offline">Sin conexión a internet requerida</li>
                     </ul>
                     <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/85892367-05b3-46ef-880c-5c42a8bfc050" class="btn btn-primary" data-i18n="price_btn_3">
@@ -675,15 +693,15 @@
                 <!-- Plan 5 licencias -->
                 <div class="price-card fade-in">
                     <div class="price-plan-name" data-i18n="plan_medium">Despacho mediano</div>
-                    <div class="price-amount">$3,599</div>
-                    <div class="price-currency" data-i18n="cur_3599">MXN · ~$200 USD · pago único</div>
+                    <div class="price-amount">$5,200</div>
+                    <div class="price-currency" data-i18n="cur_5200">MXN · ~$289 USD · pago único</div>
                     <ul class="price-features">
                         <li data-i18n="pf_lic5">5 licencias perpetuas (5 equipos)</li>
-                        <li data-i18n="pf_concrete">Concreto reforzado — NTC-Concreto 2023 y ACI 318-25</li>
-                        <li data-i18n="pf_steel">Acero estructural — NTC-Acero 2023 y AISC 360-22</li>
+                        <li data-i18n="pf_modules">Los 6 módulos: vigas, columnas, zapatas, placas base, muros y armaduras</li>
+                        <li data-i18n="pf_codes">NTC CDMX 2023 · ACI 318-25 · AISC 360-22</li>
                         <li data-i18n="pf_units_lang">Unidades SI/MKS/Imperial · idiomas ES/EN</li>
                         <li data-i18n="pf_reports">Memorias de cálculo detalladas</li>
-                        <li data-i18n="pf_updates">Actualizaciones 2.xx.xx gratuitas</li>
+                        <li data-i18n="pf_updates">Actualizaciones 3.xx.xx gratuitas</li>
                         <li data-i18n="pf_offline">Sin conexión a internet requerida</li>
                     </ul>
                     <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/092eef1c-5911-4e0d-a5b6-57c517c186bd" class="btn btn-secondary" data-i18n="price_btn_5">
@@ -696,21 +714,61 @@
         </div>
     </section>
 
-    <section id="features">
+    <section id="modulos">
         <div class="container">
-            <div class="section-label fade-in" data-i18n="feat_label">Funcionalidades</div>
-            <h2 class="section-title fade-in" data-i18n="feat_title">Todo lo que necesitas para diseñar vigas</h2>
-            <p class="section-desc fade-in" data-i18n="feat_desc">Strux automatiza el proceso de diseño y genera memorias de cálculo trazables a cada artículo de la norma.</p>
+            <div class="section-label fade-in" data-i18n="mod_label">Módulos</div>
+            <h2 class="section-title fade-in" data-i18n="mod_title">Seis módulos, un solo programa</h2>
+            <p class="section-desc fade-in" data-i18n="mod_desc">La versión 3.00.00 cubre el ciclo completo de un proyecto: de la superestructura a la cimentación, con un mismo archivo de proyecto y una sola memoria de cálculo.</p>
             <div class="features-grid">
                 <div class="feature-card fade-in">
                     <div class="feature-icon">📐</div>
-                    <h3 data-i18n="feat1_t">Diseño por Flexión</h3>
-                    <p data-i18n="feat1_p">Secciones rectangulares y T. Acero requerido, cuantías mínimas y máximas y verificación de ductilidad, con los factores de reducción de la norma seleccionada (NTC o ACI 318).</p>
+                    <h3 data-i18n="mod1_t">Vigas</h3>
+                    <p data-i18n="mod1_p">Análisis y diseño de vigas de concreto reforzado, acero estructural y vigas genéricas. Flexión, cortante y deflexiones con los diagramas M(x) y V(x) del modelo real.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🏛️</div>
+                    <h3 data-i18n="mod2_t">Columnas</h3>
+                    <p data-i18n="mod2_p">Diseño de columnas de concreto y acero en flexocompresión biaxial. Diagramas de interacción, pandeo por flexión y pandeo lateral-torsional según la sección.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🪨</div>
+                    <h3 data-i18n="mod3_t">Zapatas</h3>
+                    <p data-i18n="mod3_p">Análisis y diseño de zapatas de concreto reforzado: aisladas, corridas y combinadas. Presiones de contacto, cortante por penetración y armado.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⚓</div>
+                    <h3 data-i18n="mod4_t">Placas base</h3>
+                    <p data-i18n="mod4_p">Análisis y diseño de placas base sobre dado de concreto. Equilibrio del plano de deformaciones, anclas en tensión y presiones de aplastamiento.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🧱</div>
+                    <h3 data-i18n="mod5_t">Muros ante sismo</h3>
+                    <p data-i18n="mod5_p">Revisión de muros de mampostería y concreto ante cargas sísmicas. Método estático por nivel, reparto del cortante de entrepiso, distorsiones y vista 3D de la planta.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔺</div>
+                    <h3 data-i18n="mod6_t">Armaduras</h3>
+                    <p data-i18n="mod6_p">Análisis y diseño de armaduras. Fuerzas axiales por barra, revisión de cuerdas y diagonales, y arriostramiento de la cuerda superior.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <div class="section-label fade-in" data-i18n="feat_label">Funcionalidades</div>
+            <h2 class="section-title fade-in" data-i18n="feat_title">Todo lo que necesitas para diseñar</h2>
+            <p class="section-desc fade-in" data-i18n="feat_desc">Strux automatiza el proceso de diseño en los seis módulos y genera memorias de cálculo trazables a cada artículo de la norma.</p>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📐</div>
+                    <h3 data-i18n="feat1_t">Flexión y flexocompresión</h3>
+                    <p data-i18n="feat1_p">Secciones rectangulares y T, acero requerido, cuantías mínimas y máximas y diagramas de interacción para columnas, con los factores de reducción de la norma seleccionada (NTC o ACI 318).</p>
                 </div>
                 <div class="feature-card fade-in">
                     <div class="feature-icon">⚡</div>
-                    <h3 data-i18n="feat2_t">Diseño por Cortante</h3>
-                    <p data-i18n="feat2_p">Resistencia del concreto y del acero transversal. Separación de estribos con verificación de los límites de la NTC-Concreto 2023 y el ACI 318-25.</p>
+                    <h3 data-i18n="feat2_t">Cortante y penetración</h3>
+                    <p data-i18n="feat2_p">Resistencia del concreto y del acero transversal, separación de estribos y cortante por penetración en zapatas, con los límites de la NTC-Concreto 2023 y el ACI 318-25.</p>
                 </div>
                 <div class="feature-card fade-in">
                     <div class="feature-icon">📉</div>
@@ -720,17 +778,17 @@
                 <div class="feature-card fade-in">
                     <div class="feature-icon">🏗️</div>
                     <h3 data-i18n="feat4_t">Acero Estructural</h3>
-                    <p data-i18n="feat4_p">Diseño de vigas de acero por momento y cortante conforme a la NTC-Acero 2023 y el AISC 360-22. Secciones compactas, no compactas y esbeltas.</p>
+                    <p data-i18n="feat4_p">Vigas, columnas, placas base y armaduras conforme a la NTC-Acero 2023 y el AISC 360-22. Clasificación de secciones compactas, no compactas y esbeltas.</p>
                 </div>
                 <div class="feature-card fade-in">
                     <div class="feature-icon">📊</div>
                     <h3 data-i18n="feat5_t">Relaciones D/C en Tiempo Real</h3>
-                    <p data-i18n="feat5_p">Indicadores de demanda/capacidad visibles en todo momento. Flexión y cortante actualizados al instante.</p>
+                    <p data-i18n="feat5_p">Indicadores de demanda/capacidad visibles en todo momento, en los seis módulos. Cada cambio de geometría, carga o material se refleja al instante.</p>
                 </div>
                 <div class="feature-card fade-in">
                     <div class="feature-icon">📄</div>
                     <h3 data-i18n="feat6_t">Memorias de Cálculo</h3>
-                    <p data-i18n="feat6_p">Reportes HTML detallados con fórmulas simbólicas, sustitución numérica y referencia al artículo normativo. Listos para entregar.</p>
+                    <p data-i18n="feat6_p">Reportes detallados con una hoja por elemento, fórmulas simbólicas, sustitución numérica, figuras vectoriales y referencia al artículo normativo. Listos para entregar en PDF.</p>
                 </div>
                 <div class="feature-card fade-in">
                     <div class="feature-icon">📏</div>
@@ -760,6 +818,7 @@
                         <li data-i18n="norm1_li2">Diseño por fuerza cortante</li>
                         <li data-i18n="norm1_li3">Deflexiones inmediatas y diferidas</li>
                         <li data-i18n="norm1_li4">Cuantías mínimas y máximas</li>
+                        <li data-i18n="norm1_li6">Flexocompresión y cimentaciones superficiales</li>
                         <li data-i18n="norm1_li5">Factores de resistencia FR</li>
                     </ul>
                 </div>
@@ -797,6 +856,26 @@
                     </ul>
                 </div>
                 <div class="norm-card fade-in">
+                    <div class="norm-tag">NTC-Mampostería 2023</div>
+                    <h3 data-i18n="norm6_t">Normas Técnicas Complementarias para Diseño y Construcción de Estructuras de Mampostería</h3>
+                    <ul>
+                        <li data-i18n="norm6_li1">Resistencia de muros a fuerza cortante</li>
+                        <li data-i18n="norm6_li2">Muros de mampostería confinada</li>
+                        <li data-i18n="norm6_li3">Rigidez lateral y reparto de cortante</li>
+                        <li data-i18n="norm6_li4">Muros de concreto en el mismo entrepiso</li>
+                    </ul>
+                </div>
+                <div class="norm-card fade-in">
+                    <div class="norm-tag">NTC-Sismo 2023</div>
+                    <h3 data-i18n="norm7_t">Normas Técnicas Complementarias para Diseño por Sismo</h3>
+                    <ul>
+                        <li data-i18n="norm7_li1">Método estático de fuerzas por nivel</li>
+                        <li data-i18n="norm7_li2">Cortante basal y factor de comportamiento Q</li>
+                        <li data-i18n="norm7_li3">Cortante de entrepiso</li>
+                        <li data-i18n="norm7_li4">Límites de distorsión lateral</li>
+                    </ul>
+                </div>
+                <div class="norm-card fade-in">
                     <div class="norm-tag">RCDF CDMX</div>
                     <h3 data-i18n="norm5_t">Reglamento de Construcciones de la Ciudad de México</h3>
                     <ul>
@@ -814,23 +893,141 @@
         <div class="container">
             <div class="section-label fade-in" data-i18n="demo_label">Interfaz</div>
             <h2 class="section-title fade-in" data-i18n="demo_title">Diseñado para ingenieros</h2>
-            <p class="section-desc fade-in" data-i18n="demo_desc">Interfaz clara y directa. Ingresa los datos de tu viga, diseña y genera la memoria de cálculo en segundos.</p>
-            <div class="demo-grid">
-                <div class="demo-item fade-in">
-                    <img src="img/captura1.png" alt="Strux - Datos de entrada para viga de concreto reforzado" data-i18n-alt="alt1" loading="lazy">
-                    <div class="caption" data-i18n="cap1">Datos de entrada — Define geometría, cargas, apoyos y propiedades del material, con unidades en SI, MKS o Imperial. Visualización del modelo en tiempo real.</div>
+            <p class="section-desc fade-in" data-i18n="demo_desc">El mismo flujo de trabajo en los seis módulos: capturas los datos, diseñas y generas la memoria de cálculo en segundos. Elige un módulo para ver su interfaz real.</p>
+
+            <div class="demo-item shot-wide fade-in" style="margin-bottom: 2.5rem;">
+                <img src="img/MENU_1.PNG" data-i18n-alt="sc_menu" loading="lazy">
+                <div class="caption" data-i18n="sc_menu">Cambio de módulo — Un solo programa y un solo archivo de proyecto. El selector de módulos se abre desde cualquier pantalla y conserva las hojas de trabajo abiertas.</div>
+            </div>
+
+            <div class="video-tabs fade-in">
+                <button class="video-tab active" data-shots="vigas" type="button" data-i18n="stab_beams">Vigas</button>
+                <button class="video-tab" data-shots="columnas" type="button" data-i18n="stab_columns">Columnas</button>
+                <button class="video-tab" data-shots="zapatas" type="button" data-i18n="stab_footings">Zapatas</button>
+                <button class="video-tab" data-shots="placas" type="button" data-i18n="stab_plates">Placas base</button>
+                <button class="video-tab" data-shots="muros" type="button" data-i18n="stab_walls">Muros</button>
+                <button class="video-tab" data-shots="armaduras" type="button" data-i18n="stab_trusses">Armaduras</button>
+            </div>
+
+            <div class="shot-panel" data-shots="vigas">
+                <div class="demo-item">
+                    <img src="img/VIGAS_CONCRETO_1.PNG" data-i18n-alt="sc_vc1" loading="lazy">
+                    <div class="caption" data-i18n="sc_vc1">Viga de concreto · Datos de entrada — Geometría por tramo, apoyos, cargas puntuales y distribuidas, y peso propio, con el modelo dibujado en tiempo real.</div>
                 </div>
-                <div class="demo-item fade-in">
-                    <img src="img/captura2.png" alt="Strux - Diseño y resultados de viga de concreto" data-i18n-alt="alt2" loading="lazy">
-                    <div class="caption" data-i18n="cap2">Concreto reforzado — Relaciones D/C, detallado de armado y diagramas conforme a NTC-Concreto 2023 y ACI 318-25.</div>
+                <div class="demo-item">
+                    <img src="img/VIGAS_CONCRETO_2.PNG" data-i18n-alt="sc_vc2" loading="lazy">
+                    <div class="caption" data-i18n="sc_vc2">Viga de concreto · Diseño — Armado longitudinal y estribos propuestos, D/C de flexión y cortante, y la curva de acero requerido contra el disponible.</div>
                 </div>
-                <div class="demo-item fade-in">
-                    <img src="img/captura3.png" alt="Strux - Datos de entrada para viga de acero estructural" data-i18n-alt="alt3" loading="lazy">
-                    <div class="caption" data-i18n="cap3">Acero estructural — Selección de perfil, cargas de construcción y servicio conforme a NTC-Acero 2023 y AISC 360-22.</div>
+                <div class="demo-item shot-narrow">
+                    <img src="img/VIGAS_CONCRETO_3.PNG" data-i18n-alt="sc_vc3" loading="lazy">
+                    <div class="caption" data-i18n="sc_vc3">Viga de concreto · Memoria de cálculo — Resumen ejecutivo con las relaciones D/C, datos de entrada, diagramas M(x) y V(x), y la tabla de acero requerido por sección.</div>
                 </div>
-                <div class="demo-item fade-in">
-                    <img src="img/captura4.png" alt="Strux - Verificaciones de diseño en acero estructural" data-i18n-alt="alt4" loading="lazy">
-                    <div class="caption" data-i18n="cap4">Verificaciones de diseño — Propiedades del perfil, clasificación de sección y D/C por etapa de construcción y servicio.</div>
+                <div class="demo-item">
+                    <img src="img/VIGAS_ACERO_1.PNG" data-i18n-alt="sc_va1" loading="lazy">
+                    <div class="caption" data-i18n="sc_va1">Viga de acero · Datos de entrada — Selección de perfil del catálogo IMCA con sus propiedades de sección, cargas de construcción y opción de sección compuesta.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/VIGAS_ACERO_2.PNG" data-i18n-alt="sc_va2" loading="lazy">
+                    <div class="caption" data-i18n="sc_va2">Viga de acero · Verificaciones — Clasificación de la sección y revisión por flexión y cortante en las dos etapas: construcción (acero solo) y servicio.</div>
+                </div>
+                <div class="demo-item shot-narrow">
+                    <img src="img/VIGAS_ACERO_3.PNG" data-i18n-alt="sc_va3" loading="lazy">
+                    <div class="caption" data-i18n="sc_va3">Viga de acero · Memoria de cálculo — Resumen de flexión, cortante, deflexión, pandeo lateral y clase de sección, con los diagramas del modelo analizado.</div>
+                </div>
+            </div>
+
+            <div class="shot-panel" data-shots="columnas" hidden>
+                <div class="demo-item">
+                    <img src="img/COLUMNAS_CONCRETO_1.PNG" data-i18n-alt="sc_cc1" loading="lazy">
+                    <div class="caption" data-i18n="sc_cc1">Columna de concreto · Sección y armado — Secciones rectangular, circular, L y T; armado longitudinal, cuantía, capacidad axial y veredicto global.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/COLUMNAS_CONCRETO_2.PNG" data-i18n-alt="sc_cc2" loading="lazy">
+                    <div class="caption" data-i18n="sc_cc2">Columna de concreto · Diagramas de interacción — Curvas Pr–Mrx y Pr–Mry, contorno biaxial y superficie 3D, con la demanda amplificada por esbeltez marcada sobre ellas.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/COLUMNAS_CONCRETO_3.PNG" data-i18n-alt="sc_cc3" loading="lazy">
+                    <div class="caption" data-i18n="sc_cc3">Columna de concreto · Isolíneas de esfuerzo — Estado de deformaciones en equilibrio, esfuerzo del concreto en la sección y esfuerzo varilla por varilla.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/COLUMNAS_ACERO_1.PNG" data-i18n-alt="sc_ca1" loading="lazy">
+                    <div class="caption" data-i18n="sc_ca1">Columna de acero · Sección — Perfil del catálogo o diseñado a la medida, grado del acero, longitudes de pandeo y arriostre, y clasificación de patín y alma.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/COLUMNAS_ACERO_2.PNG" data-i18n-alt="sc_ca2" loading="lazy">
+                    <div class="caption" data-i18n="sc_ca2">Columna de acero · Interacción — Curvas de eje fuerte y eje débil, contorno biaxial y la ecuación de interacción con los momentos amplificados por P-Δ.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/COLUMNAS_ACERO_3.PNG" data-i18n-alt="sc_ca3" loading="lazy">
+                    <div class="caption" data-i18n="sc_ca3">Columna de acero · Capacidad — Curva de columna φcPn contra KL/r y curva de pandeo lateral-torsional φbMnx contra Lb, con el punto de diseño señalado.</div>
+                </div>
+            </div>
+
+            <div class="shot-panel" data-shots="zapatas" hidden>
+                <div class="demo-item">
+                    <img src="img/ZAPATAS_1.PNG" data-i18n-alt="sc_z1" loading="lazy">
+                    <div class="caption" data-i18n="sc_z1">Zapatas · Vistas — Planta con la parrilla de armado, vista 3D y elevación con la distribución de presiones, por cada combinación de carga.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/ZAPATAS_2.PNG" data-i18n-alt="sc_z2" loading="lazy">
+                    <div class="caption" data-i18n="sc_z2">Zapatas · Presiones del terreno — Mapa de isolíneas de presión, q máx y q mín, área comprimida y detección de levantamiento en cada combinación.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/ZAPATAS_3.PNG" data-i18n-alt="sc_z3" loading="lazy">
+                    <div class="caption" data-i18n="sc_z3">Zapatas · Diseño — Cortante por penetración y cortante en cada dirección, y diseño por flexión con el armado propuesto, con la fórmula y el artículo a la vista.</div>
+                </div>
+            </div>
+
+            <div class="shot-panel" data-shots="placas" hidden>
+                <div class="demo-item">
+                    <img src="img/PB_1.PNG" data-i18n-alt="sc_pb1" loading="lazy">
+                    <div class="caption" data-i18n="sc_pb1">Placas base · Vistas — Planta con las presiones sobre el dado y las anclas en tensión marcadas en rojo, y elevación con el perfil, la placa y el empotramiento de las anclas.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/PB_2.PNG" data-i18n-alt="sc_pb2" loading="lazy">
+                    <div class="caption" data-i18n="sc_pb2">Placas base · Presiones — Superficie 3D de presiones sobre el dado, zona en contacto y tensión ancla por ancla para cada combinación.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/PB_3.PNG" data-i18n-alt="sc_pb3" loading="lazy">
+                    <div class="caption" data-i18n="sc_pb3">Placas base · Diseño — Aplastamiento del dado, flexión de la placa por los volados críticos, tensión en las anclas y cortante por fricción más anclas.</div>
+                </div>
+            </div>
+
+            <div class="shot-panel" data-shots="muros" hidden>
+                <div class="demo-item">
+                    <img src="img/MUROSIS_1.PNG" data-i18n-alt="sc_mw1" loading="lazy">
+                    <div class="caption" data-i18n="sc_mw1">Muros · Revisión por dirección — Un renglón por muro con material, apoyo, geometría, rigidez, cortante resistente, cortante de diseño y su D/C.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/MUROSIS_2.PNG" data-i18n-alt="sc_mw2" loading="lazy">
+                    <div class="caption" data-i18n="sc_mw2">Muros · Resumen del entrepiso — Rigidez total, centro de rigidez, excentricidades de diseño, distorsión contra el límite de la norma y el muro gobernante en cada dirección.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/MUROSIS_3.PNG" data-i18n-alt="sc_mw3" loading="lazy">
+                    <div class="caption" data-i18n="sc_mw3">Muros · Vista 3D de la planta — Muros sólidos con color por material (tabique y concreto) sobre la losa, con órbita, encuadre y zoom libres.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/MUROSIS_4.PNG" data-i18n-alt="sc_mw4" loading="lazy">
+                    <div class="caption" data-i18n="sc_mw4">Muros · Armado y refuerzo — Armado mínimo normativo o personalizado para muros de concreto, con diseño de los núcleos extremos por descomposición de fuerzas.</div>
+                </div>
+                <div class="demo-item">
+                    <img src="img/MUROSIS_5.PNG" data-i18n-alt="sc_mw5" loading="lazy">
+                    <div class="caption" data-i18n="sc_mw5">Muros · Importación desde DXF — Toma la planta directamente del archivo de CAD: elige capa, unidad, espesor y material, y los muros entran nombrados y en orden.</div>
+                </div>
+            </div>
+
+            <div class="shot-panel" data-shots="armaduras" hidden>
+                <div class="demo-item shot-crop">
+                    <img src="img/ARMADURAS_1.PNG" data-i18n-alt="sc_ar1" loading="lazy">
+                    <div class="caption" data-i18n="sc_ar1">Armaduras · Modelo — Tipología, celosía, claro y peralte definen la geometría; cuerdas, montantes y diagonales quedan agrupados con su perfil.</div>
+                </div>
+                <div class="demo-item shot-crop">
+                    <img src="img/ARMADURAS_2.PNG" data-i18n-alt="sc_ar2" loading="lazy">
+                    <div class="caption" data-i18n="sc_ar2">Armaduras · Fuerzas axiales — Compresión y tensión rotuladas barra por barra sobre el modelo, con la lista de las barras más solicitadas.</div>
+                </div>
+                <div class="demo-item shot-crop">
+                    <img src="img/ARMADURAS_3.PNG" data-i18n-alt="sc_ar3" loading="lazy">
+                    <div class="caption" data-i18n="sc_ar3">Armaduras · Cuantificación — Peso y longitud por grupo y total, peso por metro de claro y despiece por perfil, listo para presupuestar.</div>
                 </div>
             </div>
         </div>
@@ -840,7 +1037,7 @@
         <div class="container">
             <div class="section-label fade-in" data-i18n="vid_label">Tutoriales</div>
             <h2 class="section-title fade-in" style="text-align:center;" data-i18n="vid_title">Ve Strux en acción</h2>
-            <p class="section-desc fade-in" style="text-align:center; margin: 0 auto 3rem;" data-i18n="vid_desc">Videos demostrativos de cada módulo de diseño. Observa el flujo completo de trabajo dentro del software.</p>
+            <p class="section-desc fade-in" style="text-align:center; margin: 0 auto 3rem;" data-i18n="vid_desc">Videos demostrativos del módulo de vigas. Observa el flujo completo de trabajo dentro del software; iremos publicando los videos de los demás módulos.</p>
 
             <div class="video-tabs fade-in">
                 <button class="video-tab active" data-video="0rJ0sqys4Sk" type="button" data-i18n="tab_concrete">
@@ -858,7 +1055,7 @@
                 <iframe
                     id="videos-iframe"
                     src="https://www.youtube-nocookie.com/embed/0rJ0sqys4Sk?rel=0&modestbranding=1"
-                    title="Demo Strux 2.01"
+                    title="Demo Strux 3.00"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen
                     loading="lazy">
@@ -880,7 +1077,7 @@
                 </div>
                 <div class="about-text">
                     <p data-i18n-html="about_p1">Strux es desarrollado por <strong>Galper Softwares</strong>, una empresa de desarrollo de software para ingeniería con sede en Aguascalientes, México. El software nace de la necesidad de contar con herramientas de diseño estructural que sigan fielmente las normas vigentes.</p>
-                    <p data-i18n-html="about_p2">El motor de diseño de Strux implementa directamente las fórmulas, factores y criterios de las Normas Técnicas Complementarias de la Ciudad de México (edición 2023) y, desde la versión 2.01.00, de los reglamentos estadounidenses ACI 318-25 y AISC 360-22.</p>
+                    <p data-i18n-html="about_p2">El motor de diseño de Strux implementa directamente las fórmulas, factores y criterios de las Normas Técnicas Complementarias de la Ciudad de México (edición 2023) — Concreto, Acero, Mampostería, Sismo y Cimentaciones — y, desde la versión 2.01.00, de los reglamentos estadounidenses ACI 318-25 y AISC 360-22.</p>
                     <p data-i18n-html="about_p3">¿Preguntas o soporte? Escríbenos a <a href="mailto:strux.contacto@gmail.com">strux.contacto@gmail.com</a></p>
                 </div>
             </div>
@@ -900,61 +1097,77 @@
         // --- i18n: detección automática de idioma (ES por defecto, EN si el navegador está en inglés) ---
         var I18N = {
             es: {
-                __title: "Strux 2.01.00 — Software de Diseño Estructural | Galper Softwares",
-                __desc: "Software profesional de Galper Softwares para diseño de vigas de concreto reforzado y acero estructural bajo las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22. Unidades SI, MKS e Imperial. Español e inglés.",
+                __title: "Strux 3.00.00 — Software de Diseño Estructural | Galper Softwares",
+                __desc: "Software profesional de Galper Softwares para diseño de vigas, columnas, zapatas, placas base, muros ante sismo y armaduras bajo las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22. Unidades SI, MKS e Imperial. Español e inglés.",
                 nav_pricing: "Precio",
+                nav_modules: "Módulos",
                 nav_features: "Funcionalidades",
                 nav_codes: "Normatividad",
                 nav_tutorials: "Tutoriales",
                 nav_about: "Acerca de",
-                hero_badge: "Versión 2.01.00 — Disponible ahora",
+                hero_badge: "Versión 3.00.00 — Disponible ahora",
                 hero_title: 'Diseño estructural <br><span class="highlight">apegado a la norma</span>',
-                hero_sub: "Software de escritorio para diseño de vigas de concreto reforzado y acero estructural conforme a las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22.",
+                hero_sub: "Software de escritorio para análisis y diseño de vigas, columnas, zapatas, placas base, muros ante sismo y armaduras, conforme a las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22.",
                 hero_btn_primary: "Ver planes y precios",
-                hero_btn_secondary: "Ver funcionalidades",
-                hero_price: 'Desde <strong>$799 MXN</strong> — licencia perpetua, pago único',
+                hero_btn_secondary: "Ver los 6 módulos",
+                hero_price: 'Desde <strong>$1,500 MXN</strong> — licencia perpetua, pago único',
                 price_label: "Precio",
                 price_title: "Licencia perpetua, un solo pago",
-                price_desc: "Sin suscripciones. Sin costos ocultos. Paga una vez y usa Strux para siempre. Todas las actualizaciones 2.xx.xx son gratuitas para compradores de la versión 2.01.00.",
+                price_desc: "Sin suscripciones. Sin costos ocultos. Paga una vez y usa Strux para siempre. Todas las actualizaciones 3.xx.xx son gratuitas para compradores de la versión 3.00.00.",
                 price_popular: "Más popular",
                 plan_individual: "Individual",
                 plan_duo: "Dúo",
                 plan_small: "Despacho pequeño",
                 plan_medium: "Despacho mediano",
-                cur_799: "MXN · ~$44 USD · pago único",
-                cur_1499: "MXN · ~$83 USD · pago único",
-                cur_2099: "MXN · ~$117 USD · pago único",
-                cur_3599: "MXN · ~$200 USD · pago único",
+                cur_1500: "MXN · ~$83 USD · pago único",
+                cur_2500: "MXN · ~$139 USD · pago único",
+                cur_3500: "MXN · ~$194 USD · pago único",
+                cur_5200: "MXN · ~$289 USD · pago único",
                 pf_lic1: "1 licencia perpetua (1 equipo)",
                 pf_lic2: "2 licencias perpetuas (2 equipos)",
                 pf_lic3: "3 licencias perpetuas (3 equipos)",
                 pf_lic5: "5 licencias perpetuas (5 equipos)",
-                pf_concrete: "Concreto reforzado — NTC-Concreto 2023 y ACI 318-25",
-                pf_steel: "Acero estructural — NTC-Acero 2023 y AISC 360-22",
+                pf_modules: "Los 6 módulos: vigas, columnas, zapatas, placas base, muros y armaduras",
+                pf_codes: "NTC CDMX 2023 · ACI 318-25 · AISC 360-22",
                 pf_units_lang: "Unidades SI/MKS/Imperial · idiomas ES/EN",
                 pf_reports: "Memorias de cálculo detalladas",
-                pf_updates: "Actualizaciones 2.xx.xx gratuitas",
+                pf_updates: "Actualizaciones 3.xx.xx gratuitas",
                 pf_offline: "Sin conexión a internet requerida",
                 price_btn_1: "Comprar — 1 licencia",
                 price_btn_2: "Comprar — 2 licencias",
                 price_btn_3: "Comprar — 3 licencias",
                 price_btn_5: "Comprar — 5 licencias",
                 price_note: '¿Dudas sobre cuál plan elegir? Escríbenos a <a href="mailto:strux.contacto@gmail.com" style="color:var(--accent);">strux.contacto@gmail.com</a>',
+                mod_label: "Módulos",
+                mod_title: "Seis módulos, un solo programa",
+                mod_desc: "La versión 3.00.00 cubre el ciclo completo de un proyecto: de la superestructura a la cimentación, con un mismo archivo de proyecto y una sola memoria de cálculo.",
+                mod1_t: "Vigas",
+                mod1_p: "Análisis y diseño de vigas de concreto reforzado, acero estructural y vigas genéricas. Flexión, cortante y deflexiones con los diagramas M(x) y V(x) del modelo real.",
+                mod2_t: "Columnas",
+                mod2_p: "Diseño de columnas de concreto y acero en flexocompresión biaxial. Diagramas de interacción, pandeo por flexión y pandeo lateral-torsional según la sección.",
+                mod3_t: "Zapatas",
+                mod3_p: "Análisis y diseño de zapatas de concreto reforzado: aisladas, corridas y combinadas. Presiones de contacto, cortante por penetración y armado.",
+                mod4_t: "Placas base",
+                mod4_p: "Análisis y diseño de placas base sobre dado de concreto. Equilibrio del plano de deformaciones, anclas en tensión y presiones de aplastamiento.",
+                mod5_t: "Muros ante sismo",
+                mod5_p: "Revisión de muros de mampostería y concreto ante cargas sísmicas. Método estático por nivel, reparto del cortante de entrepiso, distorsiones y vista 3D de la planta.",
+                mod6_t: "Armaduras",
+                mod6_p: "Análisis y diseño de armaduras. Fuerzas axiales por barra, revisión de cuerdas y diagonales, y arriostramiento de la cuerda superior.",
                 feat_label: "Funcionalidades",
-                feat_title: "Todo lo que necesitas para diseñar vigas",
-                feat_desc: "Strux automatiza el proceso de diseño y genera memorias de cálculo trazables a cada artículo de la norma.",
-                feat1_t: "Diseño por Flexión",
-                feat1_p: "Secciones rectangulares y T. Acero requerido, cuantías mínimas y máximas y verificación de ductilidad, con los factores de reducción de la norma seleccionada (NTC o ACI 318).",
-                feat2_t: "Diseño por Cortante",
-                feat2_p: "Resistencia del concreto y del acero transversal. Separación de estribos con verificación de los límites de la NTC-Concreto 2023 y el ACI 318-25.",
+                feat_title: "Todo lo que necesitas para diseñar",
+                feat_desc: "Strux automatiza el proceso de diseño en los seis módulos y genera memorias de cálculo trazables a cada artículo de la norma.",
+                feat1_t: "Flexión y flexocompresión",
+                feat1_p: "Secciones rectangulares y T, acero requerido, cuantías mínimas y máximas y diagramas de interacción para columnas, con los factores de reducción de la norma seleccionada (NTC o ACI 318).",
+                feat2_t: "Cortante y penetración",
+                feat2_p: "Resistencia del concreto y del acero transversal, separación de estribos y cortante por penetración en zapatas, con los límites de la NTC-Concreto 2023 y el ACI 318-25.",
                 feat3_t: "Revisión de Deflexiones",
                 feat3_p: "Deflexiones inmediatas y diferidas con el método de Bischoff. Comparación automática contra los límites permisibles definidos por cada norma.",
                 feat4_t: "Acero Estructural",
-                feat4_p: "Diseño de vigas de acero por momento y cortante conforme a la NTC-Acero 2023 y el AISC 360-22. Secciones compactas, no compactas y esbeltas.",
+                feat4_p: "Vigas, columnas, placas base y armaduras conforme a la NTC-Acero 2023 y el AISC 360-22. Clasificación de secciones compactas, no compactas y esbeltas.",
                 feat5_t: "Relaciones D/C en Tiempo Real",
-                feat5_p: "Indicadores de demanda/capacidad visibles en todo momento. Flexión y cortante actualizados al instante.",
+                feat5_p: "Indicadores de demanda/capacidad visibles en todo momento, en los seis módulos. Cada cambio de geometría, carga o material se refleja al instante.",
                 feat6_t: "Memorias de Cálculo",
-                feat6_p: "Reportes HTML detallados con fórmulas simbólicas, sustitución numérica y referencia al artículo normativo. Listos para entregar.",
+                feat6_p: "Reportes detallados con una hoja por elemento, fórmulas simbólicas, sustitución numérica, figuras vectoriales y referencia al artículo normativo. Listos para entregar en PDF.",
                 feat7_t: "Cambio de Unidades",
                 feat7_p: "Alterna entre Sistema Internacional (SI), MKS e Imperial cuando quieras. Datos, resultados y memorias se convierten al instante.",
                 feat8_t: "Español e Inglés",
@@ -967,6 +1180,7 @@
                 norm1_li2: "Diseño por fuerza cortante",
                 norm1_li3: "Deflexiones inmediatas y diferidas",
                 norm1_li4: "Cuantías mínimas y máximas",
+                norm1_li6: "Flexocompresión y cimentaciones superficiales",
                 norm1_li5: "Factores de resistencia FR",
                 norm2_t: "Normas Técnicas Complementarias para Diseño y Construcción de Estructuras de Acero",
                 norm2_li1: "Resistencia a flexión (Cap. 7)",
@@ -991,87 +1205,138 @@
                 norm5_li2: "Combinaciones de carga",
                 norm5_li3: "Factores de carga y resistencia",
                 norm5_li4: "Criterios de estados límite",
+                norm6_t: "Normas Técnicas Complementarias para Diseño y Construcción de Estructuras de Mampostería",
+                norm6_li1: "Resistencia de muros a fuerza cortante",
+                norm6_li2: "Muros de mampostería confinada",
+                norm6_li3: "Rigidez lateral y reparto de cortante",
+                norm6_li4: "Muros de concreto en el mismo entrepiso",
+                norm7_t: "Normas Técnicas Complementarias para Diseño por Sismo",
+                norm7_li1: "Método estático de fuerzas por nivel",
+                norm7_li2: "Cortante basal y factor de comportamiento Q",
+                norm7_li3: "Cortante de entrepiso",
+                norm7_li4: "Límites de distorsión lateral",
                 demo_label: "Interfaz",
                 demo_title: "Diseñado para ingenieros",
-                demo_desc: "Interfaz clara y directa. Ingresa los datos de tu viga, diseña y genera la memoria de cálculo en segundos.",
-                alt1: "Strux - Datos de entrada para viga de concreto reforzado",
-                alt2: "Strux - Diseño y resultados de viga de concreto",
-                alt3: "Strux - Datos de entrada para viga de acero estructural",
-                alt4: "Strux - Verificaciones de diseño en acero estructural",
-                cap1: "Datos de entrada — Define geometría, cargas, apoyos y propiedades del material, con unidades en SI, MKS o Imperial. Visualización del modelo en tiempo real.",
-                cap2: "Concreto reforzado — Relaciones D/C, detallado de armado y diagramas conforme a NTC-Concreto 2023 y ACI 318-25.",
-                cap3: "Acero estructural — Selección de perfil, cargas de construcción y servicio conforme a NTC-Acero 2023 y AISC 360-22.",
-                cap4: "Verificaciones de diseño — Propiedades del perfil, clasificación de sección y D/C por etapa de construcción y servicio.",
+                demo_desc: "El mismo flujo de trabajo en los seis módulos: capturas los datos, diseñas y generas la memoria de cálculo en segundos. Elige un módulo para ver su interfaz real.",
+                stab_beams: "Vigas",
+                stab_columns: "Columnas",
+                stab_footings: "Zapatas",
+                stab_plates: "Placas base",
+                stab_walls: "Muros",
+                stab_trusses: "Armaduras",
+                sc_menu: "Cambio de módulo — Un solo programa y un solo archivo de proyecto. El selector de módulos se abre desde cualquier pantalla y conserva las hojas de trabajo abiertas.",
+                sc_vc1: "Viga de concreto · Datos de entrada — Geometría por tramo, apoyos, cargas puntuales y distribuidas, y peso propio, con el modelo dibujado en tiempo real.",
+                sc_vc2: "Viga de concreto · Diseño — Armado longitudinal y estribos propuestos, D/C de flexión y cortante, y la curva de acero requerido contra el disponible.",
+                sc_vc3: "Viga de concreto · Memoria de cálculo — Resumen ejecutivo con las relaciones D/C, datos de entrada, diagramas M(x) y V(x), y la tabla de acero requerido por sección.",
+                sc_va1: "Viga de acero · Datos de entrada — Selección de perfil del catálogo IMCA con sus propiedades de sección, cargas de construcción y opción de sección compuesta.",
+                sc_va2: "Viga de acero · Verificaciones — Clasificación de la sección y revisión por flexión y cortante en las dos etapas: construcción (acero solo) y servicio.",
+                sc_va3: "Viga de acero · Memoria de cálculo — Resumen de flexión, cortante, deflexión, pandeo lateral y clase de sección, con los diagramas del modelo analizado.",
+                sc_cc1: "Columna de concreto · Sección y armado — Secciones rectangular, circular, L y T; armado longitudinal, cuantía, capacidad axial y veredicto global.",
+                sc_cc2: "Columna de concreto · Diagramas de interacción — Curvas Pr–Mrx y Pr–Mry, contorno biaxial y superficie 3D, con la demanda amplificada por esbeltez marcada sobre ellas.",
+                sc_cc3: "Columna de concreto · Isolíneas de esfuerzo — Estado de deformaciones en equilibrio, esfuerzo del concreto en la sección y esfuerzo varilla por varilla.",
+                sc_ca1: "Columna de acero · Sección — Perfil del catálogo o diseñado a la medida, grado del acero, longitudes de pandeo y arriostre, y clasificación de patín y alma.",
+                sc_ca2: "Columna de acero · Interacción — Curvas de eje fuerte y eje débil, contorno biaxial y la ecuación de interacción con los momentos amplificados por P-Δ.",
+                sc_ca3: "Columna de acero · Capacidad — Curva de columna φcPn contra KL/r y curva de pandeo lateral-torsional φbMnx contra Lb, con el punto de diseño señalado.",
+                sc_z1: "Zapatas · Vistas — Planta con la parrilla de armado, vista 3D y elevación con la distribución de presiones, por cada combinación de carga.",
+                sc_z2: "Zapatas · Presiones del terreno — Mapa de isolíneas de presión, q máx y q mín, área comprimida y detección de levantamiento en cada combinación.",
+                sc_z3: "Zapatas · Diseño — Cortante por penetración y cortante en cada dirección, y diseño por flexión con el armado propuesto, con la fórmula y el artículo a la vista.",
+                sc_pb1: "Placas base · Vistas — Planta con las presiones sobre el dado y las anclas en tensión marcadas en rojo, y elevación con el perfil, la placa y el empotramiento de las anclas.",
+                sc_pb2: "Placas base · Presiones — Superficie 3D de presiones sobre el dado, zona en contacto y tensión ancla por ancla para cada combinación.",
+                sc_pb3: "Placas base · Diseño — Aplastamiento del dado, flexión de la placa por los volados críticos, tensión en las anclas y cortante por fricción más anclas.",
+                sc_mw1: "Muros · Revisión por dirección — Un renglón por muro con material, apoyo, geometría, rigidez, cortante resistente, cortante de diseño y su D/C.",
+                sc_mw2: "Muros · Resumen del entrepiso — Rigidez total, centro de rigidez, excentricidades de diseño, distorsión contra el límite de la norma y el muro gobernante en cada dirección.",
+                sc_mw3: "Muros · Vista 3D de la planta — Muros sólidos con color por material (tabique y concreto) sobre la losa, con órbita, encuadre y zoom libres.",
+                sc_mw4: "Muros · Armado y refuerzo — Armado mínimo normativo o personalizado para muros de concreto, con diseño de los núcleos extremos por descomposición de fuerzas.",
+                sc_mw5: "Muros · Importación desde DXF — Toma la planta directamente del archivo de CAD: elige capa, unidad, espesor y material, y los muros entran nombrados y en orden.",
+                sc_ar1: "Armaduras · Modelo — Tipología, celosía, claro y peralte definen la geometría; cuerdas, montantes y diagonales quedan agrupados con su perfil.",
+                sc_ar2: "Armaduras · Fuerzas axiales — Compresión y tensión rotuladas barra por barra sobre el modelo, con la lista de las barras más solicitadas.",
+                sc_ar3: "Armaduras · Cuantificación — Peso y longitud por grupo y total, peso por metro de claro y despiece por perfil, listo para presupuestar.",
                 vid_label: "Tutoriales",
                 vid_title: "Ve Strux en acción",
-                vid_desc: "Videos demostrativos de cada módulo de diseño. Observa el flujo completo de trabajo dentro del software.",
+                vid_desc: "Videos demostrativos del módulo de vigas. Observa el flujo completo de trabajo dentro del software; iremos publicando los videos de los demás módulos.",
                 tab_concrete: "Concreto",
                 tab_steel: "Acero",
                 tab_generic: "Viga genérica",
                 vid_footer: '¿Quieres ver todos los tutoriales en detalle? <a href="tutoriales.html">Visita la página de tutoriales →</a>',
                 about_label: "Acerca de",
                 about_p1: 'Strux es desarrollado por <strong>Galper Softwares</strong>, una empresa de desarrollo de software para ingeniería con sede en Aguascalientes, México. El software nace de la necesidad de contar con herramientas de diseño estructural que sigan fielmente las normas vigentes.',
-                about_p2: 'El motor de diseño de Strux implementa directamente las fórmulas, factores y criterios de las Normas Técnicas Complementarias de la Ciudad de México (edición 2023) y, desde la versión 2.01.00, de los reglamentos estadounidenses ACI 318-25 y AISC 360-22.',
+                about_p2: 'El motor de diseño de Strux implementa directamente las fórmulas, factores y criterios de las Normas Técnicas Complementarias de la Ciudad de México (edición 2023) — Concreto, Acero, Mampostería, Sismo y Cimentaciones — y, desde la versión 2.01.00, de los reglamentos estadounidenses ACI 318-25 y AISC 360-22.',
                 about_p3: '¿Preguntas o soporte? Escríbenos a <a href="mailto:strux.contacto@gmail.com">strux.contacto@gmail.com</a>',
                 footer_copy: "&copy; 2026 Galper Softwares. Todos los derechos reservados.",
                 footer_links: '<a href="terms.html">Términos del servicio</a> · <a href="privacy.html">Aviso de privacidad</a> · <a href="refund.html">Política de reembolsos</a>'
             },
             en: {
-                __title: "Strux 2.01.00 — Structural Design Software | Galper Softwares",
-                __desc: "Professional Galper Softwares tool for designing reinforced-concrete and structural-steel beams under Mexico City NTC 2023, ACI 318-25 and AISC 360-22. SI, MKS and Imperial units. Spanish and English.",
+                __title: "Strux 3.00.00 — Structural Design Software | Galper Softwares",
+                __desc: "Professional Galper Softwares tool for designing beams, columns, footings, base plates, seismic walls and trusses under Mexico City NTC 2023, ACI 318-25 and AISC 360-22. SI, MKS and Imperial units. Spanish and English.",
                 nav_pricing: "Pricing",
+                nav_modules: "Modules",
                 nav_features: "Features",
                 nav_codes: "Codes",
                 nav_tutorials: "Tutorials",
                 nav_about: "About",
-                hero_badge: "Version 2.01.00 — Available now",
+                hero_badge: "Version 3.00.00 — Available now",
                 hero_title: 'Structural design <br><span class="highlight">built to code</span>',
-                hero_sub: "Desktop software for designing reinforced-concrete and structural-steel beams under the Mexico City NTC 2023, ACI 318-25 and AISC 360-22 codes.",
+                hero_sub: "Desktop software for the analysis and design of beams, columns, footings, base plates, seismic walls and trusses under the Mexico City NTC 2023, ACI 318-25 and AISC 360-22 codes.",
                 hero_btn_primary: "See plans and pricing",
-                hero_btn_secondary: "See features",
-                hero_price: 'From <strong>$799 MXN</strong> — perpetual license, one-time payment',
+                hero_btn_secondary: "See the 6 modules",
+                hero_price: 'From <strong>$1,500 MXN</strong> — perpetual license, one-time payment',
                 price_label: "Pricing",
                 price_title: "Perpetual license, one-time payment",
-                price_desc: "No subscriptions. No hidden fees. Pay once and use Strux forever. All 2.xx.xx updates are free for buyers of version 2.01.00.",
+                price_desc: "No subscriptions. No hidden fees. Pay once and use Strux forever. All 3.xx.xx updates are free for buyers of version 3.00.00.",
                 price_popular: "Most popular",
                 plan_individual: "Individual",
                 plan_duo: "Duo",
                 plan_small: "Small studio",
                 plan_medium: "Medium studio",
-                cur_799: "MXN · ~$44 USD · one-time",
-                cur_1499: "MXN · ~$83 USD · one-time",
-                cur_2099: "MXN · ~$117 USD · one-time",
-                cur_3599: "MXN · ~$200 USD · one-time",
+                cur_1500: "MXN · ~$83 USD · one-time",
+                cur_2500: "MXN · ~$139 USD · one-time",
+                cur_3500: "MXN · ~$194 USD · one-time",
+                cur_5200: "MXN · ~$289 USD · one-time",
                 pf_lic1: "1 perpetual license (1 computer)",
                 pf_lic2: "2 perpetual licenses (2 computers)",
                 pf_lic3: "3 perpetual licenses (3 computers)",
                 pf_lic5: "5 perpetual licenses (5 computers)",
-                pf_concrete: "Reinforced concrete — NTC-Concreto 2023 & ACI 318-25",
-                pf_steel: "Structural steel — NTC-Acero 2023 & AISC 360-22",
+                pf_modules: "All 6 modules: beams, columns, footings, base plates, walls and trusses",
+                pf_codes: "NTC Mexico City 2023 · ACI 318-25 · AISC 360-22",
                 pf_units_lang: "SI/MKS/Imperial units · ES/EN languages",
                 pf_reports: "Detailed calculation reports",
-                pf_updates: "Free 2.xx.xx updates",
+                pf_updates: "Free 3.xx.xx updates",
                 pf_offline: "No internet connection required",
                 price_btn_1: "Buy — 1 license",
                 price_btn_2: "Buy — 2 licenses",
                 price_btn_3: "Buy — 3 licenses",
                 price_btn_5: "Buy — 5 licenses",
                 price_note: 'Not sure which plan to choose? Email us at <a href="mailto:strux.contacto@gmail.com" style="color:var(--accent);">strux.contacto@gmail.com</a>',
+                mod_label: "Modules",
+                mod_title: "Six modules, one program",
+                mod_desc: "Version 3.00.00 covers a project end to end — from the superstructure down to the foundation — within a single project file and a single calculation report.",
+                mod1_t: "Beams",
+                mod1_p: "Analysis and design of reinforced-concrete, structural-steel and generic beams. Flexure, shear and deflections with the M(x) and V(x) diagrams of the actual model.",
+                mod2_t: "Columns",
+                mod2_p: "Design of concrete and steel columns under biaxial combined bending and compression. Interaction diagrams, flexural buckling and lateral-torsional buckling by section type.",
+                mod3_t: "Footings",
+                mod3_p: "Analysis and design of reinforced-concrete footings: isolated, strip and combined. Bearing pressures, punching shear and reinforcement.",
+                mod4_t: "Base plates",
+                mod4_p: "Analysis and design of base plates on concrete pedestals. Strain-plane equilibrium, anchor rods in tension and bearing pressures.",
+                mod5_t: "Seismic wall checks",
+                mod5_p: "Checks of masonry and concrete walls under seismic loads. Static method by story, story-shear distribution, drifts and a 3D view of the plan.",
+                mod6_t: "Trusses",
+                mod6_p: "Analysis and design of trusses. Axial forces per member, chord and diagonal checks, and top-chord bracing.",
                 feat_label: "Features",
-                feat_title: "Everything you need to design beams",
-                feat_desc: "Strux automates the design process and generates calculation reports traceable to each code provision.",
-                feat1_t: "Flexural Design",
-                feat1_p: "Rectangular and T sections. Required steel, minimum and maximum reinforcement ratios and ductility checks, using the reduction factors of the selected code (NTC or ACI 318).",
-                feat2_t: "Shear Design",
-                feat2_p: "Concrete and transverse-steel strength. Stirrup spacing checked against the limits of NTC-Concreto 2023 and ACI 318-25.",
+                feat_title: "Everything you need to design",
+                feat_desc: "Strux automates the design process across the six modules and generates calculation reports traceable to each code provision.",
+                feat1_t: "Flexure and Combined Bending",
+                feat1_p: "Rectangular and T sections, required steel, minimum and maximum reinforcement ratios and interaction diagrams for columns, using the reduction factors of the selected code (NTC or ACI 318).",
+                feat2_t: "Shear and Punching",
+                feat2_p: "Concrete and transverse-steel strength, stirrup spacing and punching shear in footings, checked against the limits of NTC-Concreto 2023 and ACI 318-25.",
                 feat3_t: "Deflection Checks",
                 feat3_p: "Immediate and long-term deflections using the Bischoff method. Automatic comparison against the permissible limits defined by each code.",
                 feat4_t: "Structural Steel",
-                feat4_p: "Steel beam design for moment and shear under NTC-Acero 2023 and AISC 360-22. Compact, noncompact and slender sections.",
+                feat4_p: "Beams, columns, base plates and trusses under NTC-Acero 2023 and AISC 360-22. Classification of compact, noncompact and slender sections.",
                 feat5_t: "Real-Time D/C Ratios",
-                feat5_p: "Demand/capacity indicators visible at all times. Flexure and shear updated instantly.",
+                feat5_p: "Demand/capacity indicators visible at all times, across the six modules. Every change of geometry, load or material is reflected instantly.",
                 feat6_t: "Calculation Reports",
-                feat6_p: "Detailed HTML reports with symbolic formulas, numeric substitution and references to the code provision. Ready to submit.",
+                feat6_p: "Detailed reports with one sheet per element, symbolic formulas, numeric substitution, vector figures and references to the code provision. Ready to submit as PDF.",
                 feat7_t: "Unit Switching",
                 feat7_p: "Switch between International (SI), MKS and Imperial systems anytime. Inputs, results and reports convert instantly.",
                 feat8_t: "Spanish & English",
@@ -1084,6 +1349,7 @@
                 norm1_li2: "Shear design",
                 norm1_li3: "Immediate and long-term deflections",
                 norm1_li4: "Minimum and maximum reinforcement ratios",
+                norm1_li6: "Combined bending and shallow foundations",
                 norm1_li5: "FR resistance factors",
                 norm2_t: "Mexico City Complementary Technical Standards for Steel Structures",
                 norm2_li1: "Flexural strength (Ch. 7)",
@@ -1108,27 +1374,62 @@
                 norm5_li2: "Load combinations",
                 norm5_li3: "Load and resistance factors",
                 norm5_li4: "Limit-state criteria",
+                norm6_t: "Mexico City Complementary Technical Standards for Masonry Structures",
+                norm6_li1: "Wall shear strength",
+                norm6_li2: "Confined masonry walls",
+                norm6_li3: "Lateral stiffness and shear distribution",
+                norm6_li4: "Concrete walls in the same story",
+                norm7_t: "Mexico City Complementary Technical Standards for Seismic Design",
+                norm7_li1: "Static method, story forces",
+                norm7_li2: "Base shear and behavior factor Q",
+                norm7_li3: "Story shear",
+                norm7_li4: "Lateral drift limits",
                 demo_label: "Interface",
                 demo_title: "Built for engineers",
-                demo_desc: "Clear, direct interface. Enter your beam data, run the design and generate the calculation report in seconds.",
-                alt1: "Strux - Input data for a reinforced-concrete beam",
-                alt2: "Strux - Concrete beam design and results",
-                alt3: "Strux - Input data for a structural-steel beam",
-                alt4: "Strux - Structural-steel design checks",
-                cap1: "Inputs — Define geometry, loads, supports and material properties, with units in SI, MKS or Imperial. Real-time model preview.",
-                cap2: "Reinforced concrete — D/C ratios, rebar detailing and diagrams under NTC-Concreto 2023 and ACI 318-25.",
-                cap3: "Structural steel — Section selection, construction and service loads under NTC-Acero 2023 and AISC 360-22.",
-                cap4: "Design checks — Section properties, classification and D/C by construction and service stage.",
+                demo_desc: "The same workflow across all six modules: enter the data, run the design and generate the calculation report in seconds. Pick a module to see its actual interface.",
+                stab_beams: "Beams",
+                stab_columns: "Columns",
+                stab_footings: "Footings",
+                stab_plates: "Base plates",
+                stab_walls: "Walls",
+                stab_trusses: "Trusses",
+                sc_menu: "Switching modules — One program and one project file. The module selector opens from any screen and keeps your open worksheets.",
+                sc_vc1: "Concrete beam · Inputs — Span geometry, supports, point and distributed loads, and self weight, with the model drawn in real time.",
+                sc_vc2: "Concrete beam · Design — Proposed longitudinal reinforcement and stirrups, flexure and shear D/C, and required versus available steel along the span.",
+                sc_vc3: "Concrete beam · Calculation report — Executive summary with the D/C ratios, input data, M(x) and V(x) diagrams, and the required-steel table by section.",
+                sc_va1: "Steel beam · Inputs — Section picked from the IMCA catalog with its section properties, construction loads and a composite-section option.",
+                sc_va2: "Steel beam · Checks — Section classification and flexure and shear checks for both stages: construction (bare steel) and service.",
+                sc_va3: "Steel beam · Calculation report — Summary of flexure, shear, deflection, lateral-torsional buckling and section class, with the diagrams of the analyzed model.",
+                sc_cc1: "Concrete column · Section and reinforcement — Rectangular, circular, L and T sections; longitudinal reinforcement, ratio, axial capacity and overall verdict.",
+                sc_cc2: "Concrete column · Interaction diagrams — Pr–Mrx and Pr–Mry curves, biaxial contour and 3D surface, with the slenderness-amplified demand plotted on them.",
+                sc_cc3: "Concrete column · Stress contours — Strain state in equilibrium, concrete stress across the section and stress bar by bar.",
+                sc_ca1: "Steel column · Section — Catalog or custom-designed section, steel grade, buckling and bracing lengths, and flange and web classification.",
+                sc_ca2: "Steel column · Interaction — Strong-axis and weak-axis curves, biaxial contour and the interaction equation with P-Δ amplified moments.",
+                sc_ca3: "Steel column · Capacity — Column curve φcPn versus KL/r and lateral-torsional buckling curve φbMnx versus Lb, with the design point marked.",
+                sc_z1: "Footings · Views — Plan with the reinforcement grid, 3D view and elevation with the pressure distribution, for each load combination.",
+                sc_z2: "Footings · Bearing pressures — Pressure contour map, q max and q min, compressed area and uplift detection for every combination.",
+                sc_z3: "Footings · Design — Punching shear and one-way shear in each direction, and flexural design with the proposed reinforcement, formula and code clause in view.",
+                sc_pb1: "Base plates · Views — Plan with the pressures on the pedestal and anchor rods in tension marked in red, and elevation with the section, plate and anchor embedment.",
+                sc_pb2: "Base plates · Pressures — 3D surface of the pressures on the pedestal, contact area and tension anchor by anchor for each combination.",
+                sc_pb3: "Base plates · Design — Pedestal bearing, plate bending from the critical cantilevers, anchor tension and shear by friction plus anchors.",
+                sc_mw1: "Walls · Checks by direction — One row per wall with material, support, geometry, stiffness, resisting shear, design shear and its D/C.",
+                sc_mw2: "Walls · Story summary — Total stiffness, center of rigidity, design eccentricities, drift against the code limit and the governing wall in each direction.",
+                sc_mw3: "Walls · 3D plan view — Solid walls colored by material (clay masonry and concrete) over the slab, with free orbit, pan and zoom.",
+                sc_mw4: "Walls · Reinforcement — Code-minimum or custom reinforcement for concrete walls, with boundary elements designed by force decomposition.",
+                sc_mw5: "Walls · DXF import — Takes the plan straight from the CAD file: pick layer, unit, thickness and material, and the walls come in named and in order.",
+                sc_ar1: "Trusses · Model — Typology, web pattern, span and depth define the geometry; chords, verticals and diagonals are grouped with their section.",
+                sc_ar2: "Trusses · Axial forces — Compression and tension labeled member by member on the model, with a list of the most stressed members.",
+                sc_ar3: "Trusses · Take-off — Weight and length by group and total, weight per meter of span and a breakdown by section, ready for costing.",
                 vid_label: "Tutorials",
                 vid_title: "See Strux in action",
-                vid_desc: "Demo videos of each design module. Watch the full workflow inside the software.",
+                vid_desc: "Demo videos of the beam module. Watch the full workflow inside the software; videos for the remaining modules are on the way.",
                 tab_concrete: "Concrete",
                 tab_steel: "Steel",
                 tab_generic: "Generic beam",
                 vid_footer: 'Want to see all tutorials in detail? <a href="tutoriales.html">Visit the tutorials page →</a>',
                 about_label: "About",
                 about_p1: 'Strux is developed by <strong>Galper Softwares</strong>, an engineering software company based in Aguascalientes, Mexico. The software was born from the need for structural design tools that faithfully follow the governing codes.',
-                about_p2: 'The Strux design engine directly implements the formulas, factors and criteria of the Mexico City Complementary Technical Standards (2023 edition) and, since version 2.01.00, the U.S. ACI 318-25 and AISC 360-22 codes.',
+                about_p2: 'The Strux design engine directly implements the formulas, factors and criteria of the Mexico City Complementary Technical Standards (2023 edition) — Concrete, Steel, Masonry, Seismic Design and Foundations — and, since version 2.01.00, the U.S. ACI 318-25 and AISC 360-22 codes.',
                 about_p3: 'Questions or support? Email us at <a href="mailto:strux.contacto@gmail.com">strux.contacto@gmail.com</a>',
                 footer_copy: "&copy; 2026 Galper Softwares. All rights reserved.",
                 footer_links: '<a href="terms.html">Terms of Service</a> · <a href="privacy.html">Privacy Policy</a> · <a href="refund.html">Refund Policy</a>'
@@ -1169,9 +1470,23 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+        // Screenshot tabs switcher (una pestaña por módulo)
+        (function() {
+            const tabs = document.querySelectorAll('.video-tab[data-shots]');
+            const panels = document.querySelectorAll('.shot-panel[data-shots]');
+            if (!tabs.length) return;
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const key = this.getAttribute('data-shots');
+                    tabs.forEach(t => t.classList.toggle('active', t === this));
+                    panels.forEach(p => { p.hidden = p.getAttribute('data-shots') !== key; });
+                });
+            });
+        })();
+
         // Video tabs switcher
         (function() {
-            const tabs = document.querySelectorAll('.video-tab');
+            const tabs = document.querySelectorAll('.video-tab[data-video]');
             const iframe = document.getElementById('videos-iframe');
             if (!iframe) return;
             tabs.forEach(tab => {
