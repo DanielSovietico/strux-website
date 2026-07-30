@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutoriales — Strux 3.00.00 | Galper Softwares</title>
-    <meta name="description" content="Tutoriales en video de Strux 3.00.00: diseño de vigas de concreto reforzado, acero estructural y vigas genéricas según las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22.">
+    <meta name="description" content="Tutoriales en video de Strux 3.00.00: revisión de muros ante sismo y diseño de vigas de concreto reforzado, acero estructural y vigas genéricas según las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22.">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Tutoriales Strux 3.00.00 — Diseño estructural">
@@ -19,6 +19,16 @@
     <!-- Schema.org VideoObject — mejora indexación en Google (rich snippets) -->
     <script type="application/ld+json">
     [
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "Strux 3.00.00 — Módulo de Diseño de Muros",
+        "description": "Revisión de muros de mampostería y concreto ante cargas sísmicas según la NTC-Mampostería 2023 y la NTC-Sismo 2023 en Strux.",
+        "thumbnailUrl": "https://i.ytimg.com/vi/9kz84oDoLzU/maxresdefault.jpg",
+        "contentUrl": "https://www.youtube.com/watch?v=9kz84oDoLzU",
+        "embedUrl": "https://www.youtube-nocookie.com/embed/9kz84oDoLzU",
+        "publisher": { "@type": "Organization", "name": "Galper Softwares" }
+      },
       {
         "@context": "https://schema.org",
         "@type": "VideoObject",
@@ -367,7 +377,38 @@
     <section class="videos-section">
         <div class="container">
 
-            <!-- Video 1: Concreto -->
+            <!-- Video 1: Muros ante sismo -->
+            <article class="video-card fade-in" id="muros">
+                <div class="video-header">
+                    <span class="video-tag" data-i18n="v4_tag">NTC-Mampostería 2023 · NTC-Sismo 2023</span>
+                    <h2 data-i18n="v4_title">Revisión de muros ante cargas sísmicas</h2>
+                </div>
+                <p class="video-description" data-i18n="v4_desc">
+                    Recorrido por el módulo de muros: captura de la planta o importación
+                    desde DXF, reparto del cortante de entrepiso entre muros de mampostería
+                    y concreto, revisión de distorsiones contra el límite de la norma y
+                    vista 3D del entrepiso.
+                </p>
+                <div class="video-wrapper">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/9kz84oDoLzU?rel=0&modestbranding=1"
+                        title="Strux — Revisión de muros ante sismo"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <div class="video-footer">
+                    <span style="color: var(--text-muted); font-size: 0.85rem; font-family: var(--mono);" data-i18n="v4_foot">
+                        Mampostería y concreto
+                    </span>
+                    <a href="https://www.youtube.com/watch?v=9kz84oDoLzU" target="_blank" rel="noopener" class="video-footer-link" data-i18n="yt_link">
+                        Ver en YouTube →
+                    </a>
+                </div>
+            </article>
+
+            <!-- Video 2: Concreto -->
             <article class="video-card fade-in" id="concreto">
                 <div class="video-header">
                     <span class="video-tag">NTC-Concreto 2023 · ACI 318-25</span>
@@ -397,7 +438,7 @@
                 </div>
             </article>
 
-            <!-- Video 2: Acero -->
+            <!-- Video 3: Acero -->
             <article class="video-card fade-in" id="acero">
                 <div class="video-header">
                     <span class="video-tag">NTC-Acero 2023 · AISC 360-22</span>
@@ -427,7 +468,7 @@
                 </div>
             </article>
 
-            <!-- Video 3: Viga genérica -->
+            <!-- Video 4: Viga genérica -->
             <article class="video-card fade-in" id="generica">
                 <div class="video-header">
                     <span class="video-tag" data-i18n="v3_tag">Viga genérica</span>
@@ -485,7 +526,7 @@
         var I18N = {
             es: {
                 __title: "Tutoriales — Strux 3.00.00 | Galper Softwares",
-                __desc: "Tutoriales en video de Strux 3.00.00: diseño de vigas de concreto reforzado, acero estructural y vigas genéricas según las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22.",
+                __desc: "Tutoriales en video de Strux 3.00.00: revisión de muros ante sismo y diseño de vigas de concreto reforzado, acero estructural y vigas genéricas según las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22.",
                 nav_pricing: "Precio",
                 nav_modules: "Módulos",
                 nav_codes: "Normatividad",
@@ -501,6 +542,10 @@
                 v3_title: "Revisión por resistencia de vigas genéricas",
                 v3_desc: "Demostración del módulo de vigas genéricas para casos donde se conoce el módulo de sección disponible y se requiere revisar su capacidad ante las solicitaciones de diseño.",
                 v3_foot: "Módulo independiente",
+                v4_tag: "NTC-Mampostería 2023 · NTC-Sismo 2023",
+                v4_title: "Revisión de muros ante cargas sísmicas",
+                v4_desc: "Recorrido por el módulo de muros: captura de la planta o importación desde DXF, reparto del cortante de entrepiso entre muros de mampostería y concreto, revisión de distorsiones contra el límite de la norma y vista 3D del entrepiso.",
+                v4_foot: "Mampostería y concreto",
                 yt_link: "Ver en YouTube →",
                 cta_title: "¿Listo para probar Strux 3.00.00?",
                 cta_p: "Licencia perpetua, pago único. Todas las actualizaciones 3.xx.xx son gratuitas.",
@@ -510,7 +555,7 @@
             },
             en: {
                 __title: "Tutorials — Strux 3.00.00 | Galper Softwares",
-                __desc: "Strux 3.00.00 video tutorials: reinforced-concrete, structural-steel and generic beam design under Mexico City NTC 2023, ACI 318-25 and AISC 360-22.",
+                __desc: "Strux 3.00.00 video tutorials: seismic wall checks plus reinforced-concrete, structural-steel and generic beam design under Mexico City NTC 2023, ACI 318-25 and AISC 360-22.",
                 nav_pricing: "Pricing",
                 nav_modules: "Modules",
                 nav_codes: "Codes",
@@ -526,6 +571,10 @@
                 v3_title: "Strength check of generic beams",
                 v3_desc: "Demonstration of the generic-beam module for cases where the available section modulus is known and its capacity must be checked against the design demands.",
                 v3_foot: "Standalone module",
+                v4_tag: "NTC-Mampostería 2023 · NTC-Sismo 2023",
+                v4_title: "Seismic checks of masonry and concrete walls",
+                v4_desc: "A walkthrough of the wall module: capturing the floor plan or importing it from DXF, distributing the story shear between masonry and concrete walls, checking drifts against the code limit, and the 3D view of the story.",
+                v4_foot: "Masonry and concrete",
                 yt_link: "Watch on YouTube →",
                 cta_title: "Ready to try Strux 3.00.00?",
                 cta_p: "Perpetual license, one-time payment. All 3.xx.xx updates are free.",
