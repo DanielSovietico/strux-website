@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" width="900" height="320" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="900" height="320" rx="10" fill="#eef2f7"/>
+
+  <text x="30" y="34" font-size="15" font-weight="700" fill="#0a1226">Tres vías para llegar a los mismos datos</text>
+
+  <!-- Fuentes -->
+  <g>
+    <rect x="30" y="60" width="205" height="56" rx="9" fill="#ffffff" stroke="#9dc3e6"/>
+    <text x="46" y="83" font-size="13" font-weight="700" fill="#1565c0">ETABS abierto</text>
+    <text x="46" y="102" font-size="11.5" fill="#33415a">OAPI · Windows</text>
+
+    <rect x="30" y="132" width="205" height="56" rx="9" fill="#ffffff" stroke="#a5d6a7"/>
+    <text x="46" y="155" font-size="13" font-weight="700" fill="#1b5e20">Archivo .e2k / .$et</text>
+    <text x="46" y="174" font-size="11.5" fill="#33415a">geometría, sin resultados</text>
+
+    <rect x="30" y="204" width="205" height="56" rx="9" fill="#ffffff" stroke="#e2b566"/>
+    <text x="46" y="227" font-size="13" font-weight="700" fill="#8a5a00">Tablas exportadas</text>
+    <text x="46" y="246" font-size="11.5" fill="#33415a">CSV · TSV · XLSX</text>
+  </g>
+
+  <!-- Flechas a la capa core -->
+  <g stroke="#7c8aa0" stroke-width="1.6" fill="none">
+    <path d="M235 88 H300" marker-end="url(#punta)"/>
+    <path d="M235 160 H300" marker-end="url(#punta)"/>
+    <path d="M235 232 H300" marker-end="url(#punta)"/>
+  </g>
+  <defs>
+    <marker id="punta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7c8aa0"/>
+    </marker>
+  </defs>
+
+  <!-- Núcleo -->
+  <rect x="300" y="60" width="230" height="200" rx="10" fill="#0a1226"/>
+  <text x="415" y="88" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">core</text>
+  <text x="415" y="112" font-size="11.5" fill="#cfe0f5" text-anchor="middle">StructuralModel</text>
+  <text x="415" y="132" font-size="11.5" fill="#cfe0f5" text-anchor="middle">ResultSet</text>
+  <line x1="325" y1="148" x2="505" y2="148" stroke="#33415a"/>
+  <text x="415" y="170" font-size="11" fill="#9fc4ea" text-anchor="middle">M3 · V2 · V3 · P · T · M2</text>
+  <text x="415" y="190" font-size="11" fill="#9fc4ea" text-anchor="middle">U1 · U2 · U3 · R1 · R2 · R3</text>
+  <text x="415" y="210" font-size="11" fill="#9fc4ea" text-anchor="middle">derivas · reacciones</text>
+  <text x="415" y="234" font-size="11" fill="#5ed0ff" text-anchor="middle">deflexión = ∫∫ M3/EI</text>
+  <text x="415" y="252" font-size="10" fill="#7c8aa0" text-anchor="middle">(único cálculo propio)</text>
+
+  <g stroke="#7c8aa0" stroke-width="1.6" fill="none">
+    <path d="M530 110 H600" marker-end="url(#punta)"/>
+    <path d="M530 160 H600" marker-end="url(#punta)"/>
+    <path d="M530 210 H600" marker-end="url(#punta)"/>
+  </g>
+
+  <!-- Salidas -->
+  <g>
+    <rect x="600" y="86" width="270" height="48" rx="9" fill="#ffffff" stroke="#9dc3e6"/>
+    <text x="616" y="106" font-size="12.5" font-weight="700" fill="#1565c0">Ventana</text>
+    <text x="616" y="123" font-size="11" fill="#33415a">tablas filtrables · diagramas M, V, δ</text>
+
+    <rect x="600" y="140" width="270" height="48" rx="9" fill="#ffffff" stroke="#9dc3e6"/>
+    <text x="616" y="160" font-size="12.5" font-weight="700" fill="#1565c0">Exportación</text>
+    <text x="616" y="177" font-size="11" fill="#33415a">Excel · CSV · JSON · PNG</text>
+
+    <rect x="600" y="194" width="270" height="48" rx="9" fill="#ffffff" stroke="#9dc3e6"/>
+    <text x="616" y="214" font-size="12.5" font-weight="700" fill="#1565c0">Visor de vigas (legacy)</text>
+    <text x="616" y="231" font-size="11" fill="#33415a">etabs_model · etabs_frame_forces</text>
+  </g>
+
+  <text x="30" y="292" font-size="11" fill="#7c8aa0">Lo que una fuente no contiene se reporta como faltante; no se rellena con supuestos.</text>
+</svg>

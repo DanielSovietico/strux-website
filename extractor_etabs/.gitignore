@@ -1,0 +1,32 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+*.spec
+.venv/
+venv/
+env/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Salidas de la aplicación
+*.xlsx
+*.xls
+!ejemplos/*.xlsx
+salidas/
+extraccion_etabs.*
+puente_strux.json
+diagramas*.png
+
+# Modelos de ETABS (pueden ser grandes y no son código)
+*.EDB
+*.ebd
+*.$et
+*.LOG
+*.OUT
+*.Y
+*.K
