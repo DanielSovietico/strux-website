@@ -637,16 +637,18 @@
     </footer>
 
     <script>
-        // Huella SHA-256 del instalador publicado.
+        // Huella SHA-256 del instalador que sirve el release, comprobada contra
+        // el archivo descargado.
         //
-        // Se deja VACÍA a propósito: una huella inventada o vieja es peor que no
-        // tener ninguna, porque quien la comprueba concluye que le dieron un
-        // archivo alterado. En cuanto publiques el instalador, pega aquí la
-        // salida de:
+        // Al publicar una versión nueva hay que recalcularla ANTES de subir la
+        // página, con:
         //
         //     certutil -hashfile Strux_3.00.00_DEMO_Setup.exe SHA256
         //
-        // y el bloque de verificación aparece solo en la tarjeta de descarga.
+        // Si no la tienes a mano, déjala vacía: el bloque de verificación
+        // desaparece solo. Publicar una huella que no corresponde al archivo es
+        // peor que no publicar ninguna, porque quien se moleste en comprobarla
+        // concluye que le entregaron un binario alterado.
         var SHA256 = "bc68380610f3bb92caf8dc028adff10ecaf5643a30beee6da8259db4149bd566";
 
         if (SHA256) {
