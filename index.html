@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strux 3.00.00 — Software de Diseño Estructural | Galper Softwares</title>
-    <meta name="description" content="Software profesional de Galper Softwares para diseño de vigas, columnas, zapatas, placas base, muros ante sismo y armaduras bajo las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22. Unidades SI, MKS e Imperial. Español e inglés.">
+    <meta name="description" content="Software profesional de Galper Softwares para diseño de vigas, columnas, zapatas, placas base, muros ante sismo y armaduras bajo las NTC de la Ciudad de México 2023, el ACI 318-25 y el AISC 360-22. Unidades SI, MKS e Imperial. Español e inglés. Demo gratuita de 5 días.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -74,6 +74,8 @@
         .nav-links > a.nav-cta { color: var(--text); }
         .nav-links > a.nav-cta:hover { color: var(--text); border-color: var(--accent); }
         .nav-cta .price { font-family: var(--mono); color: var(--amber); }
+        .nav-links > a.nav-demo { color: var(--green); font-weight: 600; }
+        .nav-links > a.nav-demo:hover { color: #34D399; }
 
         /* --- SECCIONES --- */
         .sec { padding: 5.5rem 2rem 0; }
@@ -110,6 +112,13 @@
             width: 7px; height: 7px; background: var(--green);
             border-radius: 50%; animation: pulse 2s infinite;
         }
+        a.hero-badge.demo { color: var(--green); transition: all .25s; }
+        a.hero-badge.demo:hover {
+            color: var(--green); border-color: var(--green);
+            background: rgba(16,185,129,0.08);
+        }
+        .hero-badge .arrow { display: inline-block; transition: transform .25s; }
+        a.hero-badge.demo:hover .arrow { transform: translateX(3px); }
         h1 {
             font-size: clamp(2.6rem, 5.6vw, 4.3rem); font-weight: 700;
             line-height: 1.04; letter-spacing: -2px; margin-bottom: 1.35rem;
@@ -142,6 +151,15 @@
             border: 1px solid var(--border); transition: all .25s;
         }
         .btn-ghost:hover { background: var(--bg-hover); border-color: var(--text-muted); color: var(--text); }
+        .btn-demo {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.9rem 1.6rem; border-radius: 8px;
+            font-size: 1rem; font-weight: 600;
+            background: var(--green); color: #06281D;
+            box-shadow: 0 0 24px rgba(16,185,129,0.22), 0 6px 16px rgba(0,0,0,0.35);
+            transition: all .25s;
+        }
+        .btn-demo:hover { background: #34D399; color: #06281D; transform: translateY(-2px); }
         .btn-ghost .price { font-family: var(--mono); color: var(--amber); }
         .btn-ghost .note { color: var(--text-dim); font-weight: 500; }
 
@@ -247,6 +265,8 @@
         }
         .cmp.strux .chip { color: var(--text); background: var(--surface); }
         .cmp-note { margin-top: 1.1rem; color: var(--text-dim); font-size: 0.88rem; line-height: 1.6; }
+        .cmp-time.amber { color: var(--amber); }
+        .cmp-cta { margin-top: 1.35rem; }
 
         /* --- PÍLDORAS (pestañas) --- */
         .pill {
@@ -412,6 +432,11 @@
         }
         .faq-sign { color: var(--accent); font-size: 1.2rem; line-height: 1; flex-shrink: 0; }
         .faq-a { display: none; padding: 0 1.35rem 1.25rem; color: var(--text-dim); font-size: 0.92rem; line-height: 1.65; }
+        .faq-a code {
+            font-family: var(--mono); font-size: 0.85em;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 5px; padding: 0.05em 0.35em; color: var(--text);
+        }
         .faq.open .faq-a { display: block; }
 
         /* --- CTA FINAL --- */
@@ -478,6 +503,7 @@
                 <a href="#modulos">Módulos</a>
                 <a href="#normas">Normas</a>
                 <a href="tutoriales.html">Tutoriales</a>
+                <a href="descarga.html" class="nav-demo">Descargar demo</a>
                 <a href="#precio" class="nav-cta">Precio <span class="price">$1,500 MXN</span></a>
             </div>
         </div>
@@ -487,12 +513,15 @@
         <div class="hero-glow"></div>
         <div class="hero-inner">
             <div class="hero-copy">
-                <div class="hero-badge"><span class="dot"></span>Versión 3.00.00 disponible</div>
+                <a href="descarga.html" class="hero-badge demo"><span class="dot"></span>Demo gratuita · 5 días · sin tarjeta <span class="arrow">→</span></a>
                 <h1>Diseño estructural en <span class="grad">minutos</span></h1>
                 <p class="hero-sub">Sin nodos, sin barras, sin modelo. Eliges el elemento, capturas los datos y sale la memoria de cálculo con su referencia normativa.</p>
                 <div class="hero-actions">
                     <a href="#video" class="btn-primary">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Ver Strux en acción
+                    </a>
+                    <a href="descarga.html" class="btn-demo">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Descargar la demo
                     </a>
                     <a href="#precio" class="btn-ghost"><span class="price">$1,500 MXN</span><span class="note">pago único</span></a>
                 </div>
@@ -671,11 +700,62 @@
         </div>
     </section>
 
+    <section id="demo" class="sec">
+        <div class="wrap">
+            <div class="kicker">Evaluación</div>
+            <h2 class="sec-title" style="margin-bottom:0.75rem;">Pruébalo cinco días antes de pagar nada</h2>
+            <p class="price-sub">
+                Es el programa, no un recorrido guiado: lo instalas, capturas una viga real,
+                la diseñas contra la norma y sacas su documento. Sin registro, sin correo y sin tarjeta.
+            </p>
+
+            <div class="compare" style="margin-top:0;">
+                <div class="cmp strux">
+                    <div class="cmp-head"><span class="cmp-name">Demo — gratis</span><span class="cmp-time">5 días</span></div>
+                    <div class="chips">
+                        <span class="chip">Los 6 módulos</span>
+                        <span class="chip">2 elementos por módulo</span>
+                        <span class="chip">NTC-Concreto y NTC-Acero 2023</span>
+                        <span class="chip">Perfiles IR 12"</span>
+                        <span class="chip">Reporte en PDF</span>
+                        <span class="chip">Sin registro</span>
+                    </div>
+                    <p class="cmp-note">
+                        Se instala aparte de la versión completa —carpeta, accesos y archivos propios—,
+                        así que si ya eres cliente no te toca nada.
+                    </p>
+                    <a href="descarga.html" class="btn-demo cmp-cta">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Descargar la demo
+                    </a>
+                </div>
+                <div class="cmp">
+                    <div class="cmp-head"><span class="cmp-name">Versión completa</span><span class="cmp-time amber">Licencia perpetua</span></div>
+                    <div class="chips">
+                        <span class="chip">Sin topes de elementos</span>
+                        <span class="chip">Catálogo IMCA completo</span>
+                        <span class="chip">ACI 318-25 · AISC 360-22</span>
+                        <span class="chip">Sección compuesta y esbeltez</span>
+                        <span class="chip">Memoria paso a paso</span>
+                        <span class="chip">Actualizaciones 3.xx.xx</span>
+                    </div>
+                    <p class="cmp-note">
+                        Lo que en la demo aparece con candado 🔒 es exactamente esto: se ve, para que
+                        sepas qué compras, pero vive en la versión completa.
+                    </p>
+                    <a href="#precio" class="btn-ghost cmp-cta">Ver los planes</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="precio" class="sec">
         <div class="wrap">
             <div class="kicker">Precio</div>
             <h2 class="sec-title" style="margin-bottom:0.75rem;">Un pago. Tuyo para siempre.</h2>
-            <p class="price-sub">Sin suscripción y sin renovación. Elige cuántos equipos necesitas.</p>
+            <p class="price-sub">
+                Sin suscripción y sin renovación. Elige cuántos equipos necesitas.
+                ¿Todavía no lo pruebas? <a href="descarga.html">Descarga la demo de 5 días</a>, gratis.
+            </p>
 
             <!--
                 CHECKOUTS Strux 3.00.00 — Lemon Squeezy.
@@ -731,9 +811,12 @@
         <div class="cta">
             <div class="topline"></div>
             <h2>Tu próxima memoria de cálculo, hoy</h2>
-            <p>Strux 3.00.00 para Windows. Licencia perpetua, un solo pago.</p>
+            <p>Strux 3.00.00 para Windows. Licencia perpetua, un solo pago — o cinco días de prueba si prefieres verlo por dentro antes.</p>
             <div class="cta-actions">
                 <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/a2b2d8d1-e79a-4d3f-96c7-ba5b369eb09d" class="btn-primary">Comprar Strux — $1,500 MXN</a>
+                <a href="descarga.html" class="btn-demo">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Probar gratis 5 días
+                </a>
                 <a href="#video" class="btn-ghost">Ver el video primero</a>
             </div>
         </div>
@@ -825,6 +908,8 @@
 
         var FAQS = [
             { q: "¿Cuánto cuesta y qué incluye?", a: "$1,500 MXN por una licencia, en un solo pago. Incluye los seis módulos completos, las memorias de cálculo y todas las actualizaciones 3.xx.xx. No hay suscripción, niveles ni módulos que se compren aparte." },
+            { q: "¿Puedo probarlo antes de comprar?", a: "Sí. La <a href=\"descarga.html\">demo</a> se descarga gratis, sin registro ni tarjeta, y dura cinco días naturales desde la primera vez que la abres. Trae los seis módulos calculando de verdad, con topes: dos elementos por módulo, las NTC 2023 de concreto y acero, y el catálogo de acero reducido a los perfiles IR 12\". Los documentos que emite llevan la marca «versión demo, no válida para construcción»." },
+            { q: "¿La demo estorba si ya tengo Strux instalado?", a: "No. Es un programa aparte: su propio ejecutable, su carpeta de instalación, sus ajustes y su extensión de proyecto (<code>.strxd</code>). Puede convivir con la versión completa en la misma máquina sin pisarle nada, y desinstalarla no toca tu instalación de Strux." },
             { q: "¿En cuántas computadoras puedo instalarlo?", a: "Una por licencia. Los planes de 2, 3 y 5 equipos entregan una clave por equipo; la licencia es perpetua y no transferible a terceros." },
             { q: "¿Necesito internet para usarlo?", a: "Solo para activar la licencia. Después Strux trabaja sin conexión: no envía tus proyectos ni recopila datos de uso." },
             { q: "¿Sustituye un software comercial?", a: "No, y no pretende hacerlo. Un programa de análisis general modela la estructura completa; Strux resuelve el elemento — viga, columna, zapata, placa base, muro, armadura — y entrega su memoria contra la norma, que es donde se va la mayor parte del tiempo." },
