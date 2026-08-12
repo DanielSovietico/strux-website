@@ -392,15 +392,15 @@
                 <div class="hero-badge"><span class="dot"></span>Evaluación gratuita · 5 días</div>
                 <h1>Pruébalo antes de <span class="grad">pagarlo</span></h1>
                 <p class="hero-sub">
-                    La demo instala los seis módulos y llega hasta el final: capturas una viga real,
-                    la diseñas contra la NTC y sacas el documento. No es un video ni un recorrido
-                    guiado — es el programa, con los topes puestos.
+                    Los seis módulos instalados y calculando: capturas una viga real, la diseñas
+                    contra la NTC y obtienes su documento. Lo único que cambia frente a la versión
+                    completa son los límites de tamaño.
                 </p>
                 <div class="hero-points">
                     <div><span class="check">✓</span><span class="txt">Sin registro, sin correo y sin tarjeta</span></div>
                     <div><span class="check">✓</span><span class="txt">Los seis módulos, con datos y resultados reales</span></div>
                     <div><span class="check">✓</span><span class="txt">Funciona sin internet y no envía tus proyectos</span></div>
-                    <div><span class="check">✓</span><span class="txt">Se instala aparte: no toca tu Strux completo si ya lo tienes</span></div>
+                    <div><span class="check">✓</span><span class="txt">Se instala aparte: si ya eres cliente, tu Strux no se ve afectado</span></div>
                 </div>
             </div>
 
@@ -428,16 +428,17 @@
                 <div class="dl-meta">
                     <div class="dl-row"><span class="k">Versión</span><span class="v">3.00.00</span></div>
                     <div class="dl-row"><span class="k">Sistema</span><span class="v">Windows 10 / 11 · 64 bits</span></div>
-                    <div class="dl-row"><span class="k">Tamaño</span><span class="v">≈ 155 MB</span></div>
+                    <div class="dl-row"><span class="k">Tamaño</span><span class="v">155.6 MB</span></div>
                     <div class="dl-row"><span class="k">Evaluación</span><span class="v">5 días naturales</span></div>
                 </div>
 
                 <!-- El bloque de verificación se inserta aquí sólo si hay huella publicada. -->
 
                 <div class="dl-note">
-                    El instalador no está firmado todavía, así que Windows mostrará el aviso de
-                    SmartScreen. Es esperado: pulsa <b>Más información → Ejecutar de todas formas</b>.
-                    Si prefieres comprobarlo tú, más abajo explicamos cómo.
+                    El instalador no está firmado, así que aparecerán dos advertencias.
+                    Al descargarlo, el navegador pedirá confirmación: pulsa <b>Conservar</b>.
+                    Al abrirlo, Windows mostrará el aviso de SmartScreen:
+                    <b>Más información</b> y después <b>Ejecutar de todas formas</b>.
                 </div>
             </div>
         </div>
@@ -448,9 +449,9 @@
             <div class="kicker">Alcance</div>
             <h2 class="sec-title">Qué puedes hacer con la demo</h2>
             <p class="sec-lead">
-                No es una versión recortada a un módulo: están los seis. Lo que se limita es
-                <b>cuántos elementos</b> caben en un archivo y <b>qué catálogo</b> tienes a mano,
-                para que puedas resolver un caso completo de principio a fin.
+                Están los seis módulos, y cada uno calcula y entrega su documento. Los límites son
+                de <b>cantidad</b>, no de funciones: cuántos elementos caben en un archivo y qué
+                perfiles de acero tienes disponibles.
             </p>
 
             <div class="scope">
@@ -537,8 +538,8 @@
                     <h3>Ejecuta el instalador</h3>
                     <p>
                         Doble clic en <code>Strux_3.00.00_DEMO_Setup.exe</code>. No pide permisos de
-                        administrador. Windows mostrará el aviso de SmartScreen porque el archivo aún
-                        no está firmado: <b>Más información → Ejecutar de todas formas</b>.
+                        administrador, así que también entra en equipos de oficina con el usuario
+                        restringido.
                     </p>
                 </div>
                 <div class="step">
@@ -646,7 +647,7 @@
         //     certutil -hashfile Strux_3.00.00_DEMO_Setup.exe SHA256
         //
         // y el bloque de verificación aparece solo en la tarjeta de descarga.
-        var SHA256 = "";
+        var SHA256 = "bc68380610f3bb92caf8dc028adff10ecaf5643a30beee6da8259db4149bd566";
 
         if (SHA256) {
             var card = document.querySelector('.dlcard');
