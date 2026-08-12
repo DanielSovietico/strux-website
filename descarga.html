@@ -428,16 +428,18 @@
                 <div class="dl-meta">
                     <div class="dl-row"><span class="k">Versión</span><span class="v">3.00.00</span></div>
                     <div class="dl-row"><span class="k">Sistema</span><span class="v">Windows 10 / 11 · 64 bits</span></div>
-                    <div class="dl-row"><span class="k">Tamaño</span><span class="v">≈ 155 MB</span></div>
+                    <div class="dl-row"><span class="k">Tamaño</span><span class="v">155.6 MB</span></div>
                     <div class="dl-row"><span class="k">Evaluación</span><span class="v">5 días naturales</span></div>
                 </div>
 
                 <!-- El bloque de verificación se inserta aquí sólo si hay huella publicada. -->
 
                 <div class="dl-note">
-                    El instalador no está firmado todavía, así que Windows mostrará el aviso de
-                    SmartScreen. Es esperado: pulsa <b>Más información → Ejecutar de todas formas</b>.
-                    Si prefieres comprobarlo tú, más abajo explicamos cómo.
+                    El instalador no está firmado todavía, así que verás dos avisos y los dos son
+                    esperados: tu navegador puede pedirte que confirmes la descarga
+                    —pulsa <b>Conservar</b>— y Windows mostrará SmartScreen al abrirlo
+                    —<b>Más información → Ejecutar de todas formas</b>—. La huella SHA-256
+                    publicada aquí te deja comprobar que el archivo llegó íntegro.
                 </div>
             </div>
         </div>
@@ -646,7 +648,7 @@
         //     certutil -hashfile Strux_3.00.00_DEMO_Setup.exe SHA256
         //
         // y el bloque de verificación aparece solo en la tarjeta de descarga.
-        var SHA256 = "";
+        var SHA256 = "bc68380610f3bb92caf8dc028adff10ecaf5643a30beee6da8259db4149bd566";
 
         if (SHA256) {
             var card = document.querySelector('.dlcard');
