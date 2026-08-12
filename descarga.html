@@ -190,16 +190,35 @@
         .dl-row { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.86rem; }
         .dl-row .k { color: var(--text-muted); }
         .dl-row .v { color: var(--text-dim); font-family: var(--mono); text-align: right; }
-        .dl-hash {
-            margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);
+        /*
+            Verificación del archivo. Va plegada: le sirve a quien desconfía del
+            aviso de «archivo peligroso» —sistemas de una empresa, sobre todo—,
+            que son pocos; desplegada, 64 caracteres de hexadecimal se comen la
+            tarjeta y no le dicen nada a nadie más.
+        */
+        .dl-verify { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+        .dl-verify summary {
+            cursor: pointer; list-style: none;
+            font-size: 0.8rem; color: var(--text-muted);
+            display: flex; align-items: center; gap: 0.45rem;
+            transition: color .2s;
         }
-        .dl-hash .k { font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 0.4rem; }
-        .dl-hash code {
+        .dl-verify summary::-webkit-details-marker { display: none; }
+        .dl-verify summary:hover { color: var(--text-dim); }
+        .dl-verify summary::before {
+            content: "›"; font-family: var(--mono); font-size: 1rem; line-height: 1;
+            display: inline-block; transition: transform .2s;
+        }
+        .dl-verify[open] summary::before { transform: rotate(90deg); }
+        .dl-verify-body { margin-top: 0.85rem; }
+        .dl-verify-body p { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+        .dl-verify-body code {
             display: block; font-family: var(--mono); font-size: 0.7rem;
             color: var(--text-dim); word-break: break-all; line-height: 1.5;
             background: var(--bg); border: 1px solid var(--border);
-            border-radius: 6px; padding: 0.6rem 0.7rem;
+            border-radius: 6px; padding: 0.6rem 0.7rem; margin-bottom: 0.85rem;
         }
+        .dl-verify-body code:last-child { margin-bottom: 0; }
         .dl-note {
             margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border);
             font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;
@@ -654,11 +673,17 @@
         if (SHA256) {
             var card = document.querySelector('.dlcard');
             var note = card.querySelector('.dl-note');
-            var box = document.createElement('div');
-            box.className = 'dl-hash';
-            box.innerHTML = '<span class="k">SHA-256 — comprueba que el archivo llegó íntegro</span>' +
-                            '<code>' + SHA256 + '</code>';
-            card.insertBefore(box, note);
+            var det = document.createElement('details');
+            det.className = 'dl-verify';
+            det.innerHTML =
+                '<summary>Verificar el archivo descargado</summary>' +
+                '<div class="dl-verify-body">' +
+                    '<p>En la carpeta donde quedó la descarga, abre la consola de Windows y ejecuta:</p>' +
+                    '<code>certutil -hashfile Strux_3.00.00_DEMO_Setup.exe SHA256</code>' +
+                    '<p>Tiene que devolver exactamente esta huella:</p>' +
+                    '<code>' + SHA256 + '</code>' +
+                '</div>';
+            card.insertBefore(det, note);
         }
     </script>
 </body>
