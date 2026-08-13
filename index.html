@@ -506,6 +506,56 @@
     <noscript><img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=1003573462698131&ev=PageView&noscript=1"/></noscript>
     <!-- End Meta (Facebook) Pixel Code -->
+
+    <!-- Eventos del píxel: descarga de la demo y clic hacia el checkout -->
+    <script>
+        (function () {
+            // El instalador propio. El redistribuible de Microsoft también termina
+            // en .exe y no debe contar como descarga de la demo.
+            var DEMO = /\/Strux[^\/?#]*\.exe(?:[?#]|$)/i;
+            var CHECKOUT = /lemonsqueezy\.com\/checkout\//i;
+            var ESPERA = 250;
+
+            function num(v) { var n = parseFloat(v); return isFinite(n) ? n : null; }
+
+            document.addEventListener('click', function (ev) {
+                if (ev.defaultPrevented || ev.button !== 0) return;
+                if (typeof window.fbq !== 'function') return;
+                var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+                if (!a) return;
+                var href = a.getAttribute('href') || '';
+
+                if (DEMO.test(href)) {
+                    // Descargar no abandona la página, así que no hay nada que retener.
+                    fbq('track', 'Lead', {
+                        content_name: 'Strux 3.00.00 DEMO',
+                        content_category: 'descarga-demo'
+                    });
+                    return;
+                }
+
+                if (!CHECKOUT.test(href)) return;
+
+                var valor = num(a.getAttribute('data-fb-value'));
+                var params = {
+                    content_name: 'Strux 3.00.00',
+                    currency: 'MXN',
+                    num_items: num(a.getAttribute('data-fb-licenses')) || 1
+                };
+                if (valor !== null) params.value = valor;
+                fbq('track', 'InitiateCheckout', params);
+
+                // El checkout se abre en la misma pestaña: retenemos la navegación un
+                // instante para que el navegador no cancele la petición del píxel.
+                if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+                if (a.getAttribute('target')) return;
+                var destino = a.href;
+                ev.preventDefault();
+                setTimeout(function () { window.location.href = destino; }, ESPERA);
+            }, false);
+        })();
+    </script>
+    <!-- Fin de los eventos del píxel -->
 </head>
 <body>
 
@@ -793,7 +843,7 @@
                     </div>
                     <div class="price-per" id="price-per">Licencia perpetua para 1 equipo</div>
                     <div class="buy-wrap">
-                        <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/a2b2d8d1-e79a-4d3f-96c7-ba5b369eb09d" class="buy" id="buy-btn">Comprar 1 licencia</a>
+                        <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/a2b2d8d1-e79a-4d3f-96c7-ba5b369eb09d" class="buy" id="buy-btn" data-fb-value="1500" data-fb-licenses="1">Comprar 1 licencia</a>
                         <div class="buy-note">
                             <span>Pago seguro con Lemon Squeezy</span><span>·</span><span>Entrega inmediata de la licencia</span>
                         </div>
@@ -830,7 +880,8 @@
             <h2>Tu próxima memoria de cálculo, hoy</h2>
             <p>Strux 3.00.00 para Windows. Licencia perpetua, un solo pago — o cinco días de prueba si prefieres verlo por dentro antes.</p>
             <div class="cta-actions">
-                <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/a2b2d8d1-e79a-4d3f-96c7-ba5b369eb09d" class="btn-primary">Comprar Strux — $1,500 MXN</a>
+                <!-- data-fb-value acompaña al precio: si cambia uno, cambia el otro. -->
+                <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/a2b2d8d1-e79a-4d3f-96c7-ba5b369eb09d" class="btn-primary" data-fb-value="1500" data-fb-licenses="1">Comprar Strux — $1,500 MXN</a>
                 <a href="descarga.html" class="btn-demo">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Probar gratis 5 días
                 </a>
@@ -1028,6 +1079,8 @@
                 ? 'Licencia perpetua para 1 equipo'
                 : fmt(Math.round(p.mxn / p.n)) + ' MXN por equipo · ' + p.n + ' licencias perpetuas';
             buyBtn.href = p.href;
+            buyBtn.setAttribute('data-fb-value', p.mxn);   // lo lee el evento InitiateCheckout
+            buyBtn.setAttribute('data-fb-licenses', p.n);
             buyBtn.textContent = p.n === 1 ? 'Comprar 1 licencia' : 'Comprar ' + p.n + ' licencias';
         }
         PLANS.forEach(function (p, i) {

@@ -401,6 +401,56 @@
     <noscript><img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=1003573462698131&ev=PageView&noscript=1"/></noscript>
     <!-- End Meta (Facebook) Pixel Code -->
+
+    <!-- Eventos del píxel: descarga de la demo y clic hacia el checkout -->
+    <script>
+        (function () {
+            // El instalador propio. El redistribuible de Microsoft también termina
+            // en .exe y no debe contar como descarga de la demo.
+            var DEMO = /\/Strux[^\/?#]*\.exe(?:[?#]|$)/i;
+            var CHECKOUT = /lemonsqueezy\.com\/checkout\//i;
+            var ESPERA = 250;
+
+            function num(v) { var n = parseFloat(v); return isFinite(n) ? n : null; }
+
+            document.addEventListener('click', function (ev) {
+                if (ev.defaultPrevented || ev.button !== 0) return;
+                if (typeof window.fbq !== 'function') return;
+                var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+                if (!a) return;
+                var href = a.getAttribute('href') || '';
+
+                if (DEMO.test(href)) {
+                    // Descargar no abandona la página, así que no hay nada que retener.
+                    fbq('track', 'Lead', {
+                        content_name: 'Strux 3.00.00 DEMO',
+                        content_category: 'descarga-demo'
+                    });
+                    return;
+                }
+
+                if (!CHECKOUT.test(href)) return;
+
+                var valor = num(a.getAttribute('data-fb-value'));
+                var params = {
+                    content_name: 'Strux 3.00.00',
+                    currency: 'MXN',
+                    num_items: num(a.getAttribute('data-fb-licenses')) || 1
+                };
+                if (valor !== null) params.value = valor;
+                fbq('track', 'InitiateCheckout', params);
+
+                // El checkout se abre en la misma pestaña: retenemos la navegación un
+                // instante para que el navegador no cancele la petición del píxel.
+                if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+                if (a.getAttribute('target')) return;
+                var destino = a.href;
+                ev.preventDefault();
+                setTimeout(function () { window.location.href = destino; }, ESPERA);
+            }, false);
+        })();
+    </script>
+    <!-- Fin de los eventos del píxel -->
 </head>
 <body>
 
@@ -651,7 +701,8 @@
                 AISC y entrega la memoria de cálculo paso a paso. Un pago, licencia perpetua.
             </p>
             <div class="cta-actions">
-                <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/a2b2d8d1-e79a-4d3f-96c7-ba5b369eb09d" class="btn-primary">Comprar Strux — $1,500 MXN</a>
+                <!-- data-fb-value acompaña al precio: si cambia uno, cambia el otro. -->
+                <a href="https://struxsoftware.lemonsqueezy.com/checkout/buy/a2b2d8d1-e79a-4d3f-96c7-ba5b369eb09d" class="btn-primary" data-fb-value="1500" data-fb-licenses="1">Comprar Strux — $1,500 MXN</a>
                 <a href="index.html#precio" class="btn-ghost">Ver todos los planes</a>
             </div>
         </div>
